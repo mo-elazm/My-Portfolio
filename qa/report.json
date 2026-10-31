@@ -1,0 +1,1612 @@
+[
+  {
+    "name": "desktop-dark-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 10416
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 10416,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -245,
+          "right": 4554,
+          "width": 4799
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -245,
+          "right": 2154,
+          "width": 2400
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -245,
+          "right": 70,
+          "width": 315
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -209,
+          "right": -193,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -157,
+          "right": 34,
+          "width": 191
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1419,
+          "right": 1681,
+          "width": 262
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1455,
+          "right": 1471,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1507,
+          "right": 1645,
+          "width": 138
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1681,
+          "right": 1902,
+          "width": 221
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1717,
+          "right": 1733,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1769,
+          "right": 1866,
+          "width": 97
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1902,
+          "right": 2154,
+          "width": 252
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 996
+        },
+        "about": {
+          "top": 1056,
+          "height": 1226
+        },
+        "experience": {
+          "top": 2282,
+          "height": 1368
+        },
+        "skills": {
+          "top": 3650,
+          "height": 1370
+        },
+        "work": {
+          "top": 5020,
+          "height": 2041
+        },
+        "certifications": {
+          "top": 7061,
+          "height": 1518
+        },
+        "contact": {
+          "top": 8579,
+          "height": 1212
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 366,
+          "renderH": 366
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 365
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 378
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 31
+    },
+    "beforeReload": 9516,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/desktop-dark-en-home.jpeg",
+      "qa/desktop-dark-en-about.jpeg",
+      "qa/desktop-dark-en-experience.jpeg",
+      "qa/desktop-dark-en-skills.jpeg",
+      "qa/desktop-dark-en-work.jpeg",
+      "qa/desktop-dark-en-certifications.jpeg",
+      "qa/desktop-dark-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "desktop-light-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "light",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 10416
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "light",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 10416,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -215,
+          "right": 4585,
+          "width": 4799
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -215,
+          "right": 2185,
+          "width": 2400
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -215,
+          "right": 101,
+          "width": 315
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -179,
+          "right": -163,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -127,
+          "right": 65,
+          "width": 191
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1215,
+          "right": 1449,
+          "width": 234
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1449,
+          "right": 1711,
+          "width": 262
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1485,
+          "right": 1501,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1537,
+          "right": 1675,
+          "width": 138
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1711,
+          "right": 1933,
+          "width": 221
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1747,
+          "right": 1763,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1799,
+          "right": 1897,
+          "width": 97
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 996
+        },
+        "about": {
+          "top": 1056,
+          "height": 1226
+        },
+        "experience": {
+          "top": 2282,
+          "height": 1368
+        },
+        "skills": {
+          "top": 3650,
+          "height": 1370
+        },
+        "work": {
+          "top": 5020,
+          "height": 2041
+        },
+        "certifications": {
+          "top": 7061,
+          "height": 1518
+        },
+        "contact": {
+          "top": 8579,
+          "height": 1212
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 366,
+          "renderH": 366
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 365
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 378
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 25
+    },
+    "beforeReload": 9516,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/desktop-light-en-home.jpeg",
+      "qa/desktop-light-en-about.jpeg",
+      "qa/desktop-light-en-experience.jpeg",
+      "qa/desktop-light-en-skills.jpeg",
+      "qa/desktop-light-en-work.jpeg",
+      "qa/desktop-light-en-certifications.jpeg",
+      "qa/desktop-light-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "desktop-dark-ar",
+    "pre": {
+      "lang": "ar",
+      "dir": "rtl",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 9998
+    },
+    "metrics": {
+      "lang": "ar",
+      "dir": "rtl",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 9998,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -176,
+          "right": 3496,
+          "width": 3671
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -176,
+          "right": 1660,
+          "width": 1836
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -176,
+          "right": 31,
+          "width": 207
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -140,
+          "right": -124,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -88,
+          "right": -5,
+          "width": 83
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1423,
+          "right": 1660,
+          "width": 237
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1459,
+          "right": 1475,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1511,
+          "right": 1624,
+          "width": 113
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": 1660,
+          "right": 3496,
+          "width": 1836
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1660,
+          "right": 1867,
+          "width": 207
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1696,
+          "right": 1712,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1748,
+          "right": 1831,
+          "width": 83
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 996
+        },
+        "about": {
+          "top": 1056,
+          "height": 1109
+        },
+        "experience": {
+          "top": 2165,
+          "height": 1250
+        },
+        "skills": {
+          "top": 3415,
+          "height": 1338
+        },
+        "work": {
+          "top": 4753,
+          "height": 2041
+        },
+        "certifications": {
+          "top": 6794,
+          "height": 1451
+        },
+        "contact": {
+          "top": 8245,
+          "height": 1127
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 366,
+          "renderH": 366
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 365
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 378
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 25
+    },
+    "beforeReload": 9098,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/desktop-dark-ar-home.jpeg",
+      "qa/desktop-dark-ar-about.jpeg",
+      "qa/desktop-dark-ar-experience.jpeg",
+      "qa/desktop-dark-ar-skills.jpeg",
+      "qa/desktop-dark-ar-work.jpeg",
+      "qa/desktop-dark-ar-certifications.jpeg",
+      "qa/desktop-dark-ar-contact.jpeg"
+    ]
+  },
+  {
+    "name": "laptop-dark-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 10039
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 10039,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -212,
+          "right": 4588,
+          "width": 4799
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -212,
+          "right": 2188,
+          "width": 2400
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -212,
+          "right": 104,
+          "width": 315
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -176,
+          "right": -160,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -124,
+          "right": 68,
+          "width": 191
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1218,
+          "right": 1453,
+          "width": 234
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1306,
+          "right": 1417,
+          "width": 110
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1453,
+          "right": 1715,
+          "width": 262
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1489,
+          "right": 1505,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1541,
+          "right": 1679,
+          "width": 138
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1715,
+          "right": 1936,
+          "width": 221
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1751,
+          "right": 1767,
+          "width": 16
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 918
+        },
+        "about": {
+          "top": 978,
+          "height": 1120
+        },
+        "experience": {
+          "top": 2097,
+          "height": 1328
+        },
+        "skills": {
+          "top": 3426,
+          "height": 1334
+        },
+        "work": {
+          "top": 4760,
+          "height": 2005
+        },
+        "certifications": {
+          "top": 6765,
+          "height": 1478
+        },
+        "contact": {
+          "top": 8243,
+          "height": 1171
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 366,
+          "renderH": 366
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 365
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 516,
+          "renderH": 378
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 21
+    },
+    "beforeReload": 9239,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/laptop-dark-en-home.jpeg",
+      "qa/laptop-dark-en-about.jpeg",
+      "qa/laptop-dark-en-experience.jpeg",
+      "qa/laptop-dark-en-skills.jpeg",
+      "qa/laptop-dark-en-work.jpeg",
+      "qa/laptop-dark-en-certifications.jpeg",
+      "qa/laptop-dark-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "tablet-dark-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 9760
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 9760,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "absolute -end-20 -top-24 size-60 rounded-full bg-accent/15 blur-[70px]",
+          "left": 815,
+          "right": 1055,
+          "width": 240
+        },
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -236,
+          "right": 4564,
+          "width": 4799
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -236,
+          "right": 2164,
+          "width": 2400
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -236,
+          "right": 80,
+          "width": 315
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -200,
+          "right": -184,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -148,
+          "right": 44,
+          "width": 191
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 890,
+          "right": 1194,
+          "width": 304
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 978,
+          "right": 1158,
+          "width": 180
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1194,
+          "right": 1428,
+          "width": 234
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1230,
+          "right": 1246,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1282,
+          "right": 1392,
+          "width": 110
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1428,
+          "right": 1690,
+          "width": 262
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 951
+        },
+        "about": {
+          "top": 1011,
+          "height": 1207
+        },
+        "experience": {
+          "top": 2219,
+          "height": 1332
+        },
+        "skills": {
+          "top": 3551,
+          "height": 1319
+        },
+        "work": {
+          "top": 4870,
+          "height": 1856
+        },
+        "certifications": {
+          "top": 6725,
+          "height": 1359
+        },
+        "contact": {
+          "top": 8084,
+          "height": 1077
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 337,
+          "renderH": 337
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 408,
+          "renderH": 288
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 408,
+          "renderH": 299
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 23
+    },
+    "beforeReload": 8992,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/tablet-dark-en-home.jpeg",
+      "qa/tablet-dark-en-about.jpeg",
+      "qa/tablet-dark-en-experience.jpeg",
+      "qa/tablet-dark-en-skills.jpeg",
+      "qa/tablet-dark-en-work.jpeg",
+      "qa/tablet-dark-en-certifications.jpeg",
+      "qa/tablet-dark-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "narrow-dark-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 900,
+      "clientWidth": 900,
+      "scrollHeight": 14761
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 900,
+      "clientWidth": 900,
+      "scrollHeight": 14761,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -239,
+          "right": 4561,
+          "width": 4799
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -239,
+          "right": 2161,
+          "width": 2400
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -239,
+          "right": 76,
+          "width": 315
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -203,
+          "right": -187,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -151,
+          "right": 40,
+          "width": 191
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 887,
+          "right": 1191,
+          "width": 304
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 923,
+          "right": 939,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 975,
+          "right": 1155,
+          "width": 180
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1191,
+          "right": 1425,
+          "width": 234
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 1227,
+          "right": 1243,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 1279,
+          "right": 1389,
+          "width": 110
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 1425,
+          "right": 1687,
+          "width": 262
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 1358
+        },
+        "about": {
+          "top": 1418,
+          "height": 1707
+        },
+        "experience": {
+          "top": 3125,
+          "height": 1329
+        },
+        "skills": {
+          "top": 4454,
+          "height": 1902
+        },
+        "work": {
+          "top": 6356,
+          "height": 3736
+        },
+        "certifications": {
+          "top": 10092,
+          "height": 2637
+        },
+        "contact": {
+          "top": 12729,
+          "height": 1447
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 84,
+          "renderH": 84
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 366,
+          "renderH": 366
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 774,
+          "renderH": 547
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 774,
+          "renderH": 567
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 19
+    },
+    "beforeReload": 13961,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/narrow-dark-en-home.jpeg",
+      "qa/narrow-dark-en-about.jpeg",
+      "qa/narrow-dark-en-experience.jpeg",
+      "qa/narrow-dark-en-skills.jpeg",
+      "qa/narrow-dark-en-work.jpeg",
+      "qa/narrow-dark-en-certifications.jpeg",
+      "qa/narrow-dark-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "mobile-dark-en",
+    "pre": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 14771
+    },
+    "metrics": {
+      "lang": "en",
+      "dir": "ltr",
+      "theme": "dark",
+      "scrollY": 0,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 14771,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "absolute -end-20 -top-24 size-60 rounded-full bg-accent/15 blur-[70px]",
+          "left": 203,
+          "right": 443,
+          "width": 240
+        },
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -207,
+          "right": 3947,
+          "width": 4154
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -207,
+          "right": 1870,
+          "width": 2077
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -207,
+          "right": 69,
+          "width": 275
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -179,
+          "right": -163,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -135,
+          "right": 41,
+          "width": 175
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 308,
+          "right": 539,
+          "width": 231
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 380,
+          "right": 511,
+          "width": 131
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 539,
+          "right": 771,
+          "width": 232
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 567,
+          "right": 583,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 611,
+          "right": 743,
+          "width": 132
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 771,
+          "right": 1035,
+          "width": 265
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 1331
+        },
+        "about": {
+          "top": 1391,
+          "height": 2155
+        },
+        "experience": {
+          "top": 3546,
+          "height": 1812
+        },
+        "skills": {
+          "top": 5358,
+          "height": 2113
+        },
+        "work": {
+          "top": 7471,
+          "height": 2683
+        },
+        "certifications": {
+          "top": 10154,
+          "height": 2112
+        },
+        "contact": {
+          "top": 12266,
+          "height": 1532
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 76,
+          "renderH": 76
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 329,
+          "renderH": 329
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 307,
+          "renderH": 217
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 307,
+          "renderH": 225
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 25
+    },
+    "beforeReload": 13927,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/mobile-dark-en-home.jpeg",
+      "qa/mobile-dark-en-about.jpeg",
+      "qa/mobile-dark-en-experience.jpeg",
+      "qa/mobile-dark-en-skills.jpeg",
+      "qa/mobile-dark-en-work.jpeg",
+      "qa/mobile-dark-en-certifications.jpeg",
+      "qa/mobile-dark-en-contact.jpeg"
+    ]
+  },
+  {
+    "name": "mobile-light-ar",
+    "pre": {
+      "lang": "ar",
+      "dir": "rtl",
+      "theme": "light",
+      "scrollY": 0,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 13672
+    },
+    "metrics": {
+      "lang": "ar",
+      "dir": "rtl",
+      "theme": "light",
+      "scrollY": 0,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 13672,
+      "horizontalOverflow": false,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "absolute -end-20 -top-24 size-60 rounded-full bg-accent/15 blur-[70px]",
+          "left": -53,
+          "right": 187,
+          "width": 240
+        },
+        {
+          "tag": "div",
+          "cls": "absolute -bottom-10 start-1/2 size-52 -translate-x-1/2 rounded-full bg-accent/10 blur-[70p",
+          "left": -117,
+          "right": 91,
+          "width": 208
+        },
+        {
+          "tag": "div",
+          "cls": "animate-marquee flex w-max",
+          "left": -155,
+          "right": 2964,
+          "width": 3119
+        },
+        {
+          "tag": "div",
+          "cls": "flex shrink-0 items-center",
+          "left": -155,
+          "right": 1404,
+          "width": 1560
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": -155,
+          "right": 20,
+          "width": 176
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": -127,
+          "right": -111,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": -83,
+          "right": -8,
+          "width": 76
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 237,
+          "right": 413,
+          "width": 176
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 413,
+          "right": 578,
+          "width": 165
+        },
+        {
+          "tag": "span",
+          "cls": "text-lg leading-none text-accent-text",
+          "left": 441,
+          "right": 457,
+          "width": 16
+        },
+        {
+          "tag": "span",
+          "cls": "whitespace-nowrap font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-m",
+          "left": 485,
+          "right": 550,
+          "width": 65
+        },
+        {
+          "tag": "div",
+          "cls": "flex items-center gap-7 px-7 py-5 sm:gap-9 sm:px-9",
+          "left": 578,
+          "right": 748,
+          "width": 170
+        }
+      ],
+      "boxes": {
+        "home": {
+          "top": 0,
+          "height": 1244
+        },
+        "about": {
+          "top": 1304,
+          "height": 1962
+        },
+        "experience": {
+          "top": 3266,
+          "height": 1518
+        },
+        "skills": {
+          "top": 4784,
+          "height": 1976
+        },
+        "work": {
+          "top": 6759,
+          "height": 2436
+        },
+        "certifications": {
+          "top": 9196,
+          "height": 2055
+        },
+        "contact": {
+          "top": 11251,
+          "height": 1477
+        }
+      },
+      "imageIssues": [
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 76,
+          "renderH": 76
+        },
+        {
+          "src": "mohamed-portrait.webp",
+          "ok": true,
+          "w": 1200,
+          "h": 1200,
+          "renderW": 329,
+          "renderH": 329
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 307,
+          "renderH": 217
+        },
+        {
+          "src": "",
+          "ok": false,
+          "w": 0,
+          "h": 0,
+          "renderW": 307,
+          "renderH": 225
+        }
+      ],
+      "mailto": [
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com",
+        "mailto:mazmgoo@gmail.com"
+      ],
+      "certButtons": 4,
+      "hiddenReveals": 22
+    },
+    "beforeReload": 12828,
+    "afterReload": 0,
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided",
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ],
+    "shots": [
+      "qa/mobile-light-ar-home.jpeg",
+      "qa/mobile-light-ar-about.jpeg",
+      "qa/mobile-light-ar-experience.jpeg",
+      "qa/mobile-light-ar-skills.jpeg",
+      "qa/mobile-light-ar-work.jpeg",
+      "qa/mobile-light-ar-certifications.jpeg",
+      "qa/mobile-light-ar-contact.jpeg"
+    ]
+  },
+  {
+    "name": "lightbox",
+    "dialogInfo": {
+      "exists": true,
+      "ariaLabel": "Certificate preview",
+      "img": {
+        "src": "ibm-certificate.jpg",
+        "ok": true
+      },
+      "box": {
+        "w": 1440,
+        "h": 900
+      },
+      "scrollHeight": 10416,
+      "bodyOverflow": "hidden",
+      "text": "CREDENTIAL\n\nIBM · P-TECH\n\nPROOF OF COMPLETION\n\nAdvanced Flutter Internship\n\nIBM & P-TECH Internship Certificate\n\nCompleted a four-week advanced Flutter internship in November 2025, building cross-platform mobile experiences and finishing with an A+ grade.\n\nISSUED\nNovember 2025\nDURATION\n4 weeks\nPROGRAM\nAdvanced Flutter\n\nSIGNED BY\n\nRania Hisham\n\nHR Leader, IBM Egypt\n\nJohn Matogo\n\nMiddle East & Africa CSR Leader, IBM\n\nVERIFIED & CERTIFIED\nOPEN ORIGINAL"
+    },
+    "second": "CREDENTIAL\n\nEraaSoft Academy\n\nPROOF OF COMPLETION\n\nFront-End Diploma\n\nEraaSoft Certificate\n\nSuccessfully completed the Front-End Diploma certified by EraaSoft Academy, covering the core skills behind ",
+    "closed": {
+      "dialog": false,
+      "bodyOverflow": "clip visible"
+    },
+    "errors": [
+      "State loaded from storage couldn't be migrated since no migrate function was provided"
+    ]
+  }
+]

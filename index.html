@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Mohamed Abo El-azm — Full Stack Developer building fast, polished digital products with React, Next.js, Laravel and Node.js."
+		/>
+		<meta name="theme-color" content="#080b09" id="theme-color" />
+		<meta name="color-scheme" content="dark light" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Mohamed Abo El-azm — Full Stack Developer" />
+		<meta
+			property="og:description"
+			content="Full Stack Developer crafting expressive interfaces and dependable systems. Explore selected work, skills and contact details."
+		/>
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale:alternate" content="ar_EG" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preload" as="image" href="/mohamed-portrait.webp" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Mohamed Abo El-azm — Full Stack Developer</title>
+		<script>
+			// Always start fresh at the hero, even after a refresh deep in the page.
+			if ("scrollRestoration" in window.history) {
+				window.history.scrollRestoration = "manual";
+			}
+			window.scrollTo(0, 0);
+		</script>
+		<script>
+			(() => {
+				try {
+					const saved = JSON.parse(localStorage.getItem("mo-portfolio-preferences") || "{}");
+					const theme = saved?.state?.theme;
+					const language = saved?.state?.language;
+					const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+					const resolvedTheme = theme || (prefersLight ? "light" : "dark");
+					const resolvedLanguage = language === "ar" ? "ar" : "en";
+
+					document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
+					document.documentElement.dataset.theme = resolvedTheme;
+					document.documentElement.lang = resolvedLanguage;
+					document.documentElement.dir = resolvedLanguage === "ar" ? "rtl" : "ltr";
+				} catch {
+					document.documentElement.classList.add("dark");
+				}
+			})();
+		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Mohamed Abo El-azm",
+				"alternateName": "محمد أبو العزم",
+				"jobTitle": "Full Stack Developer",
+				"email": "mailto:mazmgoo@gmail.com",
+				"url": "https://github.com/mo-elazm",
+				"sameAs": [
+					"https://github.com/mo-elazm",
+					"https://www.linkedin.com/in/mohamed-abo-elazm-73681b324/"
+				],
+				"knowsAbout": [
+					"React",
+					"Next.js",
+					"JavaScript",
+					"Laravel",
+					"Node.js",
+					"PHP",
+					"Flutter",
+					"Supabase",
+					"Firebase",
+					"SQL"
+				],
+				"hasCredential": [
+					{
+						"@type": "EducationalOccupationalCredential",
+						"name": "Advanced Flutter Internship",
+						"description": "Four-week advanced Flutter internship completed in November 2025 with an A+ grade.",
+						"credentialCategory": "Certificate",
+						"recognizedBy": {
+							"@type": "Organization",
+							"name": "IBM"
+						}
+					},
+					{
+						"@type": "EducationalOccupationalCredential",
+						"name": "Front-End Diploma",
+						"description": "Front-End Diploma certified by EraaSoft Academy, issued 25 July 2026.",
+						"credentialCategory": "Diploma",
+						"recognizedBy": {
+							"@type": "Organization",
+							"name": "EraaSoft Academy"
+						}
+					}
+				]
+			}
+		</script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script type="module" src="/src/main.jsx"></script>
+	</body>
+</html>
