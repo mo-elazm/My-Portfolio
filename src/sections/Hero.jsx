@@ -160,7 +160,7 @@ export default function Hero() {
 						<span className="eyebrow-label">{t.hero.eyebrow}</span>
 					</div>
 
-					<h1 className="mt-7 font-display text-[clamp(3rem,8.2vw,6.15rem)] font-semibold leading-[0.89] tracking-[-0.07em] text-ink rtl:leading-[1.06] rtl:tracking-[-0.035em] sm:mt-8">
+					<h1 className="mt-7 font-display text-[clamp(3rem,7vw,6.15rem)] font-semibold leading-[0.89] tracking-[-0.07em] text-ink rtl:leading-[1.06] rtl:tracking-[-0.035em] sm:mt-8">
 						{t.hero.headline.map((line, index) => {
 							const accent = index === 2;
 							return (
@@ -338,7 +338,7 @@ export default function Hero() {
 							<span>{t.hero.card.location}</span>
 						</div>
 
-						<div className="hero-float glass-panel absolute -end-3 top-28 z-20 hidden items-center gap-2.5 rounded-2xl px-4 py-3 text-[10px] font-bold text-ink sm:flex lg:-end-6">
+						<div className="hero-float glass-panel absolute -end-3 -bottom-4 z-20 hidden items-center gap-2.5 rounded-2xl px-4 py-3 text-[10px] font-bold text-ink sm:flex lg:-end-6">
 							<span className="flex items-center gap-1 text-accent-text">
 								<SiReact aria-hidden="true" className="size-4" />
 								<span className="text-ink/25">+</span>

@@ -1,6 +1,7 @@
 import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { profile } from "@/data/profile";
+import { cn } from "@/utils/cn";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export default function About() {
@@ -66,11 +67,14 @@ export default function About() {
 							</figcaption>
 						</figure>
 
-						<div className="relative mt-3 grid grid-cols-3 gap-2">
-							{metadata.map((item) => (
+						<div className="relative mt-3 grid grid-cols-2 gap-2 xl:grid-cols-3">
+							{metadata.map((item, index) => (
 								<div
 									key={item.label}
-									className="glass-chip rounded-2xl p-3 transition-colors hover:border-accent-text/30"
+									className={cn(
+										"glass-chip rounded-2xl p-3 transition-colors hover:border-accent-text/30",
+										index === metadata.length - 1 && "col-span-2 xl:col-span-1",
+									)}
 								>
 									<p className="text-[8px] font-bold uppercase tracking-[0.16em] text-muted/80">
 										{item.label}

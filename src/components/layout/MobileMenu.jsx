@@ -6,9 +6,7 @@ import { useTranslation } from "@/i18n";
 import useAppStore from "@/store/useAppStore";
 import useLockBodyScroll from "@/hooks/useLockBodyScroll";
 import { cn } from "@/utils/cn";
-import LanguageToggle from "@/components/ui/LanguageToggle";
 import SocialLinks from "@/components/ui/SocialLinks";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function MobileMenu() {
 	const { t } = useTranslation();
@@ -93,15 +91,7 @@ export default function MobileMenu() {
 					))}
 				</nav>
 
-				<div className="mt-8 flex flex-wrap items-center justify-between gap-5">
-					<div className="flex items-center gap-2">
-						<ThemeToggle />
-						<LanguageToggle />
-					</div>
-					<SocialLinks />
-				</div>
-
-				<div className="mt-7 flex flex-col gap-3 border-t border-line pt-5">
+				<div className="mt-8 flex flex-col gap-3 border-t border-line pt-5">
 					<a
 						href={`mailto:${profile.email}`}
 						onClick={closeMenu}

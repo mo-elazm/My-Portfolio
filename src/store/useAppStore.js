@@ -55,6 +55,10 @@ const useAppStore = create(
 		{
 			name: PREFERENCES_KEY,
 			version: 1,
+			migrate: (persistedState) => ({
+				theme: persistedState?.theme === "light" ? "light" : "dark",
+				language: persistedState?.language === "ar" ? "ar" : "en",
+			}),
 			partialize: (state) => ({
 				theme: state.theme,
 				language: state.language,

@@ -10,8 +10,8 @@ A bilingual (English / Arabic) personal portfolio for Mohamed Abo El-azm, Full S
 - **Responsive by design** — tested from 390 px to 1440 px with no horizontal overflow; dedicated mobile menu with scroll lock and keyboard support.
 - **Accessible interactions** — skip link, focus management, `inert` mobile menu, ARIA labels, and AA-contrast text.
 - **Real project showcase** — live demos and source links for Mercato, Skillline and Walletly.
-- **Experience & credentials** — an EraaSoft mentoring timeline, technical internships, and certificate cards for the IBM P-TECH Flutter internship and the EraaSoft Front-End Diploma.
-- **WhatsApp contact form** — composes a pre-filled message and opens WhatsApp, no backend required.
+- **Experience & credentials** — an EraaSoft mentoring timeline, technical internships, and real certificate previews for the IBM P-TECH Flutter internship and the EraaSoft Front-End Diploma, each opening in a keyboard-accessible lightbox.
+- **Direct contact** — email, WhatsApp, GitHub and LinkedIn shortcuts plus a WhatsApp contact form that composes a pre-filled message, no backend required.
 
 ## Tech stack
 
@@ -55,7 +55,7 @@ src/
 ├─ layouts/      # Main page layout
 ├─ lib/          # GSAP setup
 ├─ pages/        # Home and 404 pages
-├─ sections/     # Hero, About, Skills, Projects, Contact
+├─ sections/     # Hero, About, Experience, Skills, Projects, Certifications, Contact
 ├─ store/        # Zustand app store
 └─ utils/        # Small helpers (class names)
 ```
@@ -65,9 +65,9 @@ src/
 - **Text and translations** — edit `src/i18n/en.js` and `src/i18n/ar.js`. Both files share the same shape, so add a key to one and mirror it in the other.
 - **Projects** — edit `src/data/projects.js` for links, stack and order; project copy lives under `projects.items` in the i18n files.
 - **Experience** — edit `src/data/experience.js` and the matching copy under `experience.items` in both i18n files.
-- **Certifications** — edit `src/data/certifications.js` (grade badges) and the copy under `certifications.items` in both i18n files.
+- **Certifications** — edit `src/data/certifications.js` (grade, image and dimensions) and the copy under `certifications.items` in both i18n files. Certificate artwork lives in `public/certificates/`.
 - **Skills** — edit `src/data/skills.js` and the matching category copy in the i18n files.
-- **Profile links and avatar** — edit `src/data/profile.js`; replace `public/mohamed-avatar.jpg` to change the portrait.
+- **Profile links and portrait** — edit `src/data/profile.js`; replace `public/mohamed-portrait.webp` (square, uncropped) to change the portrait.
 - **Site metadata** — update `index.html` for the title, description, Open Graph tags and JSON-LD.
 
 ## Deployment
