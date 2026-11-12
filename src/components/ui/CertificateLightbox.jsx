@@ -16,7 +16,6 @@ import { useTranslation } from "@/i18n";
 import { gsap } from "@/lib/gsap";
 import useAppStore from "@/store/useAppStore";
 import useLockBodyScroll from "@/hooks/useLockBodyScroll";
-import { cn } from "@/utils/cn";
 
 const icons = {
 	flutter: SiFlutter,
@@ -177,29 +176,24 @@ export default function CertificateLightbox() {
 				type="button"
 				aria-label={t.common.closeDialog}
 				onClick={closeCertificate}
-				className="fixed inset-0 cursor-default bg-[#030604]/80 backdrop-blur-xl"
+				className="fixed inset-0 cursor-default bg-[#09090B]/85 backdrop-blur-xl"
 			/>
 
 			<div className="relative flex min-h-full items-center justify-center p-3 sm:p-6">
 				<div
 					ref={panelRef}
-					className="glass-panel relative w-full max-w-6xl overflow-hidden rounded-[1.7rem] sm:rounded-[2.1rem]"
+					className="relative w-full max-w-6xl overflow-hidden rounded-[1.6rem] border border-line bg-surface shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] sm:rounded-[2rem]"
 				>
-					<div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-line/70 bg-canvas/85 px-4 py-3.5 backdrop-blur-xl sm:px-6">
+					<div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-line bg-surface/90 px-4 py-3.5 backdrop-blur-xl sm:px-6">
 						<div className="flex min-w-0 items-center gap-3">
-							<span
-								className={cn(
-									"grid size-10 shrink-0 place-items-center rounded-xl border border-line bg-canvas/70",
-									cert.accent === "secondary" ? "text-secondary" : "text-peach",
-								)}
-							>
-								<Icon aria-hidden="true" className="size-4.5" />
+							<span className="grid size-9 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
+								<Icon aria-hidden="true" className="size-4" />
 							</span>
 							<div className="min-w-0">
-								<p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-muted/75">
-									{t.certifications.credentialLabel}
+								<p className="eyebrow-label">{t.certifications.credentialLabel}</p>
+								<p className="mt-1 truncate text-xs font-semibold text-ink">
+									{copy.issuer}
 								</p>
-								<p className="mt-0.5 truncate text-xs font-bold text-ink">{copy.issuer}</p>
 							</div>
 						</div>
 
@@ -208,15 +202,18 @@ export default function CertificateLightbox() {
 							type="button"
 							onClick={closeCertificate}
 							aria-label={t.common.closeDialog}
-							className="grid size-10 shrink-0 place-items-center rounded-full border border-line bg-canvas/60 text-muted transition-colors hover:border-accent-text/40 hover:text-ink"
+							className="icon-btn size-9 shrink-0"
 						>
-							<FiX aria-hidden="true" className="size-4.5" />
+							<FiX aria-hidden="true" className="size-4" />
 						</button>
 					</div>
 
 					<div className="grid lg:grid-cols-[1.55fr_0.85fr]">
-						<div className="relative flex items-center justify-center bg-white/[0.045] p-3 sm:p-5 lg:p-6">
-							<div className="visual-grid absolute inset-0 opacity-30" aria-hidden="true" />
+						<div className="relative flex items-center justify-center bg-surface-2/60 p-3 sm:p-5 lg:p-6">
+							<div
+								className="dot-grid absolute inset-0 opacity-40"
+								aria-hidden="true"
+							/>
 							<figure className="cert-lightbox-media certificate-paper relative w-full rounded-[0.9rem] p-2 sm:rounded-[1.2rem] sm:p-3">
 								<img
 									src={cert.image}
@@ -228,38 +225,40 @@ export default function CertificateLightbox() {
 							</figure>
 						</div>
 
-						<div className="flex flex-col border-t border-line/70 lg:border-s lg:border-t-0">
+						<div className="flex flex-col border-t border-line lg:border-s lg:border-t-0">
 							<div className="cert-lightbox-copy flex-1 p-5 sm:p-7">
 								<p className="eyebrow-label text-accent-text">
 									{t.certifications.proofLabel}
 								</p>
-								<h3 className="mt-3 font-display text-[clamp(1.7rem,3.6vw,2.6rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-ink">
+								<h3 className="mt-3 font-display text-[clamp(1.6rem,3.4vw,2.35rem)] font-bold leading-[1.06] tracking-[-0.04em] text-ink rtl:leading-[1.2] rtl:tracking-[-0.01em]">
 									{copy.title}
 								</h3>
-								<p className="mt-1.5 text-[11px] font-semibold text-muted">{copy.subtitle}</p>
-								<p className="mt-4 text-pretty text-[0.85rem] leading-6 text-muted">
+								<p className="mt-1.5 text-[11px] font-medium text-muted">
+									{copy.subtitle}
+								</p>
+								<p className="mt-4 text-pretty text-[13px] leading-6 text-muted">
 									{copy.description}
 								</p>
 
 								<dl className="mt-6 grid grid-cols-2 gap-2">
-									<div className="rounded-xl border border-line bg-canvas/45 p-3">
-										<dt className="text-[8px] font-bold uppercase tracking-[0.14em] text-muted/75">
-											{t.certifications.issuedLabel}
-										</dt>
-										<dd className="mt-1.5 text-[11px] font-semibold leading-4 text-ink">
-											{copy.issued}
-										</dd>
-									</div>
-									<div className="rounded-xl border border-line bg-canvas/45 p-3">
-										<dt className="text-[8px] font-bold uppercase tracking-[0.14em] text-muted/75">
-											{t.certifications.durationLabel}
-										</dt>
-										<dd className="mt-1.5 text-[11px] font-semibold leading-4 text-ink">
-											{copy.duration}
-										</dd>
-									</div>
-									<div className="col-span-2 rounded-xl border border-line bg-canvas/45 p-3">
-										<dt className="text-[8px] font-bold uppercase tracking-[0.14em] text-muted/75">
+									{[
+										{ label: t.certifications.issuedLabel, value: copy.issued },
+										{ label: t.certifications.durationLabel, value: copy.duration },
+									].map((detail) => (
+										<div
+											key={detail.label}
+											className="rounded-xl border border-line bg-surface-2 p-3"
+										>
+											<dt className="text-[8px] font-medium uppercase tracking-[0.12em] text-muted">
+												{detail.label}
+											</dt>
+											<dd className="mt-1.5 text-[11px] font-semibold leading-4 text-ink">
+												{detail.value}
+											</dd>
+										</div>
+									))}
+									<div className="col-span-2 rounded-xl border border-line bg-surface-2 p-3">
+										<dt className="text-[8px] font-medium uppercase tracking-[0.12em] text-muted">
 											{t.certifications.programLabel}
 										</dt>
 										<dd className="mt-1.5 text-[11px] font-semibold leading-4 text-ink">
@@ -268,22 +267,17 @@ export default function CertificateLightbox() {
 									</div>
 								</dl>
 
-								<div className="mt-3 rounded-xl border border-line bg-canvas/45 p-3">
-									<p className="text-[8px] font-bold uppercase tracking-[0.16em] text-muted/75">
+								<div className="mt-3 rounded-xl border border-line bg-surface-2 p-3">
+									<p className="text-[8px] font-medium uppercase tracking-[0.12em] text-muted">
 										{t.certifications.signedBy}
 									</p>
 									<div className="mt-2.5 flex flex-wrap gap-x-6 gap-y-2.5">
 										{copy.signatories.map((person) => (
 											<div key={person.name}>
-												<p
-													className={cn(
-														"font-serif text-[16px] leading-none text-ink",
-														!isRTL && "italic",
-													)}
-												>
+												<p className="font-display text-[13px] font-semibold leading-none text-ink">
 													{person.name}
 												</p>
-												<p className="mt-1 max-w-[220px] text-[8.5px] font-medium leading-4 text-muted">
+												<p className="mt-1.5 max-w-[220px] text-[9px] leading-4 text-muted">
 													{person.role}
 												</p>
 											</div>
@@ -291,20 +285,20 @@ export default function CertificateLightbox() {
 									</div>
 								</div>
 
-								<div className="mt-4 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.12em] text-accent-text">
+								<div className="mt-4 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.1em] text-accent-text">
 									<FiCheck aria-hidden="true" className="size-3.5" />
 									<span>{t.certifications.verified}</span>
 								</div>
 							</div>
 
-							<div className="flex items-center justify-between gap-3 border-t border-line/70 p-4 sm:px-6">
+							<div className="flex items-center justify-between gap-3 border-t border-line p-4 sm:px-6">
 								<div className="flex items-center gap-1.5">
 									<button
 										type="button"
 										onClick={() => goTo(-1)}
 										aria-label={t.certifications.previousCertificate}
 										title={t.certifications.previousCertificate}
-										className="grid size-9 place-items-center rounded-full border border-line bg-canvas/55 text-muted transition-colors hover:border-accent-text/40 hover:text-ink"
+										className="icon-btn size-9"
 									>
 										<FiChevronLeft
 											aria-hidden="true"
@@ -316,7 +310,7 @@ export default function CertificateLightbox() {
 										onClick={() => goTo(1)}
 										aria-label={t.certifications.nextCertificate}
 										title={t.certifications.nextCertificate}
-										className="grid size-9 place-items-center rounded-full border border-line bg-canvas/55 text-muted transition-colors hover:border-accent-text/40 hover:text-ink"
+										className="icon-btn size-9"
 									>
 										<FiChevronRight
 											aria-hidden="true"
@@ -329,7 +323,7 @@ export default function CertificateLightbox() {
 									href={cert.image}
 									target="_blank"
 									rel="noreferrer noopener"
-									className="group inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#0a100b] transition-colors hover:bg-ink hover:text-canvas"
+									className="btn btn-primary min-h-9 px-4 text-[10px]"
 								>
 									<FiExternalLink aria-hidden="true" className="size-3.5" />
 									<span>{t.certifications.openOriginal}</span>

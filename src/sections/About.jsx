@@ -1,191 +1,132 @@
-import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
+import { FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { profile } from "@/data/profile";
-import { cn } from "@/utils/cn";
 import SectionHeading from "@/components/ui/SectionHeading";
+import SpotlightCard from "@/components/ui/SpotlightCard";
+import StatusPill from "@/components/ui/StatusPill";
 
 export default function About() {
-	const { t, isRTL } = useTranslation();
-	const metadata = [
-		{
-			label: t.about.profile.basedIn,
-			value: t.about.profile.basedInValue,
-		},
-		{
-			label: t.about.profile.focus,
-			value: t.about.profile.focusValue,
-		},
-		{
-			label: t.about.profile.approach,
-			value: t.about.profile.approachValue,
-		},
-	];
+	const { t } = useTranslation();
 
 	return (
-		<section id="about" className="section-pad relative border-t border-line/70">
+		<section id="about" className="section-pad relative border-t border-line">
 			<div className="container-shell">
-				<div className="grid items-start gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16 xl:gap-20">
-					<div data-reveal className="relative mx-auto w-full max-w-[390px] lg:sticky lg:top-28">
-						<div
-							aria-hidden="true"
-							className="absolute -inset-3 rounded-[2.6rem] bg-gradient-to-b from-accent/20 via-transparent to-secondary/15 blur-2xl"
-						/>
+				<SectionHeading
+					eyebrow={t.about.eyebrow}
+					number={t.about.number}
+					title={t.about.title}
+					description={t.about.description}
+				/>
 
-						<figure className="glass-panel relative overflow-hidden rounded-[2.2rem] p-2.5">
-							<div className="relative overflow-hidden rounded-[1.7rem] border border-white/[0.06] bg-[#060b08]">
-								<div className="visual-grid-sm absolute inset-0 opacity-20" aria-hidden="true" />
-								<div
-									aria-hidden="true"
-									className="absolute -end-16 -top-16 size-44 rounded-full bg-accent/15 blur-[70px]"
-								/>
-								<img
-									src={profile.portrait}
-									alt={t.about.profile.alt}
-									width={1200}
-									height={1200}
-									decoding="async"
-									className="relative block h-auto w-full object-contain"
-								/>
-							</div>
+				<div
+					data-reveal-group
+					className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+				>
+					<SpotlightCard
+						data-reveal-item
+						className="flex flex-col justify-between rounded-[1.6rem] p-6 sm:col-span-2 sm:p-8 lg:row-span-2"
+					>
+						<div>
+							<p className="eyebrow-label">{t.about.eyebrow}</p>
+							<h3 className="mt-4 max-w-lg font-display text-[clamp(1.55rem,3vw,2.2rem)] font-bold leading-[1.15] tracking-[-0.035em] text-ink rtl:leading-[1.3] rtl:tracking-normal">
+								{t.about.cardTitle}
+							</h3>
 
-							<figcaption className="flex items-center justify-between gap-3 px-2.5 pb-1 pt-3.5">
-								<div className="min-w-0">
-									<p className="font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-muted/70">
-										{t.about.profile.portrait}
-									</p>
-									<p className="mt-1 truncate font-display text-lg font-semibold tracking-[-0.04em] text-ink">
-										{t.common.name}
-									</p>
-									<p className="mt-0.5 truncate text-[10px] font-medium text-muted">
-										{t.common.role}
-									</p>
-								</div>
-								<span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-canvas/60 px-2.5 py-1.5 text-[8px] font-bold uppercase tracking-[0.1em] text-muted">
-									<span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
-									{t.hero.card.status}
-								</span>
-							</figcaption>
-						</figure>
-
-						<div className="relative mt-3 grid grid-cols-2 gap-2 xl:grid-cols-3">
-							{metadata.map((item, index) => (
-								<div
-									key={item.label}
-									className={cn(
-										"glass-chip rounded-2xl p-3 transition-colors hover:border-accent-text/30",
-										index === metadata.length - 1 && "col-span-2 xl:col-span-1",
-									)}
-								>
-									<p className="text-[8px] font-bold uppercase tracking-[0.16em] text-muted/80">
-										{item.label}
-									</p>
-									<p className="mt-1.5 text-[10px] font-semibold leading-4 text-ink">
-										{item.value}
-									</p>
-								</div>
-							))}
-						</div>
-
-						<div className="glass-card relative mt-3 rounded-2xl p-4">
-							<div className="flex items-center justify-between gap-3">
-								<p className="text-[8px] font-bold uppercase tracking-[0.15em] text-muted/75">
-									{t.about.profile.currentlyLabel}
-								</p>
-								<span className="inline-flex items-center gap-1.5 text-[8px] font-bold uppercase tracking-[0.12em] text-accent-text">
-									<FiMapPin aria-hidden="true" className="size-3" />
-									{t.hero.card.location}
-								</span>
-							</div>
-							<p className="mt-1.5 text-[11px] font-semibold leading-5 text-ink">
-								{t.about.profile.currentlyValue}
-							</p>
-							<div className="mt-3 flex flex-wrap gap-1.5">
-								{["React", "Next.js", "Laravel"].map((tech) => (
-									<span
-										key={tech}
-										className="rounded-full border border-line bg-surface/70 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.08em] text-muted"
+							<div className="mt-4 max-w-xl space-y-3.5">
+								{t.about.body.map((paragraph) => (
+									<p
+										key={paragraph}
+										className="text-pretty text-sm leading-7 text-muted"
 									>
-										{tech}
-									</span>
+										{paragraph}
+									</p>
 								))}
 							</div>
 						</div>
-					</div>
 
-					<div className="pt-1 lg:pt-2">
-						<SectionHeading
-							eyebrow={t.about.eyebrow}
-							number={t.about.number}
-							title={t.about.title}
-							description={t.about.intro}
-						/>
-
-						<div className="mt-7 max-w-[680px] space-y-5">
-							{t.about.body.map((paragraph) => (
-								<p
-									key={paragraph}
-									data-reveal
-									className="text-pretty text-[0.95rem] leading-7 text-muted sm:text-base sm:leading-8"
-								>
-									{paragraph}
-								</p>
+						<div className="mt-8 grid grid-cols-3 gap-3 border-t border-line pt-5">
+							{t.about.stats.map((stat) => (
+								<div key={stat.label}>
+									<p className="font-display text-xl font-bold tracking-[-0.03em] text-ink sm:text-2xl">
+										{stat.value}
+									</p>
+									<p className="mt-1 text-[10px] font-medium leading-4 text-muted">
+										{stat.label}
+									</p>
+								</div>
 							))}
 						</div>
+					</SpotlightCard>
 
-						<div className="mt-9 grid gap-3 sm:grid-cols-3">
-							{t.about.cards.map((card, index) => (
-								<article
-									key={card.title}
-									data-reveal
-									data-reveal-delay={index * 0.05}
-									className="group glass-card card-sheen relative overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent-text/30"
-								>
-									<div
-										aria-hidden="true"
-										className="absolute -end-4 -top-5 font-display text-6xl font-bold text-ink/[0.035] transition-colors group-hover:text-accent-text/[0.08]"
-									>
-										0{index + 1}
-									</div>
-									<div className="relative z-[2]">
-										<span className="grid size-8 place-items-center rounded-full border border-line bg-canvas/60 text-accent-text">
-											<FiArrowUpRight
-												aria-hidden="true"
-												className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-											/>
-										</span>
-										<h3 className="mt-4 text-[13px] font-bold leading-5 text-ink">
-											{card.title}
-										</h3>
-										<p className="mt-2 text-pretty text-[11px] leading-[1.65] text-muted">
-											{card.text}
-										</p>
-									</div>
-								</article>
-							))}
-						</div>
-
-						<blockquote
-							data-reveal
-							className="glass-card relative mt-9 overflow-hidden rounded-[1.6rem] px-5 py-5 sm:px-6"
-						>
-							<span
+					<SpotlightCard
+						data-reveal-item
+						className="rounded-[1.6rem] p-2 sm:col-span-2 lg:col-span-1 lg:row-span-2"
+					>
+						<div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-surface-2">
+							<div
 								aria-hidden="true"
-								className="absolute end-4 top-0 font-serif text-8xl leading-none text-accent-text/10"
-							>
-								”
-							</span>
-							<div className="relative flex items-start gap-4">
-								<span className="mt-1 hidden h-12 w-1 shrink-0 rounded-full bg-gradient-to-b from-accent to-secondary sm:block" />
-								<p
-									className={`max-w-2xl text-pretty font-serif text-lg leading-7 tracking-[-0.02em] text-ink sm:text-xl sm:leading-8 ${
-										isRTL ? "" : "italic"
-									}`}
-								>
-									“{t.about.quote}”
+								className="dot-grid-sm absolute inset-0 opacity-40"
+							/>
+							<img
+								src={profile.portrait}
+								alt={t.about.portraitAlt}
+								width={1200}
+								height={1200}
+								loading="lazy"
+								decoding="async"
+								className="relative block aspect-square w-full object-contain"
+							/>
+						</div>
+
+						<div className="flex items-end justify-between gap-3 px-2 pb-1.5 pt-3">
+							<div className="min-w-0">
+								<p className="font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+									{t.hero.portraitLabel}
+								</p>
+								<p className="mt-1.5 truncate font-display text-sm font-bold text-ink">
+									{t.common.name}
+								</p>
+								<p className="mt-0.5 flex items-center gap-1 text-[10px] text-muted">
+									<FiMapPin aria-hidden="true" className="size-3 text-accent-text" />
+									{t.about.locationValue}
 								</p>
 							</div>
-						</blockquote>
-					</div>
+							<StatusPill label={t.hero.badge} className="shrink-0" />
+						</div>
+					</SpotlightCard>
+
+					{Object.entries(t.about.cards).map(([key, card]) => (
+						<SpotlightCard
+							key={key}
+							data-reveal-item
+							className="rounded-[1.6rem] p-5 sm:p-6"
+						>
+							<p className="eyebrow-label">{card.label}</p>
+							<h3 className="mt-3 font-display text-lg font-bold leading-6 tracking-[-0.02em] text-ink rtl:tracking-normal">
+								{card.title}
+							</h3>
+							<p className="mt-2 text-pretty text-[12px] leading-6 text-muted">
+								{card.text}
+							</p>
+						</SpotlightCard>
+					))}
+
+					<SpotlightCard
+						data-reveal-item
+						className="rounded-[1.6rem] p-6 sm:col-span-2 sm:p-8 lg:col-span-3"
+					>
+						<div className="flex items-start gap-4">
+							<span
+								aria-hidden="true"
+								className="hidden font-display text-5xl leading-none text-accent-text/30 sm:block"
+							>
+								“
+							</span>
+							<p className="max-w-3xl text-pretty font-display text-base font-medium leading-7 text-ink sm:text-lg sm:leading-8">
+								{t.about.quote}
+							</p>
+						</div>
+					</SpotlightCard>
 				</div>
 			</div>
 		</section>

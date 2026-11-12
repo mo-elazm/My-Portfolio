@@ -13,37 +13,34 @@ export default function Navbar() {
 	const activeSection = useAppStore((state) => state.activeSection);
 	const mobileMenuOpen = useAppStore((state) => state.mobileMenuOpen);
 	const toggleMobileMenu = useAppStore((state) => state.toggleMobileMenu);
-	const scrolled = useScrolled(30);
-
-	const hasBackground = scrolled || mobileMenuOpen;
+	const scrolled = useScrolled(20);
 
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 px-3 py-3 sm:px-5">
+		<header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
 			<div
 				className={cn(
-					"relative mx-auto flex h-16 max-w-[1180px] items-center justify-between gap-4 rounded-[1.35rem] border px-3 transition-all duration-500 sm:px-4",
-					hasBackground
-						? "border-line/80 bg-canvas/70 shadow-[0_20px_60px_-42px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
-						: "border-transparent bg-transparent",
+					"glass-panel mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 rounded-2xl px-2.5 transition-shadow duration-500 sm:px-3",
+					scrolled && "shadow-[0_18px_50px_-30px_rgba(0,0,0,0.6)]",
 				)}
 			>
-				<Logo onClick={() => {}} />
+				<Logo />
 
 				<nav
 					aria-label={t.common.menu}
-					className="glass-chip absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full p-1 lg:flex"
+					className="hidden items-center gap-0.5 rounded-full border border-line/70 bg-surface/50 p-1 lg:flex"
 				>
 					{navItems.map((item) => {
 						const isActive = activeSection === item.id;
+
 						return (
 							<a
 								key={item.id}
 								href={`#${item.id}`}
 								aria-current={isActive ? "page" : undefined}
 								className={cn(
-									"rounded-full px-3 py-2 text-[11px] font-semibold transition-all duration-300 xl:px-4 xl:text-[12px]",
+									"rounded-full px-3 py-1.5 text-[11px] font-semibold leading-none transition-colors duration-300",
 									isActive
-										? "bg-ink text-canvas shadow-[0_10px_24px_-16px_rgba(0,0,0,0.55)]"
+										? "bg-ink text-canvas"
 										: "text-muted hover:bg-ink/[0.05] hover:text-ink",
 								)}
 							>
@@ -53,13 +50,13 @@ export default function Navbar() {
 					})}
 				</nav>
 
-				<div className="flex items-center gap-2">
-					<LanguageToggle className="hidden sm:inline-flex" />
+				<div className="flex items-center gap-1.5">
+					<LanguageToggle />
 					<ThemeToggle />
 
 					<a
 						href="#contact"
-						className="ms-1 hidden h-10 items-center rounded-full bg-accent px-4 text-[11px] font-extrabold text-[#0a100b] shadow-[0_14px_34px_-18px_var(--glow)] transition-colors duration-300 hover:bg-ink hover:text-canvas xl:inline-flex"
+						className="btn btn-primary ms-1 hidden min-h-9 px-4 text-[11px] xl:inline-flex"
 					>
 						{t.common.letsTalk}
 					</a>
@@ -70,12 +67,12 @@ export default function Navbar() {
 						aria-label={mobileMenuOpen ? t.common.close : t.common.openMenu}
 						aria-expanded={mobileMenuOpen}
 						aria-controls="mobile-menu"
-						className="inline-flex size-10 items-center justify-center rounded-full border border-line bg-surface/70 text-ink transition-colors hover:border-accent-text/50 hover:text-accent-text lg:hidden"
+						className="icon-btn size-9 lg:hidden"
 					>
 						{mobileMenuOpen ? (
-							<FiX aria-hidden="true" className="size-5" />
+							<FiX aria-hidden="true" className="size-[18px]" />
 						) : (
-							<FiMenu aria-hidden="true" className="size-5" />
+							<FiMenu aria-hidden="true" className="size-[18px]" />
 						)}
 					</button>
 				</div>

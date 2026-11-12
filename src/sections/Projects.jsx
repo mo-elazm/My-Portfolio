@@ -2,23 +2,16 @@ import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { projects } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
-import { cn } from "@/utils/cn";
-import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectPreview from "@/components/projects/ProjectPreview";
 
 export default function Projects() {
-	const { t, isRTL } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
-		<section id="work" className="section-pad relative border-t border-line/70">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute start-[-8rem] top-[28%] size-96 rounded-full bg-accent/[0.045] blur-[120px]"
-			/>
-
-			<div className="container-shell relative">
-				<div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+		<section id="work" className="section-pad relative border-t border-line">
+			<div className="container-shell">
+				<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 					<SectionHeading
 						eyebrow={t.projects.eyebrow}
 						number={t.projects.number}
@@ -26,115 +19,127 @@ export default function Projects() {
 						description={t.projects.description}
 					/>
 
-					<div data-reveal className="shrink-0 lg:pb-1">
-						<Button
-							href={profile.github}
-							target="_blank"
-							rel="noreferrer noopener"
-							variant="secondary"
-							icon={false}
-						>
-							<span className="inline-flex items-center gap-2">
-								<FiGithub aria-hidden="true" className="size-4" />
-								{t.projects.github}
-								<FiArrowUpRight
-									aria-hidden="true"
-									className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-								/>
-							</span>
-						</Button>
-					</div>
+					<a
+						href={profile.github}
+						target="_blank"
+						rel="noreferrer noopener"
+						className="btn btn-secondary w-fit shrink-0"
+					>
+						<FiGithub aria-hidden="true" className="size-3.5" />
+						<span>{t.projects.github}</span>
+					</a>
 				</div>
 
-				<div className="mt-14 space-y-20 sm:space-y-24 lg:mt-20 lg:space-y-32">
-					{projects.map((project, index) => {
+				<div data-reveal-group className="mt-12 grid gap-4 md:grid-cols-2">
+					{projects.map((project) => {
 						const copy = t.projects.items[project.id];
-						const reversed = index % 2 === 1;
 
 						return (
 							<article
 								key={project.id}
-								data-reveal
-								className="group grid items-center gap-8 lg:grid-cols-2 lg:gap-14 xl:gap-20"
+								data-reveal-item
+								className="group flex flex-col overflow-hidden rounded-[1.6rem] border border-line bg-surface shadow-[var(--card-shadow)] transition-[translate,border-color] duration-500 hover:-translate-y-1 hover:border-line-strong"
 							>
-								<div className={cn("relative", reversed && "lg:order-2")}>
-									<div
-										aria-hidden="true"
-										className="absolute -inset-4 rounded-[2.5rem] bg-accent/[0.045] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-									/>
-									<span className="absolute -top-3 start-6 z-10 inline-flex items-center gap-2 rounded-full border border-line bg-canvas px-3 py-1.5 font-mono text-[8px] font-bold uppercase tracking-[0.16em] text-muted shadow-sm">
-										<span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
-										{project.number} / {t.projects.featured}
-									</span>
-
-									<div className="card-sheen relative overflow-hidden rounded-[1.85rem] border border-line/70 bg-surface/80 p-2 shadow-[var(--card-shadow)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1">
-										<div className="aspect-[4/3] overflow-hidden rounded-[1.35rem]">
+								<div className="p-2 pb-0">
+									<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
+										<div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
 											<ProjectPreview variant={project.variant} />
 										</div>
 									</div>
 								</div>
 
-								<div className={cn("max-w-xl", reversed && "lg:order-1")}>
-									<div className="flex items-center gap-3">
-										<span className="font-mono text-[10px] font-bold text-accent-text">
+								<div className="flex flex-1 flex-col p-5 sm:p-6">
+									<div className="flex items-center justify-between gap-3">
+										<span className="eyebrow-label">{copy.category}</span>
+										<span className="font-mono text-[10px] font-medium text-muted">
 											{project.number}
 										</span>
-										<span className="h-px w-8 bg-line-strong" aria-hidden="true" />
-										<span className="eyebrow-label">{copy.category}</span>
 									</div>
 
-									<h3 className="mt-5 font-display text-[clamp(2.6rem,6vw,4.6rem)] font-semibold leading-none tracking-[-0.065em] text-ink rtl:tracking-[-0.03em]">
+									<h3 className="mt-3 font-display text-2xl font-bold tracking-[-0.03em] text-ink rtl:tracking-normal">
 										{copy.title}
 									</h3>
 
-									<p className="mt-5 max-w-lg text-pretty text-[0.95rem] leading-7 text-muted sm:text-base sm:leading-8">
+									<p className="mt-2 line-clamp-2 text-pretty text-[13px] leading-6 text-muted">
 										{copy.description}
 									</p>
 
-									<div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+									<div className="mt-4 flex flex-wrap gap-1.5">
 										{project.stack.map((tech) => (
 											<span
 												key={tech}
-												className="rounded-full border border-line bg-surface/50 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.08em] text-muted"
+												className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[9px] font-medium text-muted"
 											>
 												{tech}
 											</span>
 										))}
 									</div>
 
-									<div className="mt-7 flex flex-wrap items-center gap-3">
+									<div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-4">
 										<a
 											href={project.url}
 											target="_blank"
 											rel="noreferrer noopener"
-											className="group/live inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-[11px] font-bold text-[#0a100b] transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink hover:text-canvas"
+											className="btn btn-primary min-h-9 px-4 text-[11px]"
 										>
 											<span>{t.projects.live}</span>
 											<FiArrowUpRight
 												aria-hidden="true"
-												className="size-3.5 transition-transform duration-300 group-hover/live:-translate-y-0.5 group-hover/live:translate-x-0.5 rtl:-scale-x-100"
+												className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
 											/>
 										</a>
 										<a
 											href={project.repo}
 											target="_blank"
 											rel="noreferrer noopener"
-											className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/50 px-5 py-3 text-[11px] font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-text/40 hover:text-accent-text"
+											className="btn btn-secondary min-h-9 px-4 text-[11px]"
 										>
-											<FiGithub aria-hidden="true" className="size-3.5" />
+											<FiGithub aria-hidden="true" className="size-3" />
 											<span>{t.projects.source}</span>
 										</a>
 									</div>
-
-									{isRTL ? null : (
-										<p className="mt-6 font-mono text-[8px] uppercase tracking-[0.18em] text-muted/55">
-											DESIGN → DEVELOP → DEPLOY
-										</p>
-									)}
 								</div>
 							</article>
 						);
 					})}
+
+					<article
+						data-reveal-item
+						className="relative flex flex-col justify-center overflow-hidden rounded-[1.6rem] border border-line bg-surface p-6 shadow-[var(--card-shadow)] sm:p-8"
+					>
+						<div
+							aria-hidden="true"
+							className="dot-grid-sm pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_80%_80%_at_100%_0%,black,transparent)]"
+						/>
+						<FiGithub
+							aria-hidden="true"
+							className="pointer-events-none absolute -bottom-6 -end-6 size-44 text-ink/[0.035] rtl:-scale-x-100"
+						/>
+						<div className="relative">
+							<span className="grid size-10 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
+								<FiGithub aria-hidden="true" className="size-4" />
+							</span>
+							<h3 className="mt-5 font-display text-xl font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
+								{t.projects.more}
+							</h3>
+							<p className="mt-2 max-w-xs text-pretty text-[13px] leading-6 text-muted">
+								{t.projects.moreText}
+							</p>
+						</div>
+
+						<a
+							href={profile.github}
+							target="_blank"
+							rel="noreferrer noopener"
+							className="btn btn-secondary relative mt-6 w-fit"
+						>
+							<span>{t.projects.github}</span>
+							<FiArrowUpRight
+								aria-hidden="true"
+								className="size-3.5 rtl:-scale-x-100"
+							/>
+						</a>
+					</article>
 				</div>
 			</div>
 		</section>

@@ -10,6 +10,7 @@ export default function ScrollProgress() {
 			frame = 0;
 			const scrollable = document.documentElement.scrollHeight - window.innerHeight;
 			const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+
 			if (barRef.current) {
 				barRef.current.style.transform = `scaleX(${progress})`;
 			}
@@ -38,7 +39,7 @@ export default function ScrollProgress() {
 		<div className="fixed inset-x-0 top-0 z-[70] h-[2px] bg-transparent" aria-hidden="true">
 			<div
 				ref={barRef}
-				className="h-full w-full origin-left bg-accent"
+				className="h-full w-full origin-left bg-accent rtl:origin-right"
 				style={{ transform: "scaleX(0)" }}
 			/>
 		</div>

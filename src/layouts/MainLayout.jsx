@@ -23,7 +23,7 @@ export default function MainLayout() {
 		<div className="relative min-h-screen overflow-x-clip">
 			<a
 				href="#main-content"
-				className="fixed start-4 top-4 z-[80] -translate-y-20 rounded-full bg-accent px-5 py-3 text-xs font-bold text-[#0a100b] transition-transform focus:translate-y-0"
+				className="fixed start-4 top-4 z-[80] -translate-y-20 rounded-full bg-accent-strong px-5 py-3 text-xs font-bold text-white transition-transform focus:translate-y-0"
 			>
 				{t.common.skipToContent}
 			</a>

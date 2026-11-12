@@ -16,17 +16,7 @@ const getStoredPreferences = () => {
 };
 
 const stored = getStoredPreferences();
-const getInitialTheme = () => {
-	if (stored.theme === "light" || stored.theme === "dark") {
-		return stored.theme;
-	}
-
-	if (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: light)").matches) {
-		return "light";
-	}
-
-	return "dark";
-};
+const getInitialTheme = () => (stored.theme === "light" ? "light" : "dark");
 
 const getInitialLanguage = () => (stored.language === "ar" ? "ar" : "en");
 

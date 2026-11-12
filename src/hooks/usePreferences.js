@@ -21,7 +21,7 @@ export default function usePreferences() {
 		root.dataset.theme = theme;
 		root.style.colorScheme = theme;
 
-		setMetaContent('meta[name="theme-color"]', isDark ? "#080b09" : "#f3f0e7");
+		setMetaContent('meta[name="theme-color"]', isDark ? "#09090B" : "#FAFAFA");
 	}, [theme]);
 
 	useEffect(() => {

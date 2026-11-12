@@ -13,7 +13,7 @@ export default function SectionHeading({
 		<div
 			data-reveal
 			className={cn(
-				"max-w-3xl",
+				"max-w-2xl",
 				align === "center" && "mx-auto text-center",
 				className,
 			)}
@@ -24,19 +24,16 @@ export default function SectionHeading({
 					align === "center" && "justify-center",
 				)}
 			>
-				<span className="font-mono text-[11px] font-bold text-accent-text">
-					({number})
+				<span className="font-mono text-[11px] font-medium text-accent-text">
+					{number}
 				</span>
-				<span
-					className="h-px w-10 bg-gradient-to-r from-accent-text/60 to-transparent rtl:bg-gradient-to-l"
-					aria-hidden="true"
-				/>
+				<span className="h-px w-8 bg-line-strong" aria-hidden="true" />
 				<span className="eyebrow-label">{eyebrow}</span>
 			</div>
 
 			<h2
 				className={cn(
-					"mt-5 font-display text-[clamp(2.35rem,5vw,4.25rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-balance text-ink",
+					"mt-5 font-display text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold leading-[1.04] tracking-[-0.04em] text-balance text-ink rtl:leading-[1.2] rtl:tracking-[-0.015em]",
 					titleClassName,
 				)}
 			>
@@ -44,7 +41,7 @@ export default function SectionHeading({
 			</h2>
 
 			{description ? (
-				<p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-[1.05rem] sm:leading-8">
+				<p className="mt-4 max-w-xl text-pretty text-[0.95rem] leading-7 text-muted sm:text-base sm:leading-8">
 					{description}
 				</p>
 			) : null}

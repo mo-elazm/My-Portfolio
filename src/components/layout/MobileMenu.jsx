@@ -48,38 +48,44 @@ export default function MobileMenu() {
 			inert={!isOpen}
 			aria-hidden={!isOpen}
 			className={cn(
-				"fixed inset-0 z-40 flex flex-col overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
+				"fixed inset-0 z-40 overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
 				isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
 			)}
 		>
-			<div className="visual-grid absolute inset-0 opacity-45" aria-hidden="true" />
-			<div className="absolute -end-24 top-24 size-72 rounded-full bg-accent/15 blur-[100px]" aria-hidden="true" />
+			<div
+				aria-hidden="true"
+				className="dot-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,black,transparent)]"
+			/>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute -end-24 top-24 size-72 rounded-full bg-accent/10 blur-[110px]"
+			/>
 
 			<div
 				className={cn(
-					"relative flex min-h-full flex-col px-6 pb-8 pt-28 transition-transform duration-500 sm:px-8",
-					isOpen ? "translate-y-0" : "translate-y-5",
+					"relative flex min-h-full flex-col px-6 pb-8 pt-24 transition-transform duration-500 sm:px-8",
+					isOpen ? "translate-y-0" : "translate-y-4",
 				)}
 			>
 				<p className="eyebrow-label">{t.common.menu}</p>
 
-				<nav className="mt-5 flex-1" aria-label={t.common.menu}>
+				<nav className="mt-4 flex-1" aria-label={t.common.menu}>
 					{navItems.map((item, index) => (
 						<a
 							key={item.id}
 							href={`#${item.id}`}
 							onClick={closeMenu}
-							style={{ transitionDelay: isOpen ? `${120 + index * 45}ms` : "0ms" }}
+							style={{ transitionDelay: isOpen ? `${100 + index * 40}ms` : "0ms" }}
 							className={cn(
-								"group flex items-center justify-between border-b border-line py-4 transition-all duration-500",
-								isOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+								"group flex items-center justify-between border-b border-line py-3.5 transition-all duration-500",
+								isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
 							)}
 						>
-							<span className="flex items-baseline gap-4">
+							<span className="flex items-baseline gap-3.5">
 								<span className="font-mono text-[10px] text-accent-text">
-									0{index + 1}
+									{String(index + 1).padStart(2, "0")}
 								</span>
-								<span className="font-display text-[clamp(2rem,9vw,3rem)] font-medium leading-none tracking-[-0.05em] text-ink transition-colors group-hover:text-accent-text">
+								<span className="font-display text-[clamp(1.7rem,7.5vw,2.4rem)] font-bold leading-none tracking-[-0.04em] text-ink transition-colors group-hover:text-accent-text rtl:tracking-normal">
 									{t.nav[item.key]}
 								</span>
 							</span>
@@ -91,11 +97,11 @@ export default function MobileMenu() {
 					))}
 				</nav>
 
-				<div className="mt-8 flex flex-col gap-3 border-t border-line pt-5">
+				<div className="mt-6 flex flex-col gap-3 border-t border-line pt-5">
 					<a
 						href={`mailto:${profile.email}`}
 						onClick={closeMenu}
-						className="inline-flex items-center gap-2 text-sm font-semibold text-ink"
+						className="inline-flex items-center gap-2.5 text-sm font-semibold text-ink"
 					>
 						<FiMail aria-hidden="true" className="size-4 text-accent-text" />
 						<span dir="ltr">{profile.email}</span>
@@ -105,7 +111,7 @@ export default function MobileMenu() {
 						target="_blank"
 						rel="noreferrer noopener"
 						onClick={closeMenu}
-						className="inline-flex items-center gap-2 text-sm font-semibold text-ink"
+						className="inline-flex items-center gap-2.5 text-sm font-semibold text-ink"
 					>
 						<FaWhatsapp aria-hidden="true" className="size-4 text-accent-text" />
 						<span dir="ltr">{profile.whatsappDisplay}</span>
@@ -113,10 +119,14 @@ export default function MobileMenu() {
 
 					<div className="mt-1 flex items-center justify-between gap-4">
 						<SocialLinks />
-						<span className="font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-muted/60">
-							Egypt / 2026
+						<span className="font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/70">
+							EG / 2026
 						</span>
 					</div>
+
+					<a href="#contact" onClick={closeMenu} className="btn btn-primary mt-2 w-full">
+						{t.common.letsTalk}
+					</a>
 				</div>
 			</div>
 		</div>
