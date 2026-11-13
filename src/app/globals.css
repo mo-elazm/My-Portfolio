@@ -16,10 +16,10 @@
 	--color-accent-text: var(--accent-text);
 	--color-accent-soft: var(--accent-soft);
 
-	--font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-	--font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-	--font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
-	--font-arabic: "IBM Plex Sans Arabic", "Plus Jakarta Sans", ui-sans-serif, sans-serif;
+	--font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+	--font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+	--font-arabic: var(--font-plex-arabic), var(--font-jakarta), ui-sans-serif, sans-serif;
 }
 
 :root {
@@ -38,8 +38,18 @@
 	--accent-soft: rgba(79, 70, 229, 0.08);
 	--accent-glow: rgba(79, 70, 229, 0.1);
 	--accent-shadow: rgba(79, 70, 229, 0.32);
-	--dot: rgba(9, 9, 11, 0.1);
-	--card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+	--dot: #09090b;
+	--card-shadow:
+		0 8px 30px rgba(0, 0, 0, 0.04),
+		0 1px 2px rgba(0, 0, 0, 0.04);
+	--nav-bg: rgba(255, 255, 255, 0.88);
+	--nav-border: rgba(0, 0, 0, 0.1);
+	--nav-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.25);
+	--mesh-1: rgba(99, 102, 241, 0.1);
+	--mesh-2: rgba(139, 92, 246, 0.07);
+	--grad-from: #4f46e5;
+	--grad-via: #6366f1;
+	--grad-to: #8b5cf6;
 	--glass: rgba(255, 255, 255, 0.72);
 	--glass-border: rgba(0, 0, 0, 0.08);
 	--paper-shadow: 0 18px 44px -24px rgba(9, 9, 11, 0.28);
@@ -59,10 +69,20 @@
 	--accent-strong: #5b5de8;
 	--accent-text: #a5b4fc;
 	--accent-soft: rgba(99, 102, 241, 0.12);
-	--accent-glow: rgba(99, 102, 241, 0.12);
+	--accent-glow: rgba(99, 102, 241, 0.14);
 	--accent-shadow: rgba(99, 102, 241, 0.45);
-	--dot: rgba(255, 255, 255, 0.09);
-	--card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	--dot: #ffffff;
+	--card-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+	--nav-bg: rgba(9, 9, 11, 0.88);
+	--nav-border: rgba(255, 255, 255, 0.1);
+	--nav-shadow:
+		0 18px 50px -20px rgba(0, 0, 0, 0.65),
+		inset 0 1px 0 rgba(255, 255, 255, 0.06);
+	--mesh-1: rgba(99, 102, 241, 0.14);
+	--mesh-2: rgba(139, 92, 246, 0.1);
+	--grad-from: #818cf8;
+	--grad-via: #6366f1;
+	--grad-to: #8b5cf6;
 	--glass: rgba(17, 17, 20, 0.66);
 	--glass-border: rgba(255, 255, 255, 0.08);
 	--paper-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
@@ -79,6 +99,7 @@
 		scroll-behavior: smooth;
 		scroll-padding-top: 6rem;
 		background: var(--canvas);
+		-webkit-text-size-adjust: 100%;
 	}
 
 	body {
@@ -97,10 +118,35 @@
 
 	[dir="rtl"] body {
 		font-family: var(--font-arabic);
+		line-height: 1.75;
 	}
 
-	[dir="rtl"] .font-display {
+	[dir="rtl"] h1,
+	[dir="rtl"] h2,
+	[dir="rtl"] h3,
+	[dir="rtl"] h4,
+	[dir="rtl"] h5,
+	[dir="rtl"] h6,
+	[dir="rtl"] .font-display,
+	[dir="rtl"] .eyebrow-label,
+	[dir="rtl"] .btn,
+	[dir="rtl"] .badge,
+	[dir="rtl"] .rtl-flat {
 		font-family: var(--font-arabic);
+		letter-spacing: 0 !important;
+		text-transform: none !important;
+	}
+
+	[dir="rtl"] p,
+	[dir="rtl"] li,
+	[dir="rtl"] dd {
+		line-height: 1.75;
+	}
+
+	[dir="rtl"] .font-mono {
+		font-family: var(--font-arabic), var(--font-jetbrains), monospace;
+		letter-spacing: 0 !important;
+		text-transform: none !important;
 	}
 
 	::selection {
@@ -160,11 +206,6 @@
 		color: var(--muted);
 	}
 
-	[dir="rtl"] .eyebrow-label {
-		letter-spacing: 0.04em;
-		font-family: var(--font-arabic);
-	}
-
 	.dot-grid {
 		background-image: radial-gradient(var(--dot) 1px, transparent 1px);
 		background-size: 22px 22px;
@@ -175,6 +216,13 @@
 		background-size: 14px 14px;
 	}
 
+	.ambient-mesh {
+		background:
+			radial-gradient(56rem 42rem at 50% -12%, var(--mesh-1), transparent 68%),
+			radial-gradient(38rem 30rem at 100% 18%, var(--mesh-2), transparent 70%),
+			radial-gradient(34rem 28rem at 0% 62%, var(--mesh-2), transparent 72%);
+	}
+
 	.spotlight-bg {
 		background: radial-gradient(
 			720px circle at 50% -10%,
@@ -183,12 +231,32 @@
 		);
 	}
 
+	.text-gradient {
+		background-image: linear-gradient(
+			100deg,
+			var(--grad-from),
+			var(--grad-via) 48%,
+			var(--grad-to)
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
 	.text-balance {
 		text-wrap: balance;
 	}
 
 	.text-pretty {
 		text-wrap: pretty;
+	}
+
+	.nav-shell {
+		background: var(--nav-bg);
+		border: 1px solid var(--nav-border);
+		box-shadow: var(--nav-shadow);
+		backdrop-filter: blur(20px) saturate(150%);
+		-webkit-backdrop-filter: blur(20px) saturate(150%);
 	}
 
 	.glass-panel {
@@ -234,7 +302,7 @@
 		border-radius: inherit;
 		padding: 1px;
 		background: radial-gradient(
-			260px circle at var(--mx, 50%) var(--my, 0%),
+			260px circle at var(--x, 50%) var(--y, 0%),
 			color-mix(in srgb, var(--accent) 70%, transparent),
 			transparent 68%
 		);
@@ -259,7 +327,7 @@
 		z-index: 0;
 		border-radius: inherit;
 		background: radial-gradient(
-			340px circle at var(--mx, 50%) var(--my, 0%),
+			340px circle at var(--x, 50%) var(--y, 0%),
 			var(--accent-glow),
 			transparent 72%
 		);
@@ -288,13 +356,15 @@
 		font-size: 0.8125rem;
 		font-weight: 700;
 		line-height: 1;
+		white-space: nowrap;
 		transition:
 			translate 0.3s ease,
+			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
 			background-color 0.3s ease,
 			border-color 0.3s ease,
 			color 0.3s ease,
 			box-shadow 0.3s ease;
-		will-change: translate;
+		will-change: translate, transform;
 	}
 
 	.btn:hover {
@@ -309,6 +379,7 @@
 
 	.btn-primary:hover {
 		background: var(--accent);
+		box-shadow: 0 18px 40px -20px var(--accent-shadow);
 	}
 
 	.btn-secondary {
@@ -373,6 +444,22 @@
 		scrollbar-width: thin;
 		scrollbar-color: var(--line-strong) transparent;
 	}
+
+	.hero-line-mask {
+		display: block;
+		overflow: hidden;
+		padding-block: 0.08em;
+		margin-block: -0.08em;
+	}
+
+	.hero-line {
+		display: block;
+		will-change: transform;
+	}
+
+	.toast-pop {
+		animation: toast-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
 }
 
 @keyframes pulse-soft {
@@ -387,15 +474,31 @@
 	}
 }
 
+@keyframes toast-in {
+	from {
+		opacity: 0;
+		transform: translate(-50%, 10px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0) scale(1);
+	}
+}
+
 .animate-pulse-soft {
 	animation: pulse-soft 2.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: no-preference) {
 	.hero-anim,
+	.hero-fade,
 	[data-reveal],
 	[data-reveal-item] {
 		opacity: 0;
+	}
+
+	.hero-line {
+		transform: translateY(110%);
 	}
 }
 

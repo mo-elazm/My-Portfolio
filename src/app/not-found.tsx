@@ -1,7 +1,9 @@
+"use client";
+
 import { useTranslation } from "@/i18n";
 import Button from "@/components/ui/Button";
 
-export default function NotFoundPage() {
+export default function NotFound() {
 	const { t } = useTranslation();
 
 	return (

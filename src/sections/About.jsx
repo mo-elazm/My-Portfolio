@@ -1,12 +1,23 @@
-import { FiMapPin } from "react-icons/fi";
+"use client";
+
+import Image from "next/image";
+import { FiClock, FiCode, FiGlobe, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { profile } from "@/data/profile";
+import CountUp from "@/components/ui/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import StatusPill from "@/components/ui/StatusPill";
 
 export default function About() {
 	const { t } = useTranslation();
+
+	const details = [
+		{ icon: FiMapPin, label: t.about.locationLabel, value: t.about.locationValue },
+		{ icon: FiClock, label: t.about.availabilityLabel, value: t.common.available },
+		{ icon: FiCode, label: t.about.focusLabel, value: "React · Next.js · Tailwind" },
+		{ icon: FiGlobe, label: t.about.languagesLabel, value: t.about.languagesValue },
+	];
 
 	return (
 		<section id="about" className="section-pad relative border-t border-line">
@@ -47,9 +58,10 @@ export default function About() {
 						<div className="mt-8 grid grid-cols-3 gap-3 border-t border-line pt-5">
 							{t.about.stats.map((stat) => (
 								<div key={stat.label}>
-									<p className="font-display text-xl font-bold tracking-[-0.03em] text-ink sm:text-2xl">
-										{stat.value}
-									</p>
+									<CountUp
+										value={stat.value}
+										className="block font-display text-xl font-bold tracking-[-0.03em] text-ink sm:text-2xl"
+									/>
 									<p className="mt-1 text-[10px] font-medium leading-4 text-muted">
 										{stat.label}
 									</p>
@@ -60,38 +72,55 @@ export default function About() {
 
 					<SpotlightCard
 						data-reveal-item
-						className="rounded-[1.6rem] p-2 sm:col-span-2 lg:col-span-1 lg:row-span-2"
+						className="flex flex-col rounded-[1.6rem] p-5 sm:col-span-2 sm:p-6 lg:col-span-1 lg:row-span-2"
 					>
-						<div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-surface-2">
-							<div
-								aria-hidden="true"
-								className="dot-grid-sm absolute inset-0 opacity-40"
-							/>
-							<img
-								src={profile.portrait}
-								alt={t.about.portraitAlt}
-								width={1200}
-								height={1200}
-								loading="lazy"
-								decoding="async"
-								className="relative block aspect-square w-full object-contain"
-							/>
-						</div>
-
-						<div className="flex items-end justify-between gap-3 px-2 pb-1.5 pt-3">
+						<div className="flex items-center gap-3">
+							<span className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-line bg-surface-2">
+								<Image
+									src={profile.portrait}
+									alt={t.about.portraitAlt}
+									fill
+									sizes="56px"
+									className="object-cover object-top contrast-[1.06] saturate-[0.78] brightness-[0.94]"
+								/>
+							</span>
 							<div className="min-w-0">
-								<p className="font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
-									{t.hero.portraitLabel}
-								</p>
-								<p className="mt-1.5 truncate font-display text-sm font-bold text-ink">
+								<p className="truncate font-display text-sm font-bold text-ink">
 									{t.common.name}
 								</p>
-								<p className="mt-0.5 flex items-center gap-1 text-[10px] text-muted">
-									<FiMapPin aria-hidden="true" className="size-3 text-accent-text" />
-									{t.about.locationValue}
+								<p className="mt-1 truncate text-[11px] font-medium text-muted">
+									{t.common.role}
 								</p>
 							</div>
-							<StatusPill label={t.hero.badge} className="shrink-0" />
+						</div>
+
+						<div className="mt-6 space-y-3.5">
+							{details.map((detail) => {
+								const Icon = detail.icon;
+
+								return (
+									<div
+										key={detail.label}
+										className="flex items-start gap-3 border-b border-line pb-3.5 last:border-0 last:pb-0"
+									>
+										<span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-lg border border-line bg-surface-2 text-accent-text">
+											<Icon aria-hidden="true" className="size-3.5" />
+										</span>
+										<div className="min-w-0">
+											<p className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted">
+												{detail.label}
+											</p>
+											<p className="mt-1 text-[11px] font-semibold leading-4 text-ink">
+												{detail.value}
+											</p>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+
+						<div className="mt-auto pt-6">
+							<StatusPill label={t.hero.badge} />
 						</div>
 					</SpotlightCard>
 

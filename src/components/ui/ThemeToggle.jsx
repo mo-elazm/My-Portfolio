@@ -1,12 +1,13 @@
+"use client";
+
 import { FiMoon, FiSun } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
-import useAppStore from "@/store/useAppStore";
+import { usePreferences } from "@/providers/PreferencesProvider";
 import { cn } from "@/utils/cn";
 
 export default function ThemeToggle({ className }) {
 	const { t } = useTranslation();
-	const theme = useAppStore((state) => state.theme);
-	const toggleTheme = useAppStore((state) => state.toggleTheme);
+	const { theme, toggleTheme } = usePreferences();
 	const isDark = theme === "dark";
 
 	return (

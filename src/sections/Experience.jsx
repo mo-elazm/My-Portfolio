@@ -1,7 +1,12 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { FiBriefcase, FiCalendar, FiCheck, FiUsers } from "react-icons/fi";
 import { experience } from "@/data/experience";
 import { useTranslation } from "@/i18n";
+import { gsap } from "@/lib/gsap";
 import { cn } from "@/utils/cn";
+import CountUp from "@/components/ui/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 
@@ -11,10 +16,46 @@ const icons = {
 };
 
 export default function Experience() {
-	const { t } = useTranslation();
+	const { t, language } = useTranslation();
+	const root = useRef(null);
+
+	useEffect(() => {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			return undefined;
+		}
+
+		const scope = root.current;
+
+		if (!scope) {
+			return undefined;
+		}
+
+		const context = gsap.context(() => {
+			gsap.fromTo(
+				"[data-timeline-line]",
+				{ scaleY: 0 },
+				{
+					scaleY: 1,
+					ease: "none",
+					scrollTrigger: {
+						trigger: scope,
+						start: "top 70%",
+						end: "bottom 65%",
+						scrub: 0.6,
+					},
+				},
+			);
+		}, scope);
+
+		return () => context.revert();
+	}, [language]);
 
 	return (
-		<section id="experience" className="section-pad relative border-t border-line">
+		<section
+			id="experience"
+			ref={root}
+			className="section-pad relative border-t border-line"
+		>
 			<div className="container-shell">
 				<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 					<SectionHeading
@@ -33,9 +74,10 @@ export default function Experience() {
 								key={stat.label}
 								className="rounded-2xl border border-line bg-surface p-3 shadow-[var(--card-shadow)]"
 							>
-								<p className="font-display text-lg font-bold tracking-[-0.03em] text-ink sm:text-xl">
-									{stat.value}
-								</p>
+								<CountUp
+									value={stat.value}
+									className="block font-display text-lg font-bold tracking-[-0.03em] text-ink sm:text-xl"
+								/>
 								<p className="mt-1 text-[9px] font-medium leading-4 text-muted">
 									{stat.label}
 								</p>
@@ -44,8 +86,14 @@ export default function Experience() {
 					</div>
 				</div>
 
-				<ol className="relative mt-12 space-y-4 before:absolute before:bottom-6 before:start-[15px] before:top-6 before:w-px before:bg-line">
-					{experience.map((item, index) => {
+				<div className="relative mt-12">
+					<span
+						aria-hidden="true"
+						data-timeline-line
+						className="absolute bottom-6 start-[15px] top-6 w-px origin-top bg-line"
+					/>
+					<ol className="space-y-4">
+						{experience.map((item, index) => {
 						const copy = t.experience.items[item.id];
 						const Icon = icons[item.icon];
 
@@ -133,7 +181,8 @@ export default function Experience() {
 							</li>
 						);
 					})}
-				</ol>
+					</ol>
+				</div>
 			</div>
 		</section>
 	);

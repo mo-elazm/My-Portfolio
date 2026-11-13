@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { sectionIds } from "@/data/profile";
 import useAppStore from "@/store/useAppStore";

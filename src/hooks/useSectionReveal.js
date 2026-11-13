@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { useTranslation } from "@/i18n";
 import { gsap, ScrollTrigger } from "@/lib/gsap";

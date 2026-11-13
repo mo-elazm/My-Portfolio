@@ -1,28 +1,32 @@
 # Mohamed Abo El-azm — Portfolio
 
-A bilingual (English / Arabic) personal portfolio for Mohamed Abo El-azm, Full Stack Developer. Built with React 19, Vite, Tailwind CSS v4, GSAP, Zustand and React Icons.
+A bilingual (English / Arabic) personal portfolio for Mohamed Abo El-azm, Front-End Developer. Built with Next.js App Router, React 19, Tailwind CSS v4, GSAP and Zustand.
 
 ## Features
 
-- **Bilingual with full RTL support** — English (LTR) and Arabic (RTL), including translated metadata, document `lang`/`dir`, and Arabic typography.
-- **Seamless dark / light themes** — system-aware on first visit, persisted across reloads, with no flash of the wrong theme.
-- **Motion with intent** — GSAP hero intro, scroll-triggered reveals, marquee, hover micro-interactions, and a scroll progress bar.
-- **Responsive by design** — tested from 390 px to 1440 px with no horizontal overflow; dedicated mobile menu with scroll lock and keyboard support.
-- **Accessible interactions** — skip link, focus management, `inert` mobile menu, ARIA labels, and AA-contrast text.
+- **Server-rendered content** — every section is rendered on the server, so crawlers and no-JS visitors get the full semantic HTML instead of an empty root node.
+- **Complete metadata** — Metadata API with Open Graph, Twitter `summary_large_image`, a generated OG image, sitemap, robots and JSON-LD.
+- **Bilingual with full RTL support** — English (LTR) and Arabic (RTL), including translated metadata, document `lang`/`dir`, logical CSS properties and Arabic typography.
+- **Seamless dark / light themes** — cookie-persisted, resolved on the server before first paint, with no flash and no hydration mismatch.
+- **Motion with intent** — GSAP masked hero intro, scroll-triggered reveals, scrubbed timeline, count-up metrics, magnetic CTAs, cursor spotlight and a scroll progress bar.
+- **Responsive by design** — verified from 390 px to 1440 px with no horizontal overflow; dedicated mobile drawer with scroll lock and keyboard support.
+- **Accessible interactions** — skip link, focus management, `inert` mobile menu, ARIA labels and AA-contrast text.
 - **Real project showcase** — live demos and source links for Mercato, Skillline and Walletly.
 - **Experience & credentials** — an EraaSoft mentoring timeline, technical internships, and real certificate previews for the IBM P-TECH Flutter internship and the EraaSoft Front-End Diploma, each opening in a keyboard-accessible lightbox.
-- **Direct contact** — email, WhatsApp, GitHub and LinkedIn shortcuts plus a WhatsApp contact form that composes a pre-filled message, no backend required.
+- **Direct contact** — email, WhatsApp, GitHub and LinkedIn shortcuts plus a one-click copy-email action with a toast confirmation.
 
 ## Tech stack
 
 | Area | Tools |
 | --- | --- |
-| Framework | React 19 + Vite |
-| Routing | React Router |
-| Styling | Tailwind CSS v4 (raw utility classes) |
+| Framework | Next.js 16 (App Router, Turbopack) |
+| UI | React 19 |
+| Styling | Tailwind CSS v4 via `@tailwindcss/postcss` |
+| Fonts | `next/font/google` — Plus Jakarta Sans, JetBrains Mono, IBM Plex Sans Arabic |
 | Animation | GSAP + `@gsap/react` |
-| State | Zustand (persisted theme, language, menu) |
+| State | Zustand (transient UI only) |
 | Icons | React Icons |
+| Language | TypeScript for app/config files, JSX for UI components |
 | Linting | Oxlint |
 
 ## Getting started
@@ -32,14 +36,14 @@ npm install
 npm run dev
 ```
 
-The dev server runs at `http://localhost:5173`.
+The dev server runs at `http://localhost:3000`.
 
 ### Scripts
 
 ```bash
-npm run dev      # start development server
-npm run build    # production build to dist/
-npm run preview  # preview the production build
+npm run dev      # start the development server
+npm run build    # production build
+npm run start    # serve the production build
 npm run lint     # run Oxlint
 ```
 
@@ -47,18 +51,21 @@ npm run lint     # run Oxlint
 
 ```
 src/
-├─ app/          # App shell and routes
-├─ components/   # Reusable UI, layout and project previews
-├─ data/         # Profile, projects and skills data
-├─ hooks/        # Scroll, preferences, reveal and body-lock hooks
-├─ i18n/         # English and Arabic copy
-├─ layouts/      # Main page layout
-├─ lib/          # GSAP setup
-├─ pages/        # Home and 404 pages
+├─ app/          # App Router: layout, page, metadata routes, OG image, 404
+├─ components/   # Reusable UI, layout, project previews, certificate lightbox
+├─ data/         # Profile, projects, experience, skills and certification data
+├─ hooks/        # Reveal, body-lock and section-observation hooks
+├─ i18n/         # English and Arabic copy + translation context
+├─ lib/          # Site constants and GSAP setup
+├─ providers/    # Preferences provider (theme + language, cookie-backed)
 ├─ sections/     # Hero, About, Experience, Skills, Projects, Certifications, Contact
-├─ store/        # Zustand app store
+├─ store/        # Zustand UI store
 └─ utils/        # Small helpers (class names)
 ```
+
+## How preferences work
+
+Theme and language are stored in the `mo-theme` and `mo-lang` cookies. `src/app/layout.tsx` reads them on the server, so the very first HTML response already carries the correct `class="dark"`, `lang` and `dir` attributes. `PreferencesProvider` then keeps the DOM, cookies and document metadata in sync when the visitor toggles either setting.
 
 ## Customizing content
 
@@ -68,8 +75,8 @@ src/
 - **Certifications** — edit `src/data/certifications.js` (grade, image and dimensions) and the copy under `certifications.items` in both i18n files. Certificate artwork lives in `public/certificates/`.
 - **Skills** — edit `src/data/skills.js` and the matching category copy in the i18n files.
 - **Profile links and portrait** — edit `src/data/profile.js`; replace `public/mohamed-portrait.webp` (square, uncropped) to change the portrait.
-- **Site metadata** — update `index.html` for the title, description, Open Graph tags and JSON-LD.
+- **Site metadata** — update `src/lib/site.js` for the canonical URL and site name, and `src/app/layout.tsx` for the title, description, Open Graph and JSON-LD. The social card is generated by `src/app/opengraph-image.tsx`.
 
 ## Deployment
 
-`npm run build` outputs a static site to `dist/`. Deploy it to Vercel, Netlify, GitHub Pages or any static host. The app uses hash-based section navigation, so no server rewrite rules are required.
+`npm run build` produces a production build that can be deployed to Vercel or any Node.js host with `npm run start`. Because preferences are read from cookies, the home page is rendered on demand (`ƒ`) rather than prerendered, while `robots.txt`, `sitemap.xml` and the OG image stay static.

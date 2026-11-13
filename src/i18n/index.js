@@ -1,14 +1,13 @@
-import { useCallback } from "react";
-import en from "./en";
-import ar from "./ar";
-import useAppStore from "@/store/useAppStore";
+"use client";
 
-export const translations = { en, ar };
+import { useCallback } from "react";
+import { usePreferences } from "@/providers/PreferencesProvider";
+import { translations } from "./translations";
+
+export { translations };
 
 export function useTranslation() {
-	const language = useAppStore((state) => state.language);
-	const setLanguage = useAppStore((state) => state.setLanguage);
-	const toggleLanguage = useAppStore((state) => state.toggleLanguage);
+	const { language, setLanguage, toggleLanguage } = usePreferences();
 
 	const changeLanguage = useCallback(
 		(nextLanguage) => {

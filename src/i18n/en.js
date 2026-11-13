@@ -39,7 +39,7 @@ const en = {
 		badge: "Available for work",
 		eyebrow: "Front-End Developer",
 		role: "Front-End Developer · React & Next.js",
-		title: ["I build interfaces", "that feel effortless."],
+		title: ["I build", "interfaces that", "feel effortless."],
 		description:
 			"I specialize in the React and Next.js ecosystem, turning complex product ideas into fast, accessible interfaces with clean architecture and precise motion.",
 		primaryCta: "View projects",
@@ -87,6 +87,10 @@ const en = {
 		quote: "Good software should feel effortless — even when the engineering behind it isn't.",
 		locationLabel: "Based in",
 		locationValue: "Egypt · Working worldwide",
+		availabilityLabel: "Availability",
+		focusLabel: "Focus",
+		languagesLabel: "Languages",
+		languagesValue: "Arabic · English",
 	},
 	experience: {
 		eyebrow: "Journey",
@@ -148,9 +152,8 @@ const en = {
 				note: "Fast, expressive interfaces with a strong foundation in the browser.",
 			},
 			state: {
-				title: "State management",
-				note: "Lightweight global state that stays predictable as the product grows.",
-				features: ["Zustand stores", "Persisted preferences", "Clean data flow"],
+				title: "State, Motion & Architecture",
+				note: "Predictable state, choreographed motion and the architecture that keeps both fast.",
 			},
 			backend: {
 				title: "Back-end",
@@ -218,6 +221,9 @@ const en = {
 		issuedLabel: "Issued",
 		durationLabel: "Duration",
 		programLabel: "Program",
+		gradeLabel: "Grade",
+		signerLabel: "Signer",
+		certified: "Certified",
 		signedBy: "Signed by",
 		footnote: "Original certificates are available on request.",
 		items: {
@@ -276,7 +282,7 @@ const en = {
 		navigate: "Navigate",
 		connect: "Connect",
 		rights: "All rights reserved.",
-		built: "Designed & built with React, Tailwind CSS and GSAP.",
+		built: "Designed & built with Next.js, Tailwind CSS and GSAP.",
 	},
 	notFound: {
 		eyebrow: "404",

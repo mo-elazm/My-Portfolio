@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { FiArrowUpRight, FiMail } from "react-icons/fi";

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaWhatsapp } from "react-icons/fa6";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { getWhatsAppLink, profile } from "@/data/profile";

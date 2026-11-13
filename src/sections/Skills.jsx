@@ -1,4 +1,5 @@
-import { FiCheck } from "react-icons/fi";
+"use client";
+
 import { skillGroups } from "@/data/skills";
 import { useTranslation } from "@/i18n";
 import { cn } from "@/utils/cn";
@@ -38,7 +39,6 @@ export default function Skills() {
 					{skillGroups.map((group, index) => {
 						const Icon = group.icon;
 						const content = t.skills.categories[group.id];
-						const isState = group.id === "state";
 						const isExploring = group.id === "exploring";
 
 						return (
@@ -69,43 +69,16 @@ export default function Skills() {
 									</p>
 								</div>
 
-								{isState ? (
-									<div className="mt-6 flex flex-col gap-5">
-										<div className="flex items-center gap-3.5">
-											<span className="grid size-12 shrink-0 place-items-center rounded-xl bg-accent font-display text-xl font-extrabold text-white">
-												Z
-											</span>
-											<div>
-												<p className="text-sm font-bold text-ink">Zustand</p>
-												<p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted">
-													Global state · Persist
-												</p>
-											</div>
-										</div>
-										<ul className="space-y-2">
-											{content.features.map((feature) => (
-												<li
-													key={feature}
-													className="flex items-center gap-2 text-[11px] font-medium text-muted"
-												>
-													<FiCheck aria-hidden="true" className="size-3.5 shrink-0 text-accent-text" />
-													{feature}
-												</li>
-											))}
-										</ul>
-									</div>
-								) : (
-									<div
-										className={cn(
-											"mt-6 flex flex-wrap gap-1.5",
-											isExploring && "lg:mt-0 lg:max-w-[430px] lg:justify-end",
-										)}
-									>
-										{group.techs.map((tech) => (
-											<TechChip key={tech.name} tech={tech} />
-										))}
-									</div>
-								)}
+								<div
+									className={cn(
+										"mt-6 flex flex-wrap gap-1.5",
+										isExploring && "lg:mt-0 lg:max-w-[430px] lg:justify-end",
+									)}
+								>
+									{group.techs.map((tech) => (
+										<TechChip key={tech.name} tech={tech} />
+									))}
+								</div>
 							</SpotlightCard>
 						);
 					})}

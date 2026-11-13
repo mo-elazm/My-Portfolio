@@ -4,6 +4,7 @@ import {
 	SiDart,
 	SiFirebase,
 	SiFlutter,
+	SiGreensock,
 	SiHtml5,
 	SiJavascript,
 	SiLaravel,
@@ -18,7 +19,16 @@ import {
 	SiTailwindcss,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
-import { TbArrowsExchange, TbCompass, TbDatabase, TbLayoutGrid, TbNetwork, TbServer2 } from "react-icons/tb";
+import {
+	TbApi,
+	TbArrowsExchange,
+	TbCompass,
+	TbDatabase,
+	TbGauge,
+	TbLayoutGrid,
+	TbNetwork,
+	TbServer2,
+} from "react-icons/tb";
 
 export const skillGroups = [
 	{
@@ -39,7 +49,12 @@ export const skillGroups = [
 		id: "state",
 		icon: TbArrowsExchange,
 		span: "lg:col-span-5",
-		techs: [{ name: "Zustand", mark: "Z" }],
+		techs: [
+			{ name: "Zustand", mark: "Z" },
+			{ name: "GSAP", icon: SiGreensock },
+			{ name: "REST APIs", icon: TbApi },
+			{ name: "Performance Optimization", icon: TbGauge },
+		],
 	},
 	{
 		id: "backend",

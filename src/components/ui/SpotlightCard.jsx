@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { cn } from "@/utils/cn";
 
@@ -17,8 +19,8 @@ export default function SpotlightCard({
 		}
 
 		const rect = node.getBoundingClientRect();
-		node.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-		node.style.setProperty("--my", `${event.clientY - rect.top}px`);
+		node.style.setProperty("--x", `${event.clientX - rect.left}px`);
+		node.style.setProperty("--y", `${event.clientY - rect.top}px`);
 	};
 
 	return (

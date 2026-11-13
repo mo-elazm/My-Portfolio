@@ -1,5 +1,8 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import {
 	FiArrowUpRight,
 	FiAward,
@@ -155,7 +158,7 @@ export default function CertificateLightbox() {
 					ease: "power2.out",
 				},
 			);
-		}, rootRef);
+		}, rootRef.current);
 
 		return () => context.revert();
 	}, [activeId, isRTL]);
@@ -215,11 +218,13 @@ export default function CertificateLightbox() {
 								aria-hidden="true"
 							/>
 							<figure className="cert-lightbox-media certificate-paper relative w-full rounded-[0.9rem] p-2 sm:rounded-[1.2rem] sm:p-3">
-								<img
+								<Image
 									src={cert.image}
 									alt={`${copy.subtitle} — ${copy.issuer}`}
 									width={cert.width}
 									height={cert.height}
+									sizes="(max-width: 1024px) 96vw, 58vw"
+									priority
 									className="max-h-[62vh] w-full rounded-[0.6rem] object-contain lg:max-h-[72vh]"
 								/>
 							</figure>

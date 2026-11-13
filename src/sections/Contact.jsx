@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import {
@@ -141,10 +143,6 @@ export default function Contact() {
 										<span>{copied ? t.contact.copied : t.contact.copyEmail}</span>
 									</button>
 								</div>
-
-								<p className="mt-3 text-[10px] leading-4 text-muted/80">
-									{copied ? t.contact.copiedHint : t.contact.availability}
-								</p>
 							</div>
 
 							<div className="grid gap-2 sm:grid-cols-3">
@@ -202,6 +200,26 @@ export default function Contact() {
 					</div>
 				</div>
 			</div>
+
+			{copied ? (
+				<div
+					role="status"
+					aria-live="polite"
+					className="toast-pop fixed bottom-6 left-1/2 z-[85] flex items-center gap-3 rounded-2xl border border-accent/30 bg-surface/95 px-4 py-3 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] backdrop-blur-xl"
+				>
+					<span className="grid size-7 shrink-0 place-items-center rounded-full bg-accent text-white">
+						<FiCheck aria-hidden="true" className="size-3.5" />
+					</span>
+					<span className="min-w-0">
+						<span className="block text-[11px] font-bold text-ink">
+							{t.contact.copied}
+						</span>
+						<span className="mt-0.5 block text-[9px] text-muted">
+							{t.contact.copiedHint}
+						</span>
+					</span>
+				</div>
+			) : null}
 		</section>
 	);
 }
