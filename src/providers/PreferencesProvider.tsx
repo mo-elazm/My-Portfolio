@@ -46,7 +46,7 @@ const applyTheme = (theme: Theme) => {
 
 	document
 		.querySelectorAll('meta[name="theme-color"]')
-		.forEach((meta) => meta.setAttribute("content", isDark ? "#09090B" : "#FAFAFA"));
+		.forEach((meta) => meta.setAttribute("content", isDark ? "#09090B" : "#F3F4F6"));
 };
 
 const setMetaContent = (selector: string, content: string) => {

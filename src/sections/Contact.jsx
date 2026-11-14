@@ -81,7 +81,7 @@ export default function Contact() {
 					/>
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute -end-24 -top-28 size-72 rounded-full bg-accent/[0.09] blur-[110px]"
+						className="pointer-events-none absolute -end-24 -top-28 size-72 rounded-full bg-accent/[0.05] blur-[110px] dark:bg-accent/[0.09]"
 					/>
 
 					<div className="relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-14">

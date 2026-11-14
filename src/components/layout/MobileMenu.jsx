@@ -60,7 +60,7 @@ export default function MobileMenu() {
 			/>
 			<div
 				aria-hidden="true"
-				className="pointer-events-none absolute -end-24 top-24 size-72 rounded-full bg-accent/10 blur-[110px]"
+				className="pointer-events-none absolute -end-24 top-24 size-72 rounded-full bg-accent/[0.05] blur-[110px] dark:bg-accent/10"
 			/>
 
 			<div

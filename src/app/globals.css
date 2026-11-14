@@ -24,35 +24,40 @@
 
 :root {
 	color-scheme: light;
-	--canvas: #fafafa;
+	--canvas: #f3f4f6;
 	--surface: #ffffff;
-	--surface-2: #f4f4f5;
+	--surface-2: #f1f2f4;
 	--ink: #09090b;
-	--muted: #52525b;
-	--line: rgba(0, 0, 0, 0.08);
-	--line-strong: rgba(0, 0, 0, 0.16);
-	--accent: #4f46e5;
-	--accent-hover: #6366f1;
-	--accent-strong: #4f46e5;
-	--accent-text: #4f46e5;
-	--accent-soft: rgba(79, 70, 229, 0.08);
-	--accent-glow: rgba(79, 70, 229, 0.1);
-	--accent-shadow: rgba(79, 70, 229, 0.32);
+	--muted: #3f3f46;
+	--line: rgba(9, 9, 11, 0.09);
+	--line-strong: rgba(9, 9, 11, 0.18);
+	--accent: #3730a3;
+	--accent-hover: #3730a3;
+	--accent-strong: #4338ca;
+	--accent-text: #4338ca;
+	--accent-soft: rgba(67, 56, 202, 0.08);
+	--accent-glow: rgba(67, 56, 202, 0.07);
+	--accent-shadow: rgba(67, 56, 202, 0.28);
 	--dot: #09090b;
 	--card-shadow:
-		0 8px 30px rgba(0, 0, 0, 0.04),
-		0 1px 2px rgba(0, 0, 0, 0.04);
-	--nav-bg: rgba(255, 255, 255, 0.88);
-	--nav-border: rgba(0, 0, 0, 0.1);
-	--nav-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.25);
-	--mesh-1: rgba(99, 102, 241, 0.1);
-	--mesh-2: rgba(139, 92, 246, 0.07);
-	--grad-from: #4f46e5;
-	--grad-via: #6366f1;
-	--grad-to: #8b5cf6;
-	--glass: rgba(255, 255, 255, 0.72);
-	--glass-border: rgba(0, 0, 0, 0.08);
+		0 4px 20px -2px rgba(9, 9, 11, 0.06),
+		0 1px 2px rgba(9, 9, 11, 0.04);
+	--nav-bg: rgba(255, 255, 255, 0.9);
+	--nav-border: rgba(9, 9, 11, 0.09);
+	--nav-shadow:
+		0 4px 20px -2px rgba(9, 9, 11, 0.06),
+		0 1px 2px rgba(9, 9, 11, 0.04);
+	--mesh-1: rgba(79, 70, 229, 0.06);
+	--mesh-2: rgba(99, 102, 241, 0.035);
+	--grad-from: #4338ca;
+	--grad-via: #4f46e5;
+	--grad-to: #7c3aed;
+	--glass: rgba(255, 255, 255, 0.82);
+	--glass-border: rgba(9, 9, 11, 0.09);
 	--paper-shadow: 0 18px 44px -24px rgba(9, 9, 11, 0.28);
+	--btn-border: #d4d4d8;
+	--btn-hover: #fafafa;
+	--btn-ink: #18181b;
 }
 
 .dark {
@@ -86,6 +91,9 @@
 	--glass: rgba(17, 17, 20, 0.66);
 	--glass-border: rgba(255, 255, 255, 0.08);
 	--paper-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+	--btn-border: rgba(255, 255, 255, 0.08);
+	--btn-hover: #18181b;
+	--btn-ink: #fafafa;
 }
 
 @layer base {
@@ -384,12 +392,12 @@
 
 	.btn-secondary {
 		background: var(--surface);
-		border: 1px solid var(--line);
-		color: var(--ink);
+		border: 1px solid var(--btn-border, var(--line));
+		color: var(--btn-ink, var(--ink));
 	}
 
 	.btn-secondary:hover {
-		background: var(--surface-2);
+		background: var(--btn-hover, var(--surface-2));
 		border-color: var(--line-strong);
 	}
 

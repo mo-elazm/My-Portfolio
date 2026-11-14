@@ -132,7 +132,7 @@ export default function Hero() {
 				<div className="hero-fade hero-portrait relative mx-auto w-full max-w-[430px] lg:max-w-[440px]">
 					<div
 						aria-hidden="true"
-						className="absolute -inset-6 rounded-[3rem] bg-indigo-500/20 blur-2xl"
+						className="absolute -inset-6 rounded-[3rem] bg-indigo-600/[0.06] blur-2xl dark:bg-indigo-500/20"
 					/>
 
 					<div className="relative rounded-[2rem] border border-line bg-surface p-2 shadow-[var(--card-shadow)]">
@@ -149,10 +149,10 @@ export default function Hero() {
 
 								<div
 									aria-hidden="true"
-									className="absolute inset-x-0 bottom-0 h-[52%] bg-gradient-to-t from-white via-white/30 to-transparent dark:from-[#09090B] dark:via-[#09090B]/45"
+									className="absolute inset-x-0 bottom-0 hidden h-[52%] bg-gradient-to-t from-white via-white/30 to-transparent dark:block dark:from-[#09090B] dark:via-[#09090B]/45"
 								/>
 
-								<div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-3 p-4">
+								<div className="absolute inset-x-0 bottom-0 z-10 hidden items-end justify-between gap-3 p-4 dark:flex">
 									<div className="min-w-0">
 										<p className="truncate font-display text-[13px] font-bold text-ink">
 											{t.hero.portraitName}{" "}
@@ -173,6 +173,27 @@ export default function Hero() {
 									</span>
 								</div>
 							</div>
+						</div>
+
+						<div className="flex items-start justify-between gap-3 px-2 pb-0.5 pt-3 dark:hidden">
+							<div className="min-w-0">
+								<p className="truncate font-display text-[13px] font-bold text-ink">
+									{t.hero.portraitName}{" "}
+									<span className="font-medium text-muted">
+										• {t.common.available}
+									</span>
+								</p>
+								<p className="mt-1.5 flex items-center gap-1.5 text-[10px] font-medium text-muted">
+									<span
+										className="size-1.5 rounded-full bg-accent"
+										aria-hidden="true"
+									/>
+									{t.hero.portraitRole}
+								</p>
+							</div>
+							<span className="shrink-0 pt-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+								{t.hero.portraitLabel}
+							</span>
 						</div>
 
 						<div className="flex items-center justify-between gap-3 px-2 pb-1 pt-3">
