@@ -7,8 +7,8 @@ export const experience: TimelineEntry[] = [
 		current: true,
 	},
 	{
-		id: "ibm",
-		icon: "mobile",
+		id: "internships",
+		icon: "intern",
 		current: false,
 	},
 ];

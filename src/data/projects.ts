@@ -1,29 +1,33 @@
-import { profile } from "@/data/profile";
-import type { CaseStudy } from "@/types/content";
+import type { Project } from "@/types/content";
 
-export const caseStudies: CaseStudy[] = [
+export const projects: Project[] = [
 	{
-		id: "foundit",
+		id: "mercato",
 		number: "01",
-		kind: "mobile",
-		year: "2025",
-		stack: ["Flutter", "Dart", "Supabase", "Cubit", "PostgreSQL"],
-		links: { repo: profile.github },
+		variant: "commerce",
+		filter: "commerce",
+		url: "https://e-commers-sooty.vercel.app",
+		repo: "https://github.com/mo-elazm/E-commers",
+		stack: ["React", "JavaScript", "CSS"],
 	},
 	{
-		id: "coursewave",
+		id: "skillline",
 		number: "02",
-		kind: "web",
-		year: "2025",
-		stack: ["React", "Zustand", "REST API", "Tailwind CSS"],
-		links: { repo: profile.github },
+		variant: "learning",
+		filter: "web",
+		url: "https://online-courses-iota-rust.vercel.app",
+		repo: "https://github.com/mo-elazm/Online-Courses",
+		stack: ["React", "Vite", "Responsive UI"],
 	},
 	{
-		id: "storeapi",
+		id: "walletly",
 		number: "03",
-		kind: "backend",
-		year: "2024",
-		stack: ["Node.js", "Express", "MongoDB", "Mongoose", "JWT"],
-		links: { repo: profile.github },
+		variant: "wallet",
+		filter: "web",
+		url: "https://react-project-eosin-five.vercel.app",
+		repo: "https://github.com/mo-elazm/ReactProject",
+		stack: ["React", "Interface Design", "State"],
 	},
 ];
+
+export const projectFilters = ["all", "web", "commerce"] as const;

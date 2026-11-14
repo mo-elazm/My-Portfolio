@@ -7,6 +7,7 @@ export const profile: Profile = {
 	firstNameAr: "محمد",
 	role: "Software Engineer",
 	roleAr: "مهندس برمجيات",
+	portrait: "/mohamed-portrait.webp",
 	email: "mazmgoo@gmail.com",
 	phone: "+201030632762",
 	phoneDisplay: "+20 103 063 2762",
@@ -36,5 +37,5 @@ export const getWhatsAppLink = (message = "") => {
 };
 
 export const whatsappLink = getWhatsAppLink(
-	"Hi Mohamed, I found your portfolio and would like to talk about a role or project.",
+	"Hi Mohamed, I found your portfolio and would like to talk about a project.",
 );

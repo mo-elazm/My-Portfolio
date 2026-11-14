@@ -1,17 +1,20 @@
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
+import Script from "next/script";
 import { IBM_Plex_Sans_Arabic, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import PreferencesProvider from "@/providers/PreferencesProvider";
+import MotionProvider from "@/providers/MotionProvider";
 import Backdrop from "@/components/layout/Backdrop";
+import CursorFollower from "@/components/layout/CursorFollower";
 import Footer from "@/components/layout/Footer";
 import MobileMenu from "@/components/layout/MobileMenu";
 import Navbar from "@/components/layout/Navbar";
+import Preloader from "@/components/layout/Preloader";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import SiteEffects from "@/components/layout/SiteEffects";
 import CertificateLightbox from "@/components/ui/CertificateLightbox";
-import CaseStudyModal from "@/components/projects/CaseStudyModal";
 import { translations } from "@/i18n/translations";
 import { profile } from "@/data/profile";
 import { siteName, siteUrl } from "@/lib/site";
@@ -201,31 +204,38 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 			suppressHydrationWarning
 		>
 			<body>
+				<Script id="portfolio-intro-flag" strategy="beforeInteractive">
+					{`(function(){try{var seen=sessionStorage.getItem("portfolio_intro_seen")==="1";var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;document.documentElement.dataset.intro=seen||reduce?"done":"pending";}catch(error){document.documentElement.dataset.intro="done";}})();`}
+				</Script>
+
 				<PreferencesProvider initialTheme={theme} initialLanguage={language}>
-					<a
-						href="#main-content"
-						className="fixed start-4 top-4 z-[80] -translate-y-20 rounded-full bg-accent-strong px-5 py-3 text-xs font-bold text-white transition-transform focus:translate-y-0"
-					>
-						{isArabic ? "تجاوز إلى المحتوى" : "Skip to content"}
-					</a>
+					<MotionProvider>
+						<a
+							href="#main-content"
+							className="fixed start-4 top-4 z-[80] -translate-y-20 rounded-full bg-accent-strong px-5 py-3 text-xs font-bold text-white transition-transform focus:translate-y-0"
+						>
+							{isArabic ? "تجاوز إلى المحتوى" : "Skip to content"}
+						</a>
 
-					<Backdrop />
-					<ScrollProgress />
-					<SiteEffects />
-					<Navbar />
-					<MobileMenu />
-					<CertificateLightbox />
-					<CaseStudyModal />
+						<Backdrop />
+						<ScrollProgress />
+						<SiteEffects />
+						<Navbar />
+						<MobileMenu />
+						<CertificateLightbox />
 
-					<main id="main-content" className="relative z-10 overflow-x-clip">
-						{children}
-					</main>
+						<main id="main-content" className="relative z-10 overflow-x-clip">
+							{children}
+						</main>
 
-					<Footer />
+						<Footer />
+						<CursorFollower />
+						<Preloader />
+					</MotionProvider>
 				</PreferencesProvider>
 
 				<noscript>
-					<style>{`[data-reveal],[data-reveal-item],.hero-anim,.hero-fade{opacity:1!important}.hero-line{transform:none!important}`}</style>
+					<style>{`[data-preloader]{display:none!important}[data-reveal],[data-reveal-item],.hero-anim,.hero-fade,.hero-pill,.hero-subtitle,.hero-cta,.hero-portrait{opacity:1!important}.hero-line{transform:none!important}`}</style>
 				</noscript>
 
 				<script

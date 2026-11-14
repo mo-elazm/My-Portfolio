@@ -1,25 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { FiCheck, FiCopy, FiGithub, FiMapPin } from "react-icons/fi";
+import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { FiGithub, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
+import { usePreferences } from "@/providers/PreferencesProvider";
 import { gsap } from "@/lib/gsap";
 import { profile } from "@/data/profile";
+import useAppStore from "@/store/useAppStore";
 import { cn } from "@/utils/cn";
 import Button from "@/components/ui/Button";
+import CairoClock from "@/components/ui/CairoClock";
 import SocialLinks from "@/components/ui/SocialLinks";
 import StatusPill from "@/components/ui/StatusPill";
-import HeroVisual from "@/components/home/HeroVisual";
+
+const HeroScene3D = dynamic(() => import("@/components/HeroScene3D"), {
+	ssr: false,
+	loading: () => null,
+});
 
 export default function Hero() {
 	const { t, language } = useTranslation();
+	const { theme } = usePreferences();
+	const introDone = useAppStore((state) => state.introDone);
 	const root = useRef(null);
-	const timerRef = useRef(null);
-	const [copied, setCopied] = useState(false);
-
-	useEffect(() => () => window.clearTimeout(timerRef.current), []);
 
 	useEffect(() => {
+		if (!introDone) {
+			return undefined;
+		}
+
 		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 			return undefined;
 		}
@@ -31,68 +42,42 @@ export default function Hero() {
 		}
 
 		const context = gsap.context(() => {
-			const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+			const timeline = gsap.timeline({ defaults: { ease: "power4.out" } });
 
 			timeline
 				.fromTo(
-					".hero-pill",
-					{ y: 16, autoAlpha: 0 },
-					{ y: 0, autoAlpha: 1, duration: 0.5 },
-				)
-				.fromTo(
 					".hero-line",
-					{ yPercent: 110, y: 0 },
-					{ yPercent: 0, y: 0, duration: 0.85, stagger: 0.09 },
-					"-=0.2",
+					{ yPercent: 100, y: 0 },
+					{ yPercent: 0, y: 0, duration: 0.85, stagger: 0.1, ease: "power4.out" },
 				)
 				.fromTo(
-					".hero-role",
+					".hero-pill",
 					{ y: 14, autoAlpha: 0 },
 					{ y: 0, autoAlpha: 1, duration: 0.5 },
 					"-=0.45",
 				)
 				.fromTo(
-					".hero-copy",
-					{ y: 14, autoAlpha: 0 },
-					{ y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.08 },
-					"-=0.3",
+					".hero-subtitle",
+					{ y: 16, autoAlpha: 0 },
+					{ y: 0, autoAlpha: 1, duration: 0.55, stagger: 0.06 },
+					"-=0.35",
 				)
 				.fromTo(
 					".hero-cta",
 					{ y: 16, autoAlpha: 0 },
-					{ y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.07 },
-					"-=0.3",
+					{ y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08 },
+					"-=0.35",
 				)
 				.fromTo(
-					".hero-visual",
-					{ y: 26, scale: 0.975, autoAlpha: 0 },
-					{ y: 0, scale: 1, autoAlpha: 1, duration: 0.9 },
-					"-=0.7",
+					".hero-portrait",
+					{ scale: 0.96, autoAlpha: 0 },
+					{ scale: 1, autoAlpha: 1, duration: 0.9, ease: "power3.out" },
+					"-=0.55",
 				);
 		}, scope);
 
 		return () => context.revert();
-	}, [language]);
-
-	const copyEmail = async () => {
-		try {
-			await navigator.clipboard.writeText(profile.email);
-		} catch {
-			const field = document.createElement("textarea");
-			field.value = profile.email;
-			field.setAttribute("readonly", "");
-			field.style.position = "fixed";
-			field.style.opacity = "0";
-			document.body.appendChild(field);
-			field.select();
-			document.execCommand("copy");
-			document.body.removeChild(field);
-		}
-
-		setCopied(true);
-		window.clearTimeout(timerRef.current);
-		timerRef.current = window.setTimeout(() => setCopied(false), 2200);
-	};
+	}, [introDone, language]);
 
 	return (
 		<section
@@ -113,7 +98,8 @@ export default function Hero() {
 				<div className="min-w-0 max-w-[680px]">
 					<div className="hero-pill flex flex-wrap items-center gap-2.5">
 						<StatusPill label={t.hero.badge} className="max-w-full text-start" />
-						<span className="eyebrow-label">{t.hero.eyebrow}</span>
+						<CairoClock className="rounded-full border border-line bg-surface px-3 py-1.5" />
+						<span className="eyebrow-label hidden sm:inline">{t.hero.eyebrow}</span>
 					</div>
 
 					<h1 className="mt-7 font-display text-[clamp(2.1rem,5.2vw,4.35rem)] font-extrabold leading-[1.04] tracking-[-0.045em] text-ink rtl:text-[clamp(2rem,4.9vw,4rem)] rtl:leading-[1.18] rtl:tracking-[-0.02em] sm:mt-8">
@@ -131,11 +117,11 @@ export default function Hero() {
 						))}
 					</h1>
 
-					<p className="hero-role mt-6 break-words font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent-text rtl:font-arabic rtl:tracking-normal">
+					<p className="hero-subtitle mt-6 break-words font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent-text rtl:font-arabic rtl:tracking-normal">
 						{t.hero.role}
 					</p>
 
-					<p className="hero-copy mt-4 max-w-[560px] text-pretty break-words text-[0.95rem] leading-7 text-muted sm:text-[1.05rem] sm:leading-8">
+					<p className="hero-subtitle mt-4 max-w-[560px] text-pretty break-words text-[0.95rem] leading-7 text-muted sm:text-[1.05rem] sm:leading-8">
 						{t.hero.description}
 					</p>
 
@@ -144,32 +130,25 @@ export default function Hero() {
 							{t.hero.primaryCta}
 						</Button>
 						<Button
-							href={profile.github}
+							href="#contact"
 							variant="secondary"
-							icon={false}
-							target="_blank"
-							rel="noreferrer noopener"
 							className="w-full active:scale-[0.97] sm:w-auto"
 						>
-							<FiGithub aria-hidden="true" className="size-3.5 shrink-0" />
-							<span>{t.hero.githubCta}</span>
+							{t.hero.secondaryCta}
 						</Button>
-						<button
-							type="button"
-							onClick={copyEmail}
-							aria-live="polite"
-							className="btn btn-secondary group w-full active:scale-[0.97] sm:w-auto"
+						<a
+							href={profile.github}
+							target="_blank"
+							rel="noreferrer noopener"
+							aria-label={t.common.viewGitHub}
+							title={t.common.viewGitHub}
+							className="icon-btn hidden size-11 shrink-0 active:scale-[0.94] sm:inline-flex"
 						>
-							{copied ? (
-								<FiCheck aria-hidden="true" className="size-3.5 shrink-0 text-accent-text" />
-							) : (
-								<FiCopy aria-hidden="true" className="size-3.5 shrink-0" />
-							)}
-							<span>{copied ? t.hero.copied : t.hero.copyEmail}</span>
-						</button>
+							<FiGithub aria-hidden="true" className="size-4" />
+						</a>
 					</div>
 
-					<div className="hero-copy mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-6">
+					<div className="hero-subtitle mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-6">
 						<SocialLinks />
 						<span className="hidden h-4 w-px bg-line-strong sm:block" aria-hidden="true" />
 						<span className="inline-flex min-w-0 items-center gap-1.5 text-[11px] font-medium text-muted">
@@ -182,7 +161,91 @@ export default function Hero() {
 					</div>
 				</div>
 
-				<HeroVisual />
+				<div className="hero-portrait relative isolate mx-auto w-full max-w-[430px] lg:max-w-[440px]">
+					<div
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-x-[-16%] -top-[24%] bottom-[10%] -z-10 opacity-90"
+					>
+						<HeroScene3D theme={theme} className="h-full w-full" />
+					</div>
+
+					<div
+						aria-hidden="true"
+						className="absolute -inset-6 -z-20 rounded-[3rem] bg-indigo-600/[0.06] blur-2xl dark:bg-indigo-500/20"
+					/>
+
+					<div className="relative rounded-[2rem] border border-line bg-surface p-2 shadow-[var(--card-shadow)]">
+						<div className="relative overflow-hidden rounded-[1.55rem] border border-line bg-surface-2">
+							<div className="relative aspect-square">
+								<Image
+									src={profile.portrait}
+									alt={t.about.portraitAlt}
+									fill
+									priority
+									sizes="(max-width: 1024px) 90vw, 440px"
+									className="object-cover object-top contrast-[1.05] saturate-[0.82]"
+								/>
+
+								<div
+									aria-hidden="true"
+									className="absolute inset-x-0 bottom-0 hidden h-[52%] bg-gradient-to-t from-[#09090B] via-[#09090B]/45 to-transparent dark:block"
+								/>
+
+								<div className="absolute inset-x-0 bottom-0 z-10 hidden items-end justify-between gap-3 p-4 dark:flex">
+									<div className="min-w-0">
+										<p className="truncate font-display text-[13px] font-bold text-ink">
+											{t.hero.portraitName}{" "}
+											<span className="font-medium text-muted">
+												· {t.common.available}
+											</span>
+										</p>
+										<p className="mt-1.5 flex items-center gap-1.5 text-[10px] font-medium text-muted">
+											<span
+												className="size-1.5 rounded-full bg-accent"
+												aria-hidden="true"
+											/>
+											{t.hero.portraitRole}
+										</p>
+									</div>
+									<span className="shrink-0 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+										{t.hero.portraitLabel}
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div className="flex items-start justify-between gap-3 px-2 pb-0.5 pt-3 dark:hidden">
+							<div className="min-w-0">
+								<p className="truncate font-display text-[13px] font-bold text-ink">
+									{t.hero.portraitName}{" "}
+									<span className="font-medium text-muted">
+										· {t.common.available}
+									</span>
+								</p>
+								<p className="mt-1.5 flex items-center gap-1.5 text-[10px] font-medium text-muted">
+									<span
+										className="size-1.5 rounded-full bg-accent"
+										aria-hidden="true"
+									/>
+									{t.hero.portraitRole}
+								</p>
+							</div>
+							<span className="shrink-0 pt-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+								{t.hero.portraitLabel}
+							</span>
+						</div>
+
+						<div className="flex items-center justify-between gap-3 px-2 pb-1 pt-3">
+							<span className="inline-flex min-w-0 items-center gap-1.5 text-[10px] font-medium text-muted">
+								<FiMapPin aria-hidden="true" className="size-3 shrink-0 text-accent-text" />
+								<span className="truncate">{t.hero.location}</span>
+							</span>
+							<span className="shrink-0 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/70">
+								EG / 26
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);

@@ -84,11 +84,11 @@ export default function OpenGraphImage() {
 							maxWidth: 900,
 						}}
 					>
-						<span>Products from</span>
-						<span style={{ color: "#A5B4FC" }}>interface to API.</span>
+						<span>Interfaces that</span>
+						<span style={{ color: "#A5B4FC" }}>feel effortless.</span>
 					</div>
 					<span style={{ fontSize: 24, color: "#A1A1AA" }}>
-						Engineering case studies, stack and credentials.
+						Live products, a focused stack and verified credentials.
 					</span>
 				</div>
 
@@ -101,7 +101,7 @@ export default function OpenGraphImage() {
 						color: "#A1A1AA",
 					}}
 				>
-					<span>Found It · CourseWave · Store API</span>
+					<span>Mercato · Skillline · Walletly</span>
 					<span style={{ color: "#A5B4FC" }}>Available for opportunities</span>
 				</div>
 			</div>

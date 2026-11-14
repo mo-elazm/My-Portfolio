@@ -1,17 +1,95 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
-import { caseStudies } from "@/data/projects";
+import { projectFilters, projects } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
-import useAppStore from "@/store/useAppStore";
+import { Flip, gsap } from "@/lib/gsap";
+import { cn } from "@/utils/cn";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import CaseStudyVisual from "@/components/projects/CaseStudyVisual";
+import ProjectPreview from "@/components/projects/ProjectPreview";
+
+const matchesFilter = (filter, active) => active === "all" || filter === active;
 
 export default function Projects() {
 	const { t } = useTranslation();
-	const openCaseStudy = useAppStore((state) => state.openCaseStudy);
+	const [filter, setFilter] = useState("all");
+	const gridRef = useRef(null);
+	const pendingFlip = useRef(null);
+
+	useLayoutEffect(() => {
+		const state = pendingFlip.current;
+
+		if (!state) {
+			return;
+		}
+
+		pendingFlip.current = null;
+
+		Flip.from(state, {
+			duration: 0.65,
+			ease: "power3.inOut",
+			stagger: 0.06,
+			absolute: true,
+			nested: true,
+			onEnter: (elements) =>
+				gsap.fromTo(
+					elements,
+					{ autoAlpha: 0, scale: 0.94, y: 14 },
+					{
+						autoAlpha: 1,
+						scale: 1,
+						y: 0,
+						duration: 0.5,
+						ease: "power3.out",
+						delay: 0.05,
+						clearProps: "transform",
+					},
+				),
+		});
+	}, [filter]);
+
+	const changeFilter = (next) => {
+		if (next === filter) {
+			return;
+		}
+
+		const grid = gridRef.current;
+
+		if (!grid) {
+			setFilter(next);
+			return;
+		}
+
+		const items = Array.from(grid.querySelectorAll("[data-flip-item]"));
+		const staying = items.filter((element) =>
+			matchesFilter(element.dataset.filter, next),
+		);
+		const leaving = items.filter(
+			(element) => !matchesFilter(element.dataset.filter, next),
+		);
+		const state = staying.length ? Flip.getState(staying) : null;
+
+		const commit = () => {
+			pendingFlip.current = state;
+			setFilter(next);
+		};
+
+		if (!leaving.length) {
+			commit();
+			return;
+		}
+
+		gsap.to(leaving, {
+			autoAlpha: 0,
+			scale: 0.94,
+			duration: 0.2,
+			ease: "power2.in",
+			onComplete: commit,
+		});
+	};
 
 	return (
 		<section id="work" className="section-pad relative border-t border-line">
@@ -23,21 +101,61 @@ export default function Projects() {
 					description={t.projects.description}
 				/>
 
-				<div data-reveal-group className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-					{caseStudies.map((study) => {
-						const copy = t.projects.items[study.id];
+				<div
+					role="group"
+					aria-label={t.projects.eyebrow}
+					className="mt-8 flex flex-wrap items-center gap-2"
+				>
+					{projectFilters.map((id) => {
+						const isActive = filter === id;
+
+						return (
+							<button
+								key={id}
+								type="button"
+								onClick={() => changeFilter(id)}
+								aria-pressed={isActive}
+								className={cn(
+									"inline-flex min-h-9 items-center rounded-full border px-4 text-[11px] font-semibold transition-colors duration-300",
+									isActive
+										? "border-transparent bg-ink text-canvas"
+										: "border-line bg-surface text-muted hover:border-line-strong hover:text-ink",
+								)}
+							>
+								{t.projects.filters[id]}
+							</button>
+						);
+					})}
+				</div>
+
+				<div
+					ref={gridRef}
+					data-reveal
+					className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+				>
+					{projects.map((project) => {
+						const copy = t.projects.items[project.id];
+						const visible = matchesFilter(project.filter, filter);
 
 						return (
 							<SpotlightCard
 								as="article"
-								key={study.id}
-								data-reveal-item
-								className="group flex min-w-0 flex-col overflow-hidden rounded-[1.6rem]"
+								key={project.id}
+								data-flip-item
+								data-filter={project.filter}
+								data-cursor="explore"
+								className={cn(
+									"group flex min-w-0 flex-col overflow-hidden rounded-[1.6rem]",
+									!visible && "hidden",
+								)}
 							>
 								<div className="p-2 pb-0">
 									<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
-										<div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03]">
-											<CaseStudyVisual kind={study.kind} />
+										<div
+											dir="ltr"
+											className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
+										>
+											<ProjectPreview variant={project.variant} />
 										</div>
 									</div>
 								</div>
@@ -46,7 +164,7 @@ export default function Projects() {
 									<div className="flex items-center justify-between gap-3">
 										<span className="eyebrow-label truncate">{copy.category}</span>
 										<span className="shrink-0 font-mono text-[10px] font-medium text-muted">
-											{study.number}
+											{project.number}
 										</span>
 									</div>
 
@@ -55,11 +173,11 @@ export default function Projects() {
 									</h3>
 
 									<p className="mt-2 line-clamp-3 text-pretty break-words text-[13px] leading-6 text-muted">
-										{copy.summary}
+										{copy.description}
 									</p>
 
 									<div className="mt-4 flex flex-wrap gap-1.5">
-										{study.stack.map((tech) => (
+										{project.stack.map((tech) => (
 											<span
 												key={tech}
 												className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[9px] font-medium text-muted"
@@ -70,27 +188,27 @@ export default function Projects() {
 									</div>
 
 									<div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-4">
-										<button
-											type="button"
-											onClick={() => openCaseStudy(study.id)}
-											aria-haspopup="dialog"
-											className="btn btn-primary min-h-10 px-4 text-[11px] active:scale-[0.97]"
-										>
-											<span>{t.projects.openCaseStudy}</span>
-											<FiArrowUpRight
-												aria-hidden="true"
-												className="size-3.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-											/>
-										</button>
 										<a
-											href={study.links.repo}
+											href={project.url}
 											target="_blank"
 											rel="noreferrer noopener"
-											aria-label={`${copy.title} — ${t.projects.github}`}
-											title={t.projects.github}
-											className="icon-btn size-10 shrink-0 active:scale-[0.94]"
+											className="btn btn-primary min-h-9 px-4 text-[11px] active:scale-[0.97]"
 										>
-											<FiGithub aria-hidden="true" className="size-4" />
+											<span>{t.projects.live}</span>
+											<FiArrowUpRight
+												aria-hidden="true"
+												className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
+											/>
+										</a>
+										<a
+											href={project.repo}
+											target="_blank"
+											rel="noreferrer noopener"
+											aria-label={`${copy.title} — ${t.projects.source}`}
+											className="btn btn-secondary min-h-9 px-4 text-[11px] active:scale-[0.97]"
+										>
+											<FiGithub aria-hidden="true" className="size-3" />
+											<span>{t.projects.source}</span>
 										</a>
 									</div>
 								</div>
@@ -98,37 +216,36 @@ export default function Projects() {
 						);
 					})}
 
-					<SpotlightCard
-						data-reveal-item
-						className="col-span-full flex flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
-					>
-						<div className="flex min-w-0 items-center gap-4">
-							<span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
-								<FiGithub aria-hidden="true" className="size-[18px]" />
-							</span>
-							<div className="min-w-0">
-								<h3 className="break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
-									{t.projects.more}
-								</h3>
-								<p className="mt-1 text-pretty break-words text-[12px] leading-5 text-muted">
-									{t.projects.moreText}
-								</p>
-							</div>
+				<SpotlightCard
+					className="col-span-full flex flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+				>
+					<div className="flex min-w-0 items-center gap-4">
+						<span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
+							<FiGithub aria-hidden="true" className="size-[18px]" />
+						</span>
+						<div className="min-w-0">
+							<h3 className="break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
+								{t.projects.more}
+							</h3>
+							<p className="mt-1 text-pretty break-words text-[12px] leading-5 text-muted">
+								{t.projects.moreText}
+							</p>
 						</div>
+					</div>
 
-						<a
-							href={profile.github}
-							target="_blank"
-							rel="noreferrer noopener"
-							className="btn btn-secondary group w-fit shrink-0 active:scale-[0.97]"
-						>
-							<span>{t.projects.github}</span>
-							<FiArrowUpRight
-								aria-hidden="true"
-								className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-							/>
-						</a>
-					</SpotlightCard>
+					<a
+						href={profile.github}
+						target="_blank"
+						rel="noreferrer noopener"
+						className="btn btn-secondary group w-fit shrink-0 active:scale-[0.97]"
+					>
+						<span>{t.projects.github}</span>
+						<FiArrowUpRight
+							aria-hidden="true"
+							className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
+						/>
+					</a>
+				</SpotlightCard>
 				</div>
 			</div>
 		</section>

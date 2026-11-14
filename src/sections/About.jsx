@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { FiClock, FiCode, FiGlobe, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
+import { profile } from "@/data/profile";
 import CountUp from "@/components/ui/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
@@ -70,11 +72,13 @@ export default function About() {
 						className="flex flex-col rounded-[1.6rem] p-5 sm:col-span-2 sm:p-6 lg:col-span-1 lg:row-span-2"
 					>
 						<div className="flex items-center gap-3">
-							<span className="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl border border-line bg-surface-2 font-display text-xl font-extrabold tracking-[-0.04em] text-ink">
-								<span aria-hidden="true">M</span>
-								<span
-									aria-hidden="true"
-									className="absolute bottom-1.5 end-1.5 size-1.5 rounded-full bg-accent"
+							<span className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-line bg-surface-2">
+								<Image
+									src={profile.portrait}
+									alt={t.about.portraitAlt}
+									fill
+									sizes="56px"
+									className="object-cover object-top contrast-[1.05] saturate-[0.82]"
 								/>
 							</span>
 							<div className="min-w-0">
@@ -86,10 +90,6 @@ export default function About() {
 								</p>
 							</div>
 						</div>
-
-						<p className="mt-3 break-words font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-muted/80 rtl:font-arabic rtl:tracking-normal">
-							{t.about.monogramMeta}
-						</p>
 
 						<div className="mt-6 space-y-3.5">
 							{details.map((detail) => {

@@ -28,7 +28,15 @@ export default function Navbar() {
 			return;
 		}
 
-		setPill({ left: element.offsetLeft, width: element.offsetWidth, ready: true });
+		const nav = navRef.current;
+		const navRect = nav?.getBoundingClientRect();
+		const itemRect = element.getBoundingClientRect();
+
+		setPill({
+			left: navRect ? itemRect.left - navRect.left : element.offsetLeft,
+			width: itemRect.width,
+			ready: true,
+		});
 	}, [activeSection]);
 
 	useEffect(() => {
@@ -104,6 +112,7 @@ export default function Navbar() {
 
 					<a
 						href="#contact"
+						data-magnetic
 						className="btn btn-primary ms-1 hidden min-h-9 px-4 text-[11px] active:scale-[0.97] xl:inline-flex"
 					>
 						{t.common.letsTalk}

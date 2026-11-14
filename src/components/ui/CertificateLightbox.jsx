@@ -174,6 +174,7 @@ export default function CertificateLightbox() {
 			aria-modal="true"
 			aria-label={t.certifications.lightboxLabel}
 			className="fixed inset-0 z-[90] overflow-y-auto"
+			data-lenis-prevent
 		>
 			<button
 				type="button"

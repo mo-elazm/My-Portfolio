@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FiCalendar, FiCheck, FiSmartphone, FiUsers } from "react-icons/fi";
+import { FiBriefcase, FiCalendar, FiCheck, FiUsers } from "react-icons/fi";
 import { experience } from "@/data/experience";
 import { useTranslation } from "@/i18n";
 import { gsap } from "@/lib/gsap";
@@ -12,7 +12,7 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const icons = {
 	mentor: FiUsers,
-	mobile: FiSmartphone,
+	intern: FiBriefcase,
 };
 
 export default function Experience() {
@@ -37,6 +37,7 @@ export default function Experience() {
 				{
 					scaleY: 1,
 					ease: "none",
+					transformOrigin: "top",
 					scrollTrigger: {
 						trigger: scope,
 						start: "top 70%",
@@ -90,7 +91,7 @@ export default function Experience() {
 					<span
 						aria-hidden="true"
 						data-timeline-line
-						className="absolute bottom-6 start-[15px] top-6 w-px origin-top bg-line"
+						className="absolute bottom-6 start-[15px] top-6 w-px origin-top scale-y-0 bg-accent/70"
 					/>
 					<ol className="space-y-4">
 						{experience.map((item, index) => {

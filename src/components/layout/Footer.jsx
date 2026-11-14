@@ -4,6 +4,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { FiArrowUp, FiGithub, FiMail, FiPhone } from "react-icons/fi";
 import { getWhatsAppLink, navItems, profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
+import CairoClock from "@/components/ui/CairoClock";
 import Logo from "@/components/ui/Logo";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -84,7 +85,8 @@ export default function Footer() {
 						© {CURRENT_YEAR} {displayName}. {t.footer.rights}
 					</p>
 
-					<div className="flex items-center justify-between gap-5 sm:justify-end">
+					<div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3 sm:justify-end">
+						<CairoClock />
 						<p className="text-[10px] text-muted/80">{t.footer.built}</p>
 						<a
 							href="#home"
