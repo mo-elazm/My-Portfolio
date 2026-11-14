@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { FiClock, FiCode, FiGlobe, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
-import { profile } from "@/data/profile";
 import CountUp from "@/components/ui/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
@@ -15,7 +13,7 @@ export default function About() {
 	const details = [
 		{ icon: FiMapPin, label: t.about.locationLabel, value: t.about.locationValue },
 		{ icon: FiClock, label: t.about.availabilityLabel, value: t.common.available },
-		{ icon: FiCode, label: t.about.focusLabel, value: "React · Next.js · Tailwind" },
+		{ icon: FiCode, label: t.about.focusLabel, value: t.about.focusValue },
 		{ icon: FiGlobe, label: t.about.languagesLabel, value: t.about.languagesValue },
 	];
 
@@ -29,17 +27,14 @@ export default function About() {
 					description={t.about.description}
 				/>
 
-				<div
-					data-reveal-group
-					className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
-				>
+				<div data-reveal-group className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 					<SpotlightCard
 						data-reveal-item
 						className="flex flex-col justify-between rounded-[1.6rem] p-6 sm:col-span-2 sm:p-8 lg:row-span-2"
 					>
-						<div>
+						<div className="min-w-0">
 							<p className="eyebrow-label">{t.about.eyebrow}</p>
-							<h3 className="mt-4 max-w-lg font-display text-[clamp(1.55rem,3vw,2.2rem)] font-bold leading-[1.15] tracking-[-0.035em] text-ink rtl:leading-[1.3] rtl:tracking-normal">
+							<h3 className="mt-4 max-w-lg break-words font-display text-[clamp(1.5rem,3vw,2.15rem)] font-bold leading-[1.15] tracking-[-0.035em] text-ink rtl:leading-[1.3] rtl:tracking-normal">
 								{t.about.cardTitle}
 							</h3>
 
@@ -47,7 +42,7 @@ export default function About() {
 								{t.about.body.map((paragraph) => (
 									<p
 										key={paragraph}
-										className="text-pretty text-sm leading-7 text-muted"
+										className="text-pretty break-words text-sm leading-7 text-muted"
 									>
 										{paragraph}
 									</p>
@@ -57,12 +52,12 @@ export default function About() {
 
 						<div className="mt-8 grid grid-cols-3 gap-3 border-t border-line pt-5">
 							{t.about.stats.map((stat) => (
-								<div key={stat.label}>
+								<div key={stat.label} className="min-w-0">
 									<CountUp
 										value={stat.value}
-										className="block font-display text-xl font-bold tracking-[-0.03em] text-ink sm:text-2xl"
+										className="block break-words font-display text-lg font-bold tracking-[-0.03em] text-ink sm:text-2xl"
 									/>
-									<p className="mt-1 text-[10px] font-medium leading-4 text-muted">
+									<p className="mt-1 break-words text-[10px] font-medium leading-4 text-muted">
 										{stat.label}
 									</p>
 								</div>
@@ -75,13 +70,11 @@ export default function About() {
 						className="flex flex-col rounded-[1.6rem] p-5 sm:col-span-2 sm:p-6 lg:col-span-1 lg:row-span-2"
 					>
 						<div className="flex items-center gap-3">
-							<span className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-line bg-surface-2">
-								<Image
-									src={profile.portrait}
-									alt={t.about.portraitAlt}
-									fill
-									sizes="56px"
-									className="object-cover object-top contrast-[1.06] saturate-[0.78] brightness-[0.94]"
+							<span className="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl border border-line bg-surface-2 font-display text-xl font-extrabold tracking-[-0.04em] text-ink">
+								<span aria-hidden="true">M</span>
+								<span
+									aria-hidden="true"
+									className="absolute bottom-1.5 end-1.5 size-1.5 rounded-full bg-accent"
 								/>
 							</span>
 							<div className="min-w-0">
@@ -93,6 +86,10 @@ export default function About() {
 								</p>
 							</div>
 						</div>
+
+						<p className="mt-3 break-words font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-muted/80 rtl:font-arabic rtl:tracking-normal">
+							{t.about.monogramMeta}
+						</p>
 
 						<div className="mt-6 space-y-3.5">
 							{details.map((detail) => {
@@ -110,7 +107,7 @@ export default function About() {
 											<p className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted">
 												{detail.label}
 											</p>
-											<p className="mt-1 text-[11px] font-semibold leading-4 text-ink">
+											<p className="mt-1 break-words text-[11px] font-semibold leading-4 text-ink">
 												{detail.value}
 											</p>
 										</div>
@@ -119,8 +116,8 @@ export default function About() {
 							})}
 						</div>
 
-						<div className="mt-auto pt-6">
-							<StatusPill label={t.hero.badge} />
+						<div className="mt-auto border-t border-line pt-5">
+							<StatusPill label={t.hero.badge} className="max-w-full text-start" />
 						</div>
 					</SpotlightCard>
 
@@ -131,10 +128,10 @@ export default function About() {
 							className="rounded-[1.6rem] p-5 sm:p-6"
 						>
 							<p className="eyebrow-label">{card.label}</p>
-							<h3 className="mt-3 font-display text-lg font-bold leading-6 tracking-[-0.02em] text-ink rtl:tracking-normal">
+							<h3 className="mt-3 break-words font-display text-lg font-bold leading-6 tracking-[-0.02em] text-ink rtl:tracking-normal">
 								{card.title}
 							</h3>
-							<p className="mt-2 text-pretty text-[12px] leading-6 text-muted">
+							<p className="mt-2 text-pretty break-words text-[12px] leading-6 text-muted">
 								{card.text}
 							</p>
 						</SpotlightCard>
@@ -151,7 +148,7 @@ export default function About() {
 							>
 								“
 							</span>
-							<p className="max-w-3xl text-pretty font-display text-base font-medium leading-7 text-ink sm:text-lg sm:leading-8">
+							<p className="max-w-3xl text-pretty break-words font-display text-base font-medium leading-7 text-ink sm:text-lg sm:leading-8">
 								{t.about.quote}
 							</p>
 						</div>

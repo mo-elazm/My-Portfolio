@@ -1,7 +1,7 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa6";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiGithub, FiMail } from "react-icons/fi";
 import { getWhatsAppLink, profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
 import { cn } from "@/utils/cn";
@@ -11,7 +11,6 @@ export default function SocialLinks({ className, iconClassName }) {
 
 	const socials = [
 		{ name: "GitHub", href: profile.github, icon: FiGithub },
-		{ name: "LinkedIn", href: profile.linkedin, icon: FiLinkedin },
 		{
 			name: "WhatsApp",
 			href: getWhatsAppLink("Hi Mohamed, I found your portfolio."),

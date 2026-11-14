@@ -9,7 +9,7 @@ export default function StatusPill({ label, className }) {
 	return (
 		<span
 			className={cn(
-				"inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-semibold leading-none text-muted",
+				"inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-semibold leading-none text-muted",
 				className,
 			)}
 		>
@@ -17,7 +17,7 @@ export default function StatusPill({ label, className }) {
 				<span className="absolute inline-flex size-full animate-pulse-soft rounded-full bg-accent" />
 				<span className="relative inline-flex size-1.5 rounded-full bg-accent" />
 			</span>
-			<span>{label || t.common.available}</span>
+			<span className="min-w-0 break-words">{label || t.common.available}</span>
 		</span>
 	);
 }

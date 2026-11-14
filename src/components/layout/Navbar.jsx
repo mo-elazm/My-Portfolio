@@ -104,7 +104,7 @@ export default function Navbar() {
 
 					<a
 						href="#contact"
-						className="btn btn-primary ms-1 hidden min-h-9 px-4 text-[11px] xl:inline-flex"
+						className="btn btn-primary ms-1 hidden min-h-9 px-4 text-[11px] active:scale-[0.97] xl:inline-flex"
 					>
 						{t.common.letsTalk}
 					</a>
@@ -115,7 +115,7 @@ export default function Navbar() {
 						aria-label={mobileMenuOpen ? t.common.close : t.common.openMenu}
 						aria-expanded={mobileMenuOpen}
 						aria-controls="mobile-menu"
-						className="icon-btn size-9 lg:hidden"
+						className="icon-btn size-10 lg:hidden"
 					>
 						{mobileMenuOpen ? (
 							<FiX aria-hidden="true" className="size-[18px]" />

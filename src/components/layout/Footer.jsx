@@ -1,7 +1,7 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa6";
-import { FiArrowUp, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiArrowUp, FiGithub, FiMail, FiPhone } from "react-icons/fi";
 import { getWhatsAppLink, navItems, profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
 import Logo from "@/components/ui/Logo";
@@ -60,6 +60,13 @@ export default function Footer() {
 								<span dir="ltr">{profile.whatsappDisplay}</span>
 							</a>
 							<a
+								href={`tel:${profile.phone}`}
+								className="link-underline inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
+							>
+								<FiPhone aria-hidden="true" className="size-3.5 text-accent-text" />
+								<span dir="ltr">{profile.phoneDisplay}</span>
+							</a>
+							<a
 								href={profile.github}
 								target="_blank"
 								rel="noreferrer noopener"
@@ -67,15 +74,6 @@ export default function Footer() {
 							>
 								<FiGithub aria-hidden="true" className="size-3.5 text-accent-text" />
 								<span>@mo-elazm</span>
-							</a>
-							<a
-								href={profile.linkedin}
-								target="_blank"
-								rel="noreferrer noopener"
-								className="link-underline inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
-							>
-								<FiLinkedin aria-hidden="true" className="size-3.5 text-accent-text" />
-								<span>LinkedIn</span>
 							</a>
 						</div>
 					</div>

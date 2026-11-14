@@ -1,16 +1,17 @@
 "use client";
 
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
-import { projects } from "@/data/projects";
+import { caseStudies } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
-import { cn } from "@/utils/cn";
+import useAppStore from "@/store/useAppStore";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
-import ProjectPreview from "@/components/projects/ProjectPreview";
+import CaseStudyVisual from "@/components/projects/CaseStudyVisual";
 
 export default function Projects() {
 	const { t } = useTranslation();
+	const openCaseStudy = useAppStore((state) => state.openCaseStudy);
 
 	return (
 		<section id="work" className="section-pad relative border-t border-line">
@@ -23,48 +24,42 @@ export default function Projects() {
 				/>
 
 				<div data-reveal-group className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-					{projects.map((project, index) => {
-						const copy = t.projects.items[project.id];
+					{caseStudies.map((study) => {
+						const copy = t.projects.items[study.id];
 
 						return (
 							<SpotlightCard
 								as="article"
-								key={project.id}
+								key={study.id}
 								data-reveal-item
-								className={cn(
-									"group flex flex-col overflow-hidden rounded-[1.6rem]",
-									index === projects.length - 1 && "md:col-span-2 lg:col-span-1",
-								)}
+								className="group flex min-w-0 flex-col overflow-hidden rounded-[1.6rem]"
 							>
 								<div className="p-2 pb-0">
 									<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
-										<div
-											dir="ltr"
-											className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
-										>
-											<ProjectPreview variant={project.variant} />
+										<div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03]">
+											<CaseStudyVisual kind={study.kind} />
 										</div>
 									</div>
 								</div>
 
 								<div className="flex flex-1 flex-col p-5 sm:p-6">
 									<div className="flex items-center justify-between gap-3">
-										<span className="eyebrow-label">{copy.category}</span>
-										<span className="font-mono text-[10px] font-medium text-muted">
-											{project.number}
+										<span className="eyebrow-label truncate">{copy.category}</span>
+										<span className="shrink-0 font-mono text-[10px] font-medium text-muted">
+											{study.number}
 										</span>
 									</div>
 
-									<h3 className="mt-3 font-display text-2xl font-bold tracking-[-0.03em] text-ink rtl:tracking-normal">
+									<h3 className="mt-3 break-words font-display text-[clamp(1.35rem,2.4vw,1.6rem)] font-bold tracking-[-0.03em] text-ink rtl:tracking-normal">
 										{copy.title}
 									</h3>
 
-									<p className="mt-2 line-clamp-3 text-pretty text-[13px] leading-6 text-muted">
-										{copy.description}
+									<p className="mt-2 line-clamp-3 text-pretty break-words text-[13px] leading-6 text-muted">
+										{copy.summary}
 									</p>
 
 									<div className="mt-4 flex flex-wrap gap-1.5">
-										{project.stack.map((tech) => (
+										{study.stack.map((tech) => (
 											<span
 												key={tech}
 												className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[9px] font-medium text-muted"
@@ -75,26 +70,27 @@ export default function Projects() {
 									</div>
 
 									<div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-4">
-										<a
-											href={project.url}
-											target="_blank"
-											rel="noreferrer noopener"
-											className="btn btn-primary min-h-9 px-4 text-[11px]"
+										<button
+											type="button"
+											onClick={() => openCaseStudy(study.id)}
+											aria-haspopup="dialog"
+											className="btn btn-primary min-h-10 px-4 text-[11px] active:scale-[0.97]"
 										>
-											<span>{t.projects.live}</span>
+											<span>{t.projects.openCaseStudy}</span>
 											<FiArrowUpRight
 												aria-hidden="true"
-												className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
+												className="size-3.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
 											/>
-										</a>
+										</button>
 										<a
-											href={project.repo}
+											href={study.links.repo}
 											target="_blank"
 											rel="noreferrer noopener"
-											className="btn btn-secondary min-h-9 px-4 text-[11px]"
+											aria-label={`${copy.title} — ${t.projects.github}`}
+											title={t.projects.github}
+											className="icon-btn size-10 shrink-0 active:scale-[0.94]"
 										>
-											<FiGithub aria-hidden="true" className="size-3" />
-											<span>{t.projects.source}</span>
+											<FiGithub aria-hidden="true" className="size-4" />
 										</a>
 									</div>
 								</div>
@@ -111,10 +107,10 @@ export default function Projects() {
 								<FiGithub aria-hidden="true" className="size-[18px]" />
 							</span>
 							<div className="min-w-0">
-								<h3 className="font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
+								<h3 className="break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
 									{t.projects.more}
 								</h3>
-								<p className="mt-1 text-pretty text-[12px] leading-5 text-muted">
+								<p className="mt-1 text-pretty break-words text-[12px] leading-5 text-muted">
 									{t.projects.moreText}
 								</p>
 							</div>
@@ -124,7 +120,7 @@ export default function Projects() {
 							href={profile.github}
 							target="_blank"
 							rel="noreferrer noopener"
-							className="btn btn-secondary group w-fit shrink-0"
+							className="btn btn-secondary group w-fit shrink-0 active:scale-[0.97]"
 						>
 							<span>{t.projects.github}</span>
 							<FiArrowUpRight

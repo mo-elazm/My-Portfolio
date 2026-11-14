@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Mohamed Abo El-azm — Front-End Developer";
+export const alt = "Mohamed Abo-Elazm — Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -63,10 +63,10 @@ export default function OpenGraphImage() {
 					</div>
 					<div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
 						<span style={{ fontSize: 22, fontWeight: 700, color: "#FAFAFA" }}>
-							Mohamed Abo El-azm
+							Mohamed Abo-Elazm
 						</span>
 						<span style={{ fontSize: 16, color: "#A1A1AA" }}>
-							Front-End Developer · React &amp; Next.js
+							Software Engineer · Web, Backend &amp; Mobile
 						</span>
 					</div>
 				</div>
@@ -84,11 +84,11 @@ export default function OpenGraphImage() {
 							maxWidth: 900,
 						}}
 					>
-						<span>Interfaces that</span>
-						<span style={{ color: "#A5B4FC" }}>feel effortless.</span>
+						<span>Products from</span>
+						<span style={{ color: "#A5B4FC" }}>interface to API.</span>
 					</div>
 					<span style={{ fontSize: 24, color: "#A1A1AA" }}>
-						Selected work, experience and credentials.
+						Engineering case studies, stack and credentials.
 					</span>
 				</div>
 
@@ -101,8 +101,8 @@ export default function OpenGraphImage() {
 						color: "#A1A1AA",
 					}}
 				>
-					<span>Mercato · Skillline · Walletly</span>
-					<span style={{ color: "#A5B4FC" }}>Available for work</span>
+					<span>Found It · CourseWave · Store API</span>
+					<span style={{ color: "#A5B4FC" }}>Available for opportunities</span>
 				</div>
 			</div>
 		),

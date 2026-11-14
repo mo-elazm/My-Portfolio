@@ -1,16 +1,24 @@
-export const profile = {
-	name: "Mohamed Abo El-azm",
+import type { NavItem, Profile } from "@/types/content";
+
+export const profile: Profile = {
+	name: "Mohamed Abo-Elazm",
 	nameAr: "محمد أبو العزم",
-	portrait: "/mohamed-portrait.webp",
-	avatar: "/mohamed-portrait.webp",
+	firstName: "Mohamed",
+	firstNameAr: "محمد",
+	role: "Software Engineer",
+	roleAr: "مهندس برمجيات",
 	email: "mazmgoo@gmail.com",
+	phone: "+201030632762",
+	phoneDisplay: "+20 103 063 2762",
 	github: "https://github.com/mo-elazm",
 	linkedin: "https://www.linkedin.com/in/mohamed-abo-elazm-73681b324/",
 	whatsappNumber: "201030632762",
 	whatsappDisplay: "+20 103 063 2762",
+	location: "Egypt",
+	locationAr: "مصر",
 };
 
-export const navItems = [
+export const navItems: NavItem[] = [
 	{ id: "home", key: "home" },
 	{ id: "about", key: "about" },
 	{ id: "experience", key: "experience" },
@@ -28,5 +36,5 @@ export const getWhatsAppLink = (message = "") => {
 };
 
 export const whatsappLink = getWhatsAppLink(
-	"Hi Mohamed, I found your portfolio and would like to talk about a project.",
+	"Hi Mohamed, I found your portfolio and would like to talk about a role or project.",
 );

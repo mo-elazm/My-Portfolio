@@ -1,9 +1,8 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import { FaWhatsapp } from "react-icons/fa6";
-import { FiArrowUpRight, FiMail } from "react-icons/fi";
-import { getWhatsAppLink, navItems, profile } from "@/data/profile";
+import { FiArrowUpRight, FiMail, FiPhone } from "react-icons/fi";
+import { navItems, profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
 import useAppStore from "@/store/useAppStore";
 import useLockBodyScroll from "@/hooks/useLockBodyScroll";
@@ -50,7 +49,7 @@ export default function MobileMenu() {
 			inert={!isOpen}
 			aria-hidden={!isOpen}
 			className={cn(
-				"fixed inset-0 z-40 overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
+				"fixed inset-0 z-40 min-h-[100dvh] overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
 				isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
 			)}
 		>
@@ -65,7 +64,7 @@ export default function MobileMenu() {
 
 			<div
 				className={cn(
-					"relative flex min-h-full flex-col px-6 pb-8 pt-24 transition-transform duration-500 sm:px-8",
+					"relative flex min-h-[100dvh] flex-col px-4 pb-8 pt-24 transition-transform duration-500 sm:px-6",
 					isOpen ? "translate-y-0" : "translate-y-4",
 				)}
 			>
@@ -79,54 +78,60 @@ export default function MobileMenu() {
 							onClick={closeMenu}
 							style={{ transitionDelay: isOpen ? `${100 + index * 40}ms` : "0ms" }}
 							className={cn(
-								"group flex items-center justify-between border-b border-line py-3.5 transition-all duration-500",
+								"group flex min-h-[44px] items-center justify-between gap-3 border-b border-line py-3 transition-all duration-500",
 								isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
 							)}
 						>
-							<span className="flex items-baseline gap-3.5">
-								<span className="font-mono text-[10px] text-accent-text">
+							<span className="flex min-w-0 items-baseline gap-3">
+								<span className="shrink-0 font-mono text-[10px] text-accent-text">
 									{String(index + 1).padStart(2, "0")}
 								</span>
-								<span className="font-display text-[clamp(1.7rem,7.5vw,2.4rem)] font-bold leading-none tracking-[-0.04em] text-ink transition-colors group-hover:text-accent-text rtl:tracking-normal">
+								<span className="break-words font-display text-[clamp(1.45rem,7vw,2.2rem)] font-bold leading-none tracking-[-0.04em] text-ink transition-colors group-hover:text-accent-text rtl:tracking-normal">
 									{t.nav[item.key]}
 								</span>
 							</span>
 							<FiArrowUpRight
 								aria-hidden="true"
-								className="size-5 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-text rtl:-scale-x-100"
+								className="size-5 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-text rtl:-scale-x-100"
 							/>
 						</a>
 					))}
 				</nav>
 
-				<div className="mt-6 flex flex-col gap-3 border-t border-line pt-5">
+				<div className="mt-6 flex flex-col gap-1 border-t border-line pt-4">
 					<a
 						href={`mailto:${profile.email}`}
 						onClick={closeMenu}
-						className="inline-flex items-center gap-2.5 text-sm font-semibold text-ink"
+						className="inline-flex min-h-[44px] min-w-0 items-center gap-2.5 text-sm font-semibold text-ink"
 					>
-						<FiMail aria-hidden="true" className="size-4 text-accent-text" />
-						<span dir="ltr">{profile.email}</span>
+						<FiMail aria-hidden="true" className="size-4 shrink-0 text-accent-text" />
+						<span dir="ltr" className="truncate">
+							{profile.email}
+						</span>
 					</a>
 					<a
-						href={getWhatsAppLink("Hi Mohamed, I found your portfolio.")}
-						target="_blank"
-						rel="noreferrer noopener"
+						href={`tel:${profile.phone}`}
 						onClick={closeMenu}
-						className="inline-flex items-center gap-2.5 text-sm font-semibold text-ink"
+						className="inline-flex min-h-[44px] min-w-0 items-center gap-2.5 text-sm font-semibold text-ink"
 					>
-						<FaWhatsapp aria-hidden="true" className="size-4 text-accent-text" />
-						<span dir="ltr">{profile.whatsappDisplay}</span>
+						<FiPhone aria-hidden="true" className="size-4 shrink-0 text-accent-text" />
+						<span dir="ltr" className="truncate">
+							{profile.phoneDisplay}
+						</span>
 					</a>
 
-					<div className="mt-1 flex items-center justify-between gap-4">
+					<div className="mt-2 flex items-center justify-between gap-4">
 						<SocialLinks />
 						<span className="font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/70">
 							EG / 2026
 						</span>
 					</div>
 
-					<a href="#contact" onClick={closeMenu} className="btn btn-primary mt-2 w-full">
+					<a
+						href="#contact"
+						onClick={closeMenu}
+						className="btn btn-primary mt-3 min-h-[44px] w-full active:scale-[0.97]"
+					>
 						{t.common.letsTalk}
 					</a>
 				</div>

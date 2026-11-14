@@ -16,7 +16,7 @@ export default function ThemeToggle({ className }) {
 			onClick={toggleTheme}
 			aria-label={t.common.toggleTheme}
 			title={t.common.toggleTheme}
-			className={cn("icon-btn size-9 shrink-0", className)}
+			className={cn("icon-btn size-10 shrink-0", className)}
 		>
 			<span className="relative size-[16px]">
 				<FiSun

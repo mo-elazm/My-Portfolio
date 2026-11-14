@@ -7,9 +7,9 @@ import {
 	FiCheck,
 	FiCopy,
 	FiGithub,
-	FiLinkedin,
 	FiMail,
 	FiMapPin,
+	FiPhone,
 } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { getWhatsAppLink, profile } from "@/data/profile";
@@ -52,11 +52,13 @@ export default function Contact() {
 			icon: FiGithub,
 		},
 		{
-			id: "linkedin",
-			label: t.contact.direct.linkedin,
-			value: t.contact.direct.linkedinValue,
-			href: profile.linkedin,
-			icon: FiLinkedin,
+			id: "phone",
+			label: t.contact.direct.phone,
+			value: t.contact.direct.phoneValue,
+			href: `tel:${profile.phone}`,
+			icon: FiPhone,
+			ltr: true,
+			external: false,
 		},
 		{
 			id: "whatsapp",
@@ -118,7 +120,7 @@ export default function Contact() {
 								<div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 									<a
 										href={`mailto:${profile.email}`}
-										className="group inline-flex min-w-0 items-center gap-2.5 text-sm font-semibold text-ink transition-colors hover:text-accent-text"
+										className="group inline-flex min-w-0 max-w-full items-center gap-2.5 text-sm font-semibold text-ink transition-colors hover:text-accent-text"
 									>
 										<FiMail
 											aria-hidden="true"
@@ -133,7 +135,7 @@ export default function Contact() {
 										type="button"
 										onClick={copyEmail}
 										aria-live="polite"
-										className="btn btn-primary min-h-9 w-full shrink-0 px-4 text-[11px] sm:w-auto"
+										className="btn btn-primary min-h-10 w-full shrink-0 px-4 text-[11px] active:scale-[0.97] sm:w-auto"
 									>
 										{copied ? (
 											<FiCheck aria-hidden="true" className="size-3.5" />
@@ -153,9 +155,9 @@ export default function Contact() {
 										<a
 											key={social.id}
 											href={social.href}
-											target="_blank"
-											rel="noreferrer noopener"
-											className="group flex items-center gap-3 rounded-[1.15rem] border border-line bg-canvas p-3 transition-colors duration-300 hover:border-line-strong sm:flex-col sm:items-start sm:gap-2.5"
+											target={social.external === false ? undefined : "_blank"}
+											rel={social.external === false ? undefined : "noreferrer noopener"}
+											className="group flex min-w-0 items-center gap-3 rounded-[1.15rem] border border-line bg-canvas p-3 transition-colors duration-300 hover:border-line-strong sm:flex-col sm:items-start sm:gap-2.5"
 										>
 											<span className="grid size-8 shrink-0 place-items-center rounded-lg border border-line bg-surface text-accent-text">
 												<Icon aria-hidden="true" className="size-3.5" />

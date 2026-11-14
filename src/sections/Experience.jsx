@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FiBriefcase, FiCalendar, FiCheck, FiUsers } from "react-icons/fi";
+import { FiCalendar, FiCheck, FiSmartphone, FiUsers } from "react-icons/fi";
 import { experience } from "@/data/experience";
 import { useTranslation } from "@/i18n";
 import { gsap } from "@/lib/gsap";
@@ -12,7 +12,7 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 
 const icons = {
 	mentor: FiUsers,
-	intern: FiBriefcase,
+	mobile: FiSmartphone,
 };
 
 export default function Experience() {
@@ -130,7 +130,7 @@ export default function Experience() {
 												) : null}
 											</div>
 
-											<h3 className="mt-2.5 font-display text-[clamp(1.25rem,2.6vw,1.6rem)] font-bold leading-tight tracking-[-0.03em] text-ink rtl:tracking-normal">
+											<h3 className="mt-2.5 break-words font-display text-[clamp(1.2rem,2.6vw,1.6rem)] font-bold leading-tight tracking-[-0.03em] text-ink rtl:tracking-normal">
 												{copy.role}
 											</h3>
 											<p className="mt-1.5 text-[11px] font-medium text-muted">
@@ -149,7 +149,7 @@ export default function Experience() {
 										</div>
 									</div>
 
-									<p className="mt-4 max-w-2xl text-pretty text-[13px] leading-6 text-muted sm:text-sm sm:leading-7">
+									<p className="mt-4 max-w-2xl text-pretty break-words text-[13px] leading-6 text-muted sm:text-sm sm:leading-7">
 										{copy.description}
 									</p>
 

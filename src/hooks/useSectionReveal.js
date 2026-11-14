@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useTranslation } from "@/i18n";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-const FROM = { y: 20, opacity: 0 };
-const TO = { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" };
+const FROM = { y: 32, opacity: 0, scale: 0.98 };
+const TO = { y: 0, opacity: 1, scale: 1, duration: 0.75, ease: "power3.out" };
 
 export default function useSectionReveal() {
 	const { language } = useTranslation();
@@ -38,7 +38,7 @@ export default function useSectionReveal() {
 
 				gsap.fromTo(items, FROM, {
 					...TO,
-					stagger: 0.1,
+					stagger: 0.08,
 					scrollTrigger: {
 						trigger: group,
 						start: "top 88%",
@@ -58,11 +58,13 @@ export default function useSectionReveal() {
 
 		document.fonts?.ready?.then(refresh).catch(() => {});
 		window.addEventListener("load", refresh, { once: true });
+		window.addEventListener("resize", refresh);
 
 		return () => {
 			cancelled = true;
 			window.clearTimeout(timer);
 			window.removeEventListener("load", refresh);
+			window.removeEventListener("resize", refresh);
 			context.revert();
 		};
 	}, [language]);

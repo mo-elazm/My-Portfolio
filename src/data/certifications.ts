@@ -1,4 +1,6 @@
-export const certifications = [
+import type { Certification } from "@/types/content";
+
+export const certifications: Certification[] = [
 	{
 		id: "ibm",
 		icon: "flutter",

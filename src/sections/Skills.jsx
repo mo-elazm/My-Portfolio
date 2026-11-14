@@ -1,8 +1,7 @@
 "use client";
 
-import { skillGroups } from "@/data/skills";
+import { stackCategories } from "@/data/skills";
 import { useTranslation } from "@/i18n";
-import { cn } from "@/utils/cn";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import TechChip from "@/components/ui/TechChip";
@@ -26,55 +25,40 @@ export default function Skills() {
 						className="w-full max-w-xs shrink-0 rounded-2xl border border-line bg-surface p-4 shadow-[var(--card-shadow)]"
 					>
 						<p className="eyebrow-label">{t.skills.coreLabel}</p>
-						<p className="mt-2 font-mono text-[11px] leading-5 text-ink">
+						<p className="mt-2 break-words font-mono text-[11px] leading-5 text-ink">
 							{t.skills.coreValue}
 						</p>
 					</div>
 				</div>
 
-				<div
-					data-reveal-group
-					className="mt-12 grid gap-3 lg:grid-cols-12"
-				>
-					{skillGroups.map((group, index) => {
+				<div data-reveal-group className="mt-12 grid gap-3 sm:grid-cols-2">
+					{stackCategories.map((group, index) => {
 						const Icon = group.icon;
 						const content = t.skills.categories[group.id];
-						const isExploring = group.id === "exploring";
 
 						return (
 							<SpotlightCard
 								key={group.id}
 								data-reveal-item
-								className={cn(
-									"flex flex-col rounded-[1.6rem] p-5 sm:p-6",
-									group.span,
-									isExploring && "lg:flex-row lg:items-center lg:justify-between lg:gap-10",
-								)}
+								className="flex min-w-0 flex-col rounded-[1.6rem] p-5 sm:p-6"
 							>
-								<div className={cn("min-w-0", isExploring && "lg:max-w-md")}>
-									<div className="flex items-center justify-between gap-4">
-										<span className="grid size-9 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
-											<Icon aria-hidden="true" className="size-[18px]" />
-										</span>
-										<span className="font-mono text-[9px] font-medium text-muted/70">
-											{String(index + 1).padStart(2, "0")}
-										</span>
-									</div>
-
-									<h3 className="mt-6 font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
-										{content.title}
-									</h3>
-									<p className="mt-1.5 max-w-md text-pretty text-[12px] leading-6 text-muted">
-										{content.note}
-									</p>
+								<div className="flex items-center justify-between gap-4">
+									<span className="grid size-9 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
+										<Icon aria-hidden="true" className="size-[18px]" />
+									</span>
+									<span className="font-mono text-[9px] font-medium text-muted/70">
+										{String(index + 1).padStart(2, "0")}
+									</span>
 								</div>
 
-								<div
-									className={cn(
-										"mt-6 flex flex-wrap gap-1.5",
-										isExploring && "lg:mt-0 lg:max-w-[430px] lg:justify-end",
-									)}
-								>
+								<h3 className="mt-6 break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
+									{content.title}
+								</h3>
+								<p className="mt-1.5 max-w-md text-pretty break-words text-[12px] leading-6 text-muted">
+									{content.note}
+								</p>
+
+								<div className="mt-6 flex flex-wrap gap-1.5">
 									{group.techs.map((tech) => (
 										<TechChip key={tech.name} tech={tech} />
 									))}

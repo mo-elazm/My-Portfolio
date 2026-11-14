@@ -11,6 +11,7 @@ import Navbar from "@/components/layout/Navbar";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import SiteEffects from "@/components/layout/SiteEffects";
 import CertificateLightbox from "@/components/ui/CertificateLightbox";
+import CaseStudyModal from "@/components/projects/CaseStudyModal";
 import { translations } from "@/i18n/translations";
 import { profile } from "@/data/profile";
 import { siteName, siteUrl } from "@/lib/site";
@@ -64,12 +65,16 @@ export async function generateMetadata(): Promise<Metadata> {
 		creator: profile.name,
 		publisher: profile.name,
 		keywords: [
-			"Mohamed Abo El-azm",
-			"Front-End Developer",
+			"Mohamed Abo-Elazm",
+			"Software Engineer",
+			"Full-Stack Developer",
 			"React Developer",
 			"Next.js Developer",
-			"Tailwind CSS",
 			"TypeScript",
+			"Node.js",
+			"Supabase",
+			"MongoDB",
+			"Flutter Developer",
 			"GSAP",
 			"Portfolio",
 			"Egypt",
@@ -136,25 +141,29 @@ const personSchema = {
 	"@type": "Person",
 	name: profile.name,
 	alternateName: profile.nameAr,
-	jobTitle: "Front-End Developer",
+	jobTitle: "Software Engineer",
 	email: `mailto:${profile.email}`,
+	telephone: profile.phone,
 	url: siteUrl,
-	image: `${siteUrl}${profile.portrait}`,
 	sameAs: [profile.github, profile.linkedin],
 	knowsAbout: [
-		"React",
 		"Next.js",
+		"React",
+		"TypeScript",
 		"JavaScript",
 		"Tailwind CSS",
 		"Zustand",
 		"GSAP",
-		"Laravel",
 		"Node.js",
-		"PHP",
-		"Flutter",
+		"Express",
 		"Supabase",
-		"Firebase",
-		"SQL",
+		"MongoDB",
+		"Mongoose",
+		"REST APIs",
+		"JWT Authentication",
+		"Flutter",
+		"Dart",
+		"Cubit",
 	],
 	hasCredential: [
 		{
@@ -206,8 +215,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 					<Navbar />
 					<MobileMenu />
 					<CertificateLightbox />
+					<CaseStudyModal />
 
-					<main id="main-content" className="relative z-10">
+					<main id="main-content" className="relative z-10 overflow-x-clip">
 						{children}
 					</main>
 
