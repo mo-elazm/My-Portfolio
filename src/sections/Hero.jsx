@@ -94,7 +94,12 @@ export default function Hero() {
 				className="dot-grid pointer-events-none absolute inset-x-0 top-0 h-[72vh] opacity-[0.03] [mask-image:linear-gradient(to_bottom,black,transparent)] dark:opacity-[0.035]"
 			/>
 
-			<div className="container-shell relative grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:gap-12 xl:gap-16">
+			<HeroScene3D
+				theme={theme}
+				className="hero-scene-mask opacity-40 sm:opacity-60 lg:opacity-100"
+			/>
+
+			<div className="container-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:gap-12 xl:gap-16">
 				<div className="min-w-0 max-w-[680px]">
 					<div className="hero-pill flex flex-wrap items-center gap-2.5">
 						<StatusPill label={t.hero.badge} className="max-w-full text-start" />
@@ -162,13 +167,6 @@ export default function Hero() {
 				</div>
 
 				<div className="hero-portrait relative isolate mx-auto w-full max-w-[430px] lg:max-w-[440px]">
-					<div
-						aria-hidden="true"
-						className="pointer-events-none absolute inset-x-[-16%] -top-[24%] bottom-[10%] -z-10 opacity-90"
-					>
-						<HeroScene3D theme={theme} className="h-full w-full" />
-					</div>
-
 					<div
 						aria-hidden="true"
 						className="absolute -inset-6 -z-20 rounded-[3rem] bg-indigo-600/[0.06] blur-2xl dark:bg-indigo-500/20"

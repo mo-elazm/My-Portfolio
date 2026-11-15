@@ -481,6 +481,19 @@
 		will-change: transform;
 	}
 
+	.hero-scene-mask {
+		-webkit-mask-image: radial-gradient(
+			ellipse 68% 64% at 50% 46%,
+			#000 44%,
+			transparent 92%
+		);
+		mask-image: radial-gradient(
+			ellipse 68% 64% at 50% 46%,
+			#000 44%,
+			transparent 92%
+		);
+	}
+
 	.toast-pop {
 		animation: toast-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
