@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FiGithub, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
-import { usePreferences } from "@/providers/PreferencesProvider";
 import { gsap } from "@/lib/gsap";
 import { profile } from "@/data/profile";
 import useAppStore from "@/store/useAppStore";
@@ -15,14 +13,8 @@ import CairoClock from "@/components/ui/CairoClock";
 import SocialLinks from "@/components/ui/SocialLinks";
 import StatusPill from "@/components/ui/StatusPill";
 
-const HeroScene3D = dynamic(() => import("@/components/HeroScene3D"), {
-	ssr: false,
-	loading: () => null,
-});
-
 export default function Hero() {
 	const { t, language } = useTranslation();
-	const { theme } = usePreferences();
 	const introDone = useAppStore((state) => state.introDone);
 	const root = useRef(null);
 
@@ -92,11 +84,6 @@ export default function Hero() {
 			<div
 				aria-hidden="true"
 				className="dot-grid pointer-events-none absolute inset-x-0 top-0 h-[72vh] opacity-[0.03] [mask-image:linear-gradient(to_bottom,black,transparent)] dark:opacity-[0.035]"
-			/>
-
-			<HeroScene3D
-				theme={theme}
-				className="hero-scene-mask opacity-40 sm:opacity-60 lg:opacity-100"
 			/>
 
 			<div className="container-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:gap-12 xl:gap-16">

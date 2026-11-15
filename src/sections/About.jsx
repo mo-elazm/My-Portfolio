@@ -5,6 +5,7 @@ import { FiClock, FiCode, FiGlobe, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { profile } from "@/data/profile";
 import CountUp from "@/components/ui/CountUp";
+import ScrollWords from "@/components/ui/ScrollWords";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import StatusPill from "@/components/ui/StatusPill";
@@ -26,7 +27,7 @@ export default function About() {
 					eyebrow={t.about.eyebrow}
 					number={t.about.number}
 					title={t.about.title}
-					description={t.about.description}
+					description={<ScrollWords text={t.about.description} />}
 				/>
 
 				<div data-reveal-group className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -149,7 +150,7 @@ export default function About() {
 								“
 							</span>
 							<p className="max-w-3xl text-pretty break-words font-display text-base font-medium leading-7 text-ink sm:text-lg sm:leading-8">
-								{t.about.quote}
+								<ScrollWords text={t.about.quote} />
 							</p>
 						</div>
 					</SpotlightCard>

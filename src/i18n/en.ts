@@ -33,6 +33,7 @@ const en = {
 	preloader: {
 		label: "Loading portfolio",
 		monogram: "M",
+		coordinates: "30.0444° N // CAIRO",
 	},
 	nav: {
 		home: "Home",

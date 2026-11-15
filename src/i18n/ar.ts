@@ -35,6 +35,7 @@ const ar: Dictionary = {
 	preloader: {
 		label: "جارٍ تحميل البورتفوليو",
 		monogram: "M",
+		coordinates: "30.0444° N // CAIRO",
 	},
 	nav: {
 		home: "الرئيسية",

@@ -6,6 +6,7 @@ import { IBM_Plex_Sans_Arabic, JetBrains_Mono, Plus_Jakarta_Sans } from "next/fo
 import "./globals.css";
 import PreferencesProvider from "@/providers/PreferencesProvider";
 import MotionProvider from "@/providers/MotionProvider";
+import AstrolabeBackground from "@/components/layout/AstrolabeBackground";
 import Backdrop from "@/components/layout/Backdrop";
 import CursorFollower from "@/components/layout/CursorFollower";
 import Footer from "@/components/layout/Footer";
@@ -218,6 +219,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 						</a>
 
 						<Backdrop />
+						<AstrolabeBackground />
 						<ScrollProgress />
 						<SiteEffects />
 						<Navbar />

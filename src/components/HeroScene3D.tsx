@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { scrollState } from "@/lib/scrollState";
+import { astrolabeState } from "@/lib/astrolabeState";
 import { cn } from "@/utils/cn";
 
 type Theme = "dark" | "light";
@@ -332,14 +333,20 @@ function Sculpture({
 		smooth.current.x += (pointer.current.y * 0.24 - smooth.current.x) * ease;
 		smooth.current.y += (pointer.current.x * 0.4 - smooth.current.y) * ease;
 
-		group.rotation.x = smooth.current.x + Math.sin(time * 0.18) * 0.025;
-		group.rotation.y = smooth.current.y + velocity * 0.3;
-		group.rotation.z = velocity * 0.06;
-		group.position.x = isCompact ? 0 : Math.min(2.35, viewport.width * 0.23);
-		// Desktop: crowns the portrait card. Compact: hovers over the portrait
-		// near the bottom of the stacked hero. Both stay clear of the viewport edges.
-		group.position.y = velocity * 0.12 + (isCompact ? -0.87 : 1.82);
-		group.scale.setScalar(scale);
+		// Base position is the Hero's trailing flank. ScrollTrigger writes
+		// offsets on top of it as the astrolabe travels between sections.
+		const baseX = isCompact ? 0 : Math.min(2.35, viewport.width * 0.23);
+		const baseY = isCompact ? -0.85 : 1.82;
+
+		group.rotation.x =
+			smooth.current.x + Math.sin(time * 0.18) * 0.025 + astrolabeState.tiltX;
+		group.rotation.y =
+			smooth.current.y + velocity * 0.3 + astrolabeState.spin;
+		group.rotation.z = velocity * 0.06 + astrolabeState.tiltZ;
+		group.position.x = baseX + astrolabeState.offsetX;
+		group.position.y =
+			baseY + astrolabeState.offsetY + velocity * 0.12;
+		group.scale.setScalar(scale * astrolabeState.scale);
 
 		if (lights.current) {
 			lights.current.position.copy(group.position);

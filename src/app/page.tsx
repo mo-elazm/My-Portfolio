@@ -1,6 +1,7 @@
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Experience from "@/sections/Experience";
+import EngineeringMarquee from "@/sections/EngineeringMarquee";
 import Skills from "@/sections/Skills";
 import Projects from "@/sections/Projects";
 import Certifications from "@/sections/Certifications";
@@ -12,6 +13,7 @@ export default function HomePage() {
 			<Hero />
 			<About />
 			<Experience />
+			<EngineeringMarquee />
 			<Skills />
 			<Projects />
 			<Certifications />

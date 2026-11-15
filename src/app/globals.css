@@ -360,6 +360,24 @@
 		z-index: 1;
 	}
 
+	/* Cursor-reactive 3D tilt (desktop pointers only, wired via SpotlightCard). */
+	.spotlight-card[data-tilt] {
+		transform-style: preserve-3d;
+		will-change: transform;
+	}
+
+	.spotlight-card[data-tilt]:hover {
+		translate: 0 -2px;
+	}
+
+	.spotlight-card[data-tilt]::before {
+		background: radial-gradient(
+			320px circle at var(--x, 50%) var(--y, 0%),
+			color-mix(in srgb, var(--accent) 88%, transparent),
+			transparent 70%
+		);
+	}
+
 	.btn {
 		display: inline-flex;
 		min-height: 2.75rem;
@@ -540,6 +558,10 @@
 
 	.hero-line {
 		transform: translateY(110%);
+	}
+
+	[data-word] {
+		opacity: 0.18;
 	}
 }
 

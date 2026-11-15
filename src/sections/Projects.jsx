@@ -1,11 +1,11 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { projectFilters, projects } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { useTranslation } from "@/i18n";
-import { Flip, gsap } from "@/lib/gsap";
+import { Flip, ScrollTrigger, gsap } from "@/lib/gsap";
 import { cn } from "@/utils/cn";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
@@ -18,6 +18,65 @@ export default function Projects() {
 	const [filter, setFilter] = useState("all");
 	const gridRef = useRef(null);
 	const pendingFlip = useRef(null);
+
+	// Scroll-choreographed card depth: entrance tilt + inner mockup parallax.
+	useEffect(() => {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			return undefined;
+		}
+
+		const grid = gridRef.current;
+
+		if (!grid) {
+			return undefined;
+		}
+
+		const context = gsap.context(() => {
+			gsap.utils.toArray("[data-card-entrance]", grid).forEach((card) => {
+				gsap.fromTo(
+					card,
+					{
+						rotateX: 7,
+						y: 45,
+						opacity: 0.4,
+						transformPerspective: 1200,
+						transformOrigin: "50% 0%",
+					},
+					{
+						rotateX: 0,
+						y: 0,
+						opacity: 1,
+						ease: "none",
+						scrollTrigger: {
+							trigger: card,
+							start: "top 92%",
+							end: "top 62%",
+							scrub: 0.6,
+						},
+					},
+				);
+			});
+
+			gsap.utils.toArray("[data-preview]", grid).forEach((preview) => {
+				gsap.fromTo(
+					preview,
+					{ yPercent: -5 },
+					{
+						yPercent: 5,
+						ease: "none",
+						scrollTrigger: {
+							trigger: preview.closest("[data-flip-item]") ?? preview,
+							start: "top bottom",
+							end: "bottom top",
+							scrub: 0.6,
+						},
+					},
+				);
+			});
+		}, grid);
+
+		return () => context.revert();
+	}, []);
 
 	useLayoutEffect(() => {
 		const state = pendingFlip.current;
@@ -33,7 +92,6 @@ export default function Projects() {
 			ease: "power3.inOut",
 			stagger: 0.06,
 			absolute: true,
-			nested: true,
 			onEnter: (elements) =>
 				gsap.fromTo(
 					elements,
@@ -48,6 +106,7 @@ export default function Projects() {
 						clearProps: "transform",
 					},
 				),
+			onComplete: () => ScrollTrigger.refresh(),
 		});
 	}, [filter]);
 
@@ -130,7 +189,6 @@ export default function Projects() {
 
 				<div
 					ref={gridRef}
-					data-reveal
 					className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
 				>
 					{projects.map((project) => {
@@ -138,114 +196,125 @@ export default function Projects() {
 						const visible = matchesFilter(project.filter, filter);
 
 						return (
-							<SpotlightCard
-								as="article"
+							<div
 								key={project.id}
 								data-flip-item
 								data-filter={project.filter}
-								data-cursor="explore"
-								className={cn(
-									"group flex min-w-0 flex-col overflow-hidden rounded-[1.6rem]",
-									!visible && "hidden",
-								)}
+								className={cn("min-w-0", !visible && "hidden")}
 							>
-								<div className="p-2 pb-0">
-									<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
-										<div
-											dir="ltr"
-											className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-105"
-										>
-											<ProjectPreview variant={project.variant} />
+								<div
+									data-card-entrance
+									className="h-full will-change-transform"
+								>
+									<SpotlightCard
+										as="article"
+										tilt
+										data-cursor="explore"
+										className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[1.6rem]"
+									>
+										<div className="p-2 pb-0">
+											<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
+												<div data-preview className="absolute inset-[-6%]">
+													<div
+														dir="ltr"
+														className="size-full transition-transform duration-500 ease-out group-hover:scale-105"
+													>
+														<ProjectPreview variant={project.variant} />
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
+
+										<div className="flex flex-1 flex-col p-5 sm:p-6">
+											<div className="flex items-center justify-between gap-3">
+												<span className="eyebrow-label truncate">
+													{copy.category}
+												</span>
+												<span className="shrink-0 font-mono text-[10px] font-medium text-muted">
+													{project.number}
+												</span>
+											</div>
+
+											<h3 className="mt-3 break-words font-display text-[clamp(1.35rem,2.4vw,1.6rem)] font-bold tracking-[-0.03em] text-ink rtl:tracking-normal">
+												{copy.title}
+											</h3>
+
+											<p className="mt-2 line-clamp-3 text-pretty break-words text-[13px] leading-6 text-muted">
+												{copy.description}
+											</p>
+
+											<div className="mt-4 flex flex-wrap gap-1.5">
+												{project.stack.map((tech) => (
+													<span
+														key={tech}
+														className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[9px] font-medium text-muted"
+													>
+														{tech}
+													</span>
+												))}
+											</div>
+
+											<div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-4">
+												<a
+													href={project.url}
+													target="_blank"
+													rel="noreferrer noopener"
+													className="btn btn-primary min-h-9 px-4 text-[11px] active:scale-[0.97]"
+												>
+													<span>{t.projects.live}</span>
+													<FiArrowUpRight
+														aria-hidden="true"
+														className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
+													/>
+												</a>
+												<a
+													href={project.repo}
+													target="_blank"
+													rel="noreferrer noopener"
+													aria-label={`${copy.title} — ${t.projects.source}`}
+													className="btn btn-secondary min-h-9 px-4 text-[11px] active:scale-[0.97]"
+												>
+													<FiGithub aria-hidden="true" className="size-3" />
+													<span>{t.projects.source}</span>
+												</a>
+											</div>
+										</div>
+									</SpotlightCard>
 								</div>
-
-								<div className="flex flex-1 flex-col p-5 sm:p-6">
-									<div className="flex items-center justify-between gap-3">
-										<span className="eyebrow-label truncate">{copy.category}</span>
-										<span className="shrink-0 font-mono text-[10px] font-medium text-muted">
-											{project.number}
-										</span>
-									</div>
-
-									<h3 className="mt-3 break-words font-display text-[clamp(1.35rem,2.4vw,1.6rem)] font-bold tracking-[-0.03em] text-ink rtl:tracking-normal">
-										{copy.title}
-									</h3>
-
-									<p className="mt-2 line-clamp-3 text-pretty break-words text-[13px] leading-6 text-muted">
-										{copy.description}
-									</p>
-
-									<div className="mt-4 flex flex-wrap gap-1.5">
-										{project.stack.map((tech) => (
-											<span
-												key={tech}
-												className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[9px] font-medium text-muted"
-											>
-												{tech}
-											</span>
-										))}
-									</div>
-
-									<div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-4">
-										<a
-											href={project.url}
-											target="_blank"
-											rel="noreferrer noopener"
-											className="btn btn-primary min-h-9 px-4 text-[11px] active:scale-[0.97]"
-										>
-											<span>{t.projects.live}</span>
-											<FiArrowUpRight
-												aria-hidden="true"
-												className="size-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-											/>
-										</a>
-										<a
-											href={project.repo}
-											target="_blank"
-											rel="noreferrer noopener"
-											aria-label={`${copy.title} — ${t.projects.source}`}
-											className="btn btn-secondary min-h-9 px-4 text-[11px] active:scale-[0.97]"
-										>
-											<FiGithub aria-hidden="true" className="size-3" />
-											<span>{t.projects.source}</span>
-										</a>
-									</div>
-								</div>
-							</SpotlightCard>
+							</div>
 						);
 					})}
 
-				<SpotlightCard
-					className="col-span-full flex flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
-				>
-					<div className="flex min-w-0 items-center gap-4">
-						<span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
-							<FiGithub aria-hidden="true" className="size-[18px]" />
-						</span>
-						<div className="min-w-0">
-							<h3 className="break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
-								{t.projects.more}
-							</h3>
-							<p className="mt-1 text-pretty break-words text-[12px] leading-5 text-muted">
-								{t.projects.moreText}
-							</p>
-						</div>
-					</div>
+					<div data-card-entrance className="col-span-full will-change-transform">
+						<SpotlightCard className="flex h-full flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+							<div className="flex min-w-0 items-center gap-4">
+								<span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
+									<FiGithub aria-hidden="true" className="size-[18px]" />
+								</span>
+								<div className="min-w-0">
+									<h3 className="break-words font-display text-lg font-bold tracking-[-0.02em] text-ink rtl:tracking-normal">
+										{t.projects.more}
+									</h3>
+									<p className="mt-1 text-pretty break-words text-[12px] leading-5 text-muted">
+										{t.projects.moreText}
+									</p>
+								</div>
+							</div>
 
-					<a
-						href={profile.github}
-						target="_blank"
-						rel="noreferrer noopener"
-						className="btn btn-secondary group w-fit shrink-0 active:scale-[0.97]"
-					>
-						<span>{t.projects.github}</span>
-						<FiArrowUpRight
-							aria-hidden="true"
-							className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
-						/>
-					</a>
-				</SpotlightCard>
+							<a
+								href={profile.github}
+								target="_blank"
+								rel="noreferrer noopener"
+								className="btn btn-secondary group w-fit shrink-0 active:scale-[0.97]"
+							>
+								<span>{t.projects.github}</span>
+								<FiArrowUpRight
+									aria-hidden="true"
+									className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100"
+								/>
+							</a>
+						</SpotlightCard>
+					</div>
 				</div>
 			</div>
 		</section>
