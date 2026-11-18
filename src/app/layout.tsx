@@ -237,7 +237,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 				</PreferencesProvider>
 
 				<noscript>
-					<style>{`[data-preloader]{display:none!important}[data-reveal],[data-reveal-item],.hero-anim,.hero-fade,.hero-pill,.hero-subtitle,.hero-cta,.hero-portrait{opacity:1!important}.hero-line{transform:none!important}`}</style>
+					<style>{`[data-preloader]{display:none!important}[data-reveal],[data-reveal-item],[data-word],.hero-anim,.hero-fade,.hero-pill,.hero-subtitle,.hero-cta,.hero-portrait{opacity:1!important}.hero-line{transform:none!important}`}</style>
 				</noscript>
 
 				<script
