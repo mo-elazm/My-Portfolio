@@ -33,22 +33,28 @@ export default function Projects() {
 		}
 
 		const context = gsap.context(() => {
-			gsap.utils.toArray("[data-card-entrance]", grid).forEach((card) => {
-				gsap.fromTo(
-					card,
-					{ y: 28, opacity: 0 },
-					{
+			const cards = gsap.utils.toArray("[data-card-entrance]", grid);
+
+			if (!cards.length) {
+				return;
+			}
+
+			gsap.set(cards, { y: 28, opacity: 0 });
+
+			// Batch by viewport entry so each row cascades in once, then the
+			// triggers detach for good.
+			ScrollTrigger.batch(cards, {
+				start: "top 92%",
+				once: true,
+				onEnter: (batch) =>
+					gsap.to(batch, {
 						y: 0,
 						opacity: 1,
 						duration: 0.65,
 						ease: "power3.out",
-						scrollTrigger: {
-							trigger: card,
-							start: "top 92%",
-							once: true,
-						},
-					},
-				);
+						stagger: 0.08,
+						overwrite: true,
+					}),
 			});
 		}, grid);
 
@@ -186,6 +192,8 @@ export default function Projects() {
 									<SpotlightCard
 										as="article"
 										tilt
+										tiltStrength={3.5}
+										specular
 										data-cursor="explore"
 										className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[1.6rem]"
 									>
@@ -263,7 +271,10 @@ export default function Projects() {
 					})}
 
 					<div data-card-entrance className="col-span-full will-change-transform">
-						<SpotlightCard className="flex h-full flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+						<SpotlightCard
+							specular
+							className="flex h-full flex-col gap-4 rounded-[1.6rem] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+						>
 							<div className="flex min-w-0 items-center gap-4">
 								<span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
 									<FiGithub aria-hidden="true" className="size-[18px]" />

@@ -9,6 +9,7 @@ import ScrollWords from "@/components/ui/ScrollWords";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import StatusPill from "@/components/ui/StatusPill";
+import SystemDiagram from "@/components/ui/SystemDiagram";
 
 export default function About() {
 	const { t } = useTranslation();
@@ -33,6 +34,7 @@ export default function About() {
 				<div data-reveal-group className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 					<SpotlightCard
 						data-reveal-item
+						specular
 						className="flex flex-col justify-between rounded-[1.6rem] p-6 sm:col-span-2 sm:p-8 lg:row-span-2"
 					>
 						<div className="min-w-0">
@@ -70,6 +72,7 @@ export default function About() {
 
 					<SpotlightCard
 						data-reveal-item
+						specular
 						className="flex flex-col rounded-[1.6rem] p-5 sm:col-span-2 sm:p-6 lg:col-span-1 lg:row-span-2"
 					>
 						<div className="flex items-center gap-3">
@@ -126,6 +129,7 @@ export default function About() {
 						<SpotlightCard
 							key={key}
 							data-reveal-item
+							specular
 							className="rounded-[1.6rem] p-5 sm:p-6"
 						>
 							<p className="eyebrow-label">{card.label}</p>
@@ -135,11 +139,13 @@ export default function About() {
 							<p className="mt-2 text-pretty break-words text-[12px] leading-6 text-muted">
 								{card.text}
 							</p>
+							{key === "focus" ? <SystemDiagram /> : null}
 						</SpotlightCard>
 					))}
 
 					<SpotlightCard
 						data-reveal-item
+						specular
 						className="rounded-[1.6rem] p-6 sm:col-span-2 sm:p-8 lg:col-span-3"
 					>
 						<div className="flex items-start gap-4">

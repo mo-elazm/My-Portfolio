@@ -11,6 +11,8 @@ export default function SpotlightCard({
 	className,
 	children,
 	tilt = false,
+	tiltStrength = TILT_RANGE,
+	specular = false,
 	...props
 }) {
 	const ref = useRef(null);
@@ -68,7 +70,7 @@ export default function SpotlightCard({
 			gsap.killTweensOf(target);
 			gsap.killTweensOf(node);
 		};
-	}, [tilt]);
+	}, [tilt, tiltStrength]);
 
 	const handlePointerMove = (event) => {
 		const node = ref.current;
@@ -88,8 +90,8 @@ export default function SpotlightCard({
 			const px = offsetX / rect.width - 0.5;
 			const py = offsetY / rect.height - 0.5;
 
-			rotateY.current(px * TILT_RANGE * 2);
-			rotateX.current(-py * TILT_RANGE * 2);
+			rotateY.current(px * tiltStrength * 2);
+			rotateX.current(-py * tiltStrength * 2);
 		}
 	};
 
@@ -108,6 +110,7 @@ export default function SpotlightCard({
 			onPointerMove={handlePointerMove}
 			onPointerLeave={handlePointerLeave}
 			data-tilt={tilt ? "" : undefined}
+			data-specular={specular ? "" : undefined}
 			className={cn("spotlight-card", className)}
 			{...props}
 		>

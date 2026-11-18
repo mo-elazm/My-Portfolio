@@ -394,6 +394,31 @@
 		);
 	}
 
+	/* Stronger specular border + sheen for bento cards (fine pointers only). */
+	@media (pointer: fine) {
+		.spotlight-card[data-specular]::before {
+			background: radial-gradient(
+				220px circle at var(--x, 50%) var(--y, 0%),
+				color-mix(in srgb, var(--accent) 92%, white 8%),
+				transparent 62%
+			);
+		}
+
+		.spotlight-card[data-specular]::after {
+			background:
+				radial-gradient(
+					170px circle at var(--x, 50%) var(--y, 0%),
+					color-mix(in srgb, var(--accent) 20%, transparent),
+					transparent 62%
+				),
+				radial-gradient(
+					340px circle at var(--x, 50%) var(--y, 0%),
+					var(--accent-glow),
+					transparent 72%
+				);
+		}
+	}
+
 	.btn {
 		display: inline-flex;
 		min-height: 2.75rem;
@@ -609,6 +634,210 @@
 	.toast-pop {
 		animation: toast-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
+
+	/* About: live architecture diagram (pure CSS/SVG animation). */
+	.sys-diagram {
+		overflow: hidden;
+		padding: 0.7rem 0.8rem 0.55rem;
+		border: 1px solid var(--line);
+		border-radius: 1rem;
+		background:
+			radial-gradient(120% 120% at 50% 0%, var(--accent-soft), transparent 72%),
+			var(--surface-2);
+	}
+
+	.sys-diagram-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.sys-diagram-title {
+		font-family: var(--font-mono);
+		font-size: 0.5rem;
+		font-weight: 500;
+		letter-spacing: 0.18em;
+		line-height: 1;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.sys-live {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--font-mono);
+		font-size: 0.5rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent-text);
+	}
+
+	.sys-live-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 999px;
+		background: var(--accent);
+		box-shadow: 0 0 0 3px var(--accent-soft);
+		animation: sys-blink 2s ease-in-out infinite;
+	}
+
+	.sys-svg {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.sys-track {
+		fill: none;
+		stroke: var(--line-strong);
+		stroke-width: 1;
+	}
+
+	.sys-halo {
+		fill: none;
+		stroke: var(--accent);
+		stroke-width: 3;
+		opacity: 0.14;
+	}
+
+	.sys-flow {
+		fill: none;
+		stroke: var(--accent);
+		stroke-width: 1.6;
+		stroke-linecap: round;
+		stroke-dasharray: 3 17;
+		animation: sys-dash 1.5s linear infinite;
+	}
+
+	.sys-flow-b {
+		animation-delay: 0.45s;
+	}
+
+	.sys-flow-c {
+		animation-delay: 0.9s;
+	}
+
+	.sys-node rect {
+		fill: var(--surface);
+		stroke: var(--line-strong);
+		stroke-width: 1;
+	}
+
+	.sys-node text {
+		fill: var(--ink);
+		font-family: var(--font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.01em;
+	}
+
+	.sys-node-led {
+		fill: var(--accent);
+		animation: sys-pulse 2.4s ease-in-out infinite;
+	}
+
+	.sys-node-led-b {
+		animation-delay: 0.6s;
+	}
+
+	.sys-node-led-c {
+		animation-delay: 1.2s;
+	}
+
+	.sys-node-led-d {
+		animation-delay: 1.8s;
+	}
+
+	/* Experience: laser track + traveling energy pulse. */
+	.timeline-laser {
+		transform: scaleY(1);
+		box-shadow: 0 0 12px 1px var(--accent-glow);
+	}
+
+	.timeline-pulse {
+		box-shadow:
+			0 0 0 3px var(--accent-soft),
+			0 0 16px 3px var(--accent-glow);
+		animation: timeline-pulse 2s ease-in-out infinite;
+	}
+
+	.timeline-node {
+		transition:
+			border-color 0.35s ease,
+			box-shadow 0.35s ease,
+			color 0.35s ease,
+			background-color 0.35s ease;
+	}
+
+	.timeline-node.is-lit {
+		border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+		color: var(--accent-text);
+		box-shadow:
+			0 0 0 4px var(--accent-soft),
+			0 0 18px 2px var(--accent-glow);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.timeline-laser {
+			transform: scaleY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.timeline-pulse {
+			display: none;
+		}
+	}
+
+	/* Contact: lightweight beacon framing the card. */
+	.contact-beacon {
+		inset-block: 0;
+		inset-inline-end: -2%;
+		width: min(64%, 400px);
+		height: 100%;
+		opacity: 0.34;
+		-webkit-mask-image: radial-gradient(
+			ellipse 68% 70% at 70% 42%,
+			#000 22%,
+			transparent 72%
+		);
+		mask-image: radial-gradient(
+			ellipse 68% 70% at 70% 42%,
+			#000 22%,
+			transparent 72%
+		);
+	}
+
+	.dark .contact-beacon {
+		opacity: 0.55;
+	}
+
+	@media (max-width: 767px) {
+		.contact-beacon {
+			inset-inline-start: auto;
+			inset-inline-end: -20%;
+			inset-block-start: -9%;
+			width: 78%;
+			height: 235px;
+			opacity: 0.2;
+			-webkit-mask-image: radial-gradient(
+				ellipse 60% 58% at 60% 42%,
+				#000 16%,
+				transparent 70%
+			);
+			mask-image: radial-gradient(
+				ellipse 60% 58% at 60% 42%,
+				#000 16%,
+				transparent 70%
+			);
+		}
+
+		.dark .contact-beacon {
+			opacity: 0.26;
+		}
+	}
 }
 
 @keyframes pulse-soft {
@@ -640,6 +869,48 @@
 	}
 	to {
 		transform: rotate(var(--tilt)) scaleY(var(--flat)) rotate(360deg);
+	}
+}
+
+@keyframes sys-dash {
+	to {
+		stroke-dashoffset: -40;
+	}
+}
+
+@keyframes sys-pulse {
+	0%,
+	100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes sys-blink {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.35;
+		transform: scale(0.7);
+	}
+}
+
+@keyframes timeline-pulse {
+	0%,
+	100% {
+		box-shadow:
+			0 0 0 3px var(--accent-soft),
+			0 0 14px 2px var(--accent-glow);
+	}
+	50% {
+		box-shadow:
+			0 0 0 5px var(--accent-soft),
+			0 0 22px 5px var(--accent-glow);
 	}
 }
 

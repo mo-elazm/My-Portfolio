@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { FaWhatsapp } from "react-icons/fa6";
 import {
 	FiArrowUpRight,
@@ -13,11 +14,18 @@ import {
 } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
 import { getWhatsAppLink, profile } from "@/data/profile";
+import { usePreferences } from "@/providers/PreferencesProvider";
 import Button from "@/components/ui/Button";
 import StatusPill from "@/components/ui/StatusPill";
 
+const ContactScene3D = dynamic(() => import("@/components/ContactScene3D"), {
+	ssr: false,
+	loading: () => null,
+});
+
 export default function Contact() {
 	const { t } = useTranslation();
+	const { theme } = usePreferences();
 	const [copied, setCopied] = useState(false);
 	const timerRef = useRef(null);
 
@@ -85,6 +93,8 @@ export default function Contact() {
 						aria-hidden="true"
 						className="pointer-events-none absolute -end-24 -top-28 size-72 rounded-full bg-accent/[0.05] blur-[110px] dark:bg-accent/[0.09]"
 					/>
+
+					<ContactScene3D theme={theme} className="contact-beacon" />
 
 					<div className="relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-14">
 						<div>

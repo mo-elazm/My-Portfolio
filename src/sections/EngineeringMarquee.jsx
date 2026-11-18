@@ -11,6 +11,7 @@ const PILLARS = [
 	"THREE.JS",
 	"SUPABASE",
 	"NODE.JS",
+	"DATA ANALYSIS",
 	"SYSTEM ARCHITECTURE",
 ];
 
@@ -32,6 +33,7 @@ function Row({ pillars, variant, trackRef }) {
 			<div
 				ref={trackRef}
 				data-marquee-track
+				dir="ltr"
 				className="flex w-max items-center will-change-transform"
 			>
 				{[...pillars, ...pillars].map((pillar, index) => (
@@ -91,9 +93,9 @@ export default function EngineeringMarquee() {
 
 				target.direction = velocity < 0 ? -1 : 1;
 				target.timeScale = gsap.utils.clamp(
-					1,
-					4.5,
-					1 + Math.abs(velocity) / 1600,
+					0.65,
+					3.4,
+					1 + Math.abs(velocity) / 2400,
 				);
 			},
 			onLeave: () => {
@@ -117,8 +119,8 @@ export default function EngineeringMarquee() {
 			offsetA = wrapOffset(offsetA - step);
 			offsetB = wrapOffset(offsetB + step * 0.78);
 
-			gsap.set(rowA, { xPercent: offsetA });
-			gsap.set(rowB, { xPercent: offsetB });
+			gsap.set(rowA, { xPercent: offsetA, force3D: true });
+			gsap.set(rowB, { xPercent: offsetB, force3D: true });
 		};
 
 		gsap.ticker.add(tick);
@@ -134,7 +136,7 @@ export default function EngineeringMarquee() {
 			ref={root}
 			data-marquee
 			aria-hidden="true"
-			className="relative z-10 overflow-hidden border-t border-line bg-canvas/30 py-6 sm:py-8 sm:backdrop-blur-[2px]"
+			className="relative z-10 overflow-hidden border-t border-line bg-canvas/30 py-6 [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)] sm:py-8 sm:backdrop-blur-[2px]"
 		>
 			<Row pillars={PILLARS} variant="display" trackRef={trackA} />
 			<div className="mt-3">

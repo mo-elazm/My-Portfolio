@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { FiBriefcase, FiCalendar, FiCheck, FiUsers } from "react-icons/fi";
 import { experience } from "@/data/experience";
 import { useTranslation } from "@/i18n";
-import { gsap } from "@/lib/gsap";
+import { ScrollTrigger, gsap } from "@/lib/gsap";
 import { cn } from "@/utils/cn";
 import CountUp from "@/components/ui/CountUp";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -18,6 +18,8 @@ const icons = {
 export default function Experience() {
 	const { t, language } = useTranslation();
 	const root = useRef(null);
+	const lineRef = useRef(null);
+	const pulseRef = useRef(null);
 
 	useEffect(() => {
 		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -31,21 +33,48 @@ export default function Experience() {
 		}
 
 		const context = gsap.context(() => {
-			gsap.fromTo(
-				"[data-timeline-line]",
-				{ scaleY: 0 },
-				{
-					scaleY: 1,
-					ease: "none",
-					transformOrigin: "top",
+			const line = lineRef.current;
+			const pulse = pulseRef.current;
+
+			if (line) {
+				const timeline = gsap.timeline({
 					scrollTrigger: {
 						trigger: scope,
 						start: "top 70%",
 						end: "bottom 65%",
 						scrub: 0.6,
+						invalidateOnRefresh: true,
 					},
-				},
-			);
+				});
+
+				timeline.fromTo(
+					line,
+					{ scaleY: 0 },
+					{ scaleY: 1, ease: "none", transformOrigin: "top" },
+					0,
+				);
+
+				if (pulse) {
+					// Travel the glowing node down the exact laser length.
+					timeline.fromTo(
+						pulse,
+						{ y: 0 },
+						{ y: () => line.offsetHeight, ease: "none" },
+						0,
+					);
+				}
+			}
+
+			// Light each milestone dot as the pulse passes it.
+			scope.querySelectorAll("[data-timeline-node]").forEach((node) => {
+				ScrollTrigger.create({
+					trigger: node.closest("li"),
+					start: "top 74%",
+					end: "bottom 40%",
+					onEnter: () => node.classList.add("is-lit"),
+					onLeaveBack: () => node.classList.remove("is-lit"),
+				});
+			});
 		}, scope);
 
 		return () => context.revert();
@@ -90,8 +119,18 @@ export default function Experience() {
 				<div className="relative mt-12">
 					<span
 						aria-hidden="true"
+						className="absolute bottom-6 start-[15px] top-6 w-px bg-line-strong/50"
+					/>
+					<span
+						ref={lineRef}
+						aria-hidden="true"
 						data-timeline-line
-						className="absolute bottom-6 start-[15px] top-6 w-px origin-top scale-y-0 bg-accent/70"
+						className="timeline-laser absolute bottom-6 start-[15px] top-6 w-px bg-accent shadow-[0_0_14px_var(--accent-glow)]"
+					/>
+					<span
+						ref={pulseRef}
+						aria-hidden="true"
+						className="timeline-pulse absolute start-[11px] top-6 z-10 size-[9px] rounded-full bg-accent"
 					/>
 					<ol className="space-y-4">
 						{experience.map((item, index) => {
@@ -107,8 +146,9 @@ export default function Experience() {
 							>
 								<span
 									aria-hidden="true"
+									data-timeline-node
 									className={cn(
-										"absolute start-0 top-6 z-10 grid size-8 place-items-center rounded-full border border-line bg-surface text-accent-text",
+										"timeline-node absolute start-0 top-6 z-10 grid size-8 place-items-center rounded-full border border-line bg-surface text-accent-text",
 										item.current && "border-accent/40",
 									)}
 								>
