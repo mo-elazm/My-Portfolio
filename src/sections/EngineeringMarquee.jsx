@@ -134,7 +134,7 @@ export default function EngineeringMarquee() {
 			ref={root}
 			data-marquee
 			aria-hidden="true"
-			className="relative z-10 overflow-hidden border-t border-line bg-canvas/30 py-6 backdrop-blur-[2px] sm:py-8"
+			className="relative z-10 overflow-hidden border-t border-line bg-canvas/30 py-6 sm:py-8 sm:backdrop-blur-[2px]"
 		>
 			<Row pillars={PILLARS} variant="display" trackRef={trackA} />
 			<div className="mt-3">

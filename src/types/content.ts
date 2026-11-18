@@ -45,6 +45,7 @@ export interface Project {
 
 export interface TechItem {
 	name: string;
+	nameAr?: string;
 	icon?: IconType;
 	mark?: string;
 }

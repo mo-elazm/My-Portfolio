@@ -123,7 +123,7 @@ export default function Certifications() {
 										type="button"
 										onClick={() => openCertificate(cert.id)}
 										aria-haspopup="dialog"
-										className="btn btn-primary min-h-9 px-4 text-[10px]"
+										className="btn btn-primary min-h-11 px-4 text-[10px] sm:min-h-9"
 									>
 										<FiMaximize2 aria-hidden="true" className="size-3.5" />
 										<span>{t.certifications.viewCertificate}</span>

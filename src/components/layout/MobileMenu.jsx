@@ -49,7 +49,7 @@ export default function MobileMenu() {
 			inert={!isOpen}
 			aria-hidden={!isOpen}
 			className={cn(
-				"fixed inset-0 z-40 min-h-[100dvh] overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
+				"fixed inset-0 z-40 min-h-[100svh] overflow-y-auto bg-canvas transition-all duration-500 lg:hidden",
 				isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
 			)}
 		>
@@ -64,7 +64,7 @@ export default function MobileMenu() {
 
 			<div
 				className={cn(
-					"relative flex min-h-[100dvh] flex-col px-4 pb-8 pt-24 transition-transform duration-500 sm:px-6",
+					"relative flex min-h-[100svh] flex-col px-4 pb-[calc(2rem_+_env(safe-area-inset-bottom))] pt-[calc(6rem_+_env(safe-area-inset-top))] transition-transform duration-500 sm:px-6",
 					isOpen ? "translate-y-0" : "translate-y-4",
 				)}
 			>

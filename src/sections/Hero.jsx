@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FiGithub, FiMapPin } from "react-icons/fi";
 import { useTranslation } from "@/i18n";
+import { usePreferences } from "@/providers/PreferencesProvider";
 import { gsap } from "@/lib/gsap";
 import { profile } from "@/data/profile";
 import useAppStore from "@/store/useAppStore";
@@ -13,8 +15,14 @@ import CairoClock from "@/components/ui/CairoClock";
 import SocialLinks from "@/components/ui/SocialLinks";
 import StatusPill from "@/components/ui/StatusPill";
 
+const HeroScene3D = dynamic(() => import("@/components/HeroScene3D"), {
+	ssr: false,
+	loading: () => null,
+});
+
 export default function Hero() {
 	const { t, language } = useTranslation();
+	const { theme } = usePreferences();
 	const introDone = useAppStore((state) => state.introDone);
 	const root = useRef(null);
 
@@ -75,7 +83,7 @@ export default function Hero() {
 		<section
 			id="home"
 			ref={root}
-			className="relative min-h-[100dvh] overflow-x-clip pb-16 pt-28 sm:pb-20 sm:pt-32 lg:flex lg:items-center lg:pb-24 lg:pt-32"
+			className="relative min-h-[100svh] overflow-x-clip pb-16 pt-[calc(7rem_+_env(safe-area-inset-top))] sm:pb-20 sm:pt-[calc(8rem_+_env(safe-area-inset-top))] lg:flex lg:items-center lg:pb-24 lg:pt-32"
 		>
 			<div
 				aria-hidden="true"
@@ -85,6 +93,8 @@ export default function Hero() {
 				aria-hidden="true"
 				className="dot-grid pointer-events-none absolute inset-x-0 top-0 h-[72vh] opacity-[0.03] [mask-image:linear-gradient(to_bottom,black,transparent)] dark:opacity-[0.035]"
 			/>
+
+			<HeroScene3D theme={theme} className="hero-scene-mask" />
 
 			<div className="container-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:gap-12 xl:gap-16">
 				<div className="min-w-0 max-w-[680px]">
@@ -178,7 +188,7 @@ export default function Hero() {
 
 								<div className="absolute inset-x-0 bottom-0 z-10 hidden items-end justify-between gap-3 p-4 dark:flex">
 									<div className="min-w-0">
-										<p className="truncate font-display text-[13px] font-bold text-ink">
+										<p className="break-words font-display text-[13px] font-bold leading-snug text-ink">
 											{t.hero.portraitName}{" "}
 											<span className="font-medium text-muted">
 												· {t.common.available}
@@ -192,7 +202,7 @@ export default function Hero() {
 											{t.hero.portraitRole}
 										</p>
 									</div>
-									<span className="shrink-0 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+									<span className="hidden shrink-0 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80 sm:inline">
 										{t.hero.portraitLabel}
 									</span>
 								</div>
@@ -201,7 +211,7 @@ export default function Hero() {
 
 						<div className="flex items-start justify-between gap-3 px-2 pb-0.5 pt-3 dark:hidden">
 							<div className="min-w-0">
-								<p className="truncate font-display text-[13px] font-bold text-ink">
+								<p className="break-words font-display text-[13px] font-bold leading-snug text-ink">
 									{t.hero.portraitName}{" "}
 									<span className="font-medium text-muted">
 										· {t.common.available}
@@ -215,7 +225,7 @@ export default function Hero() {
 									{t.hero.portraitRole}
 								</p>
 							</div>
-							<span className="shrink-0 pt-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80">
+							<span className="hidden shrink-0 pt-0.5 font-mono text-[8px] font-medium uppercase tracking-[0.16em] text-muted/80 sm:inline">
 								{t.hero.portraitLabel}
 							</span>
 						</div>

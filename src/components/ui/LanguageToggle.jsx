@@ -33,7 +33,7 @@ export default function LanguageToggle({ className }) {
 						aria-label={`${option.label} — ${option.ariaLabel}`}
 						lang={option.value}
 						className={cn(
-							"rounded-full px-2.5 py-2 text-[10px] font-bold leading-none transition-colors duration-300",
+							"rounded-full px-2.5 py-2 text-[10px] font-bold leading-none transition-colors duration-300 min-h-11 sm:min-h-8",
 							option.value === "ar" && "font-arabic text-[11px]",
 							active
 								? "bg-ink text-canvas"

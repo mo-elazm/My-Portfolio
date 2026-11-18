@@ -10,7 +10,7 @@ export default function Logo({ className, onClick, compact = false }) {
 		<a
 			href="#home"
 			onClick={onClick}
-			className={cn("group flex shrink-0 items-center gap-2.5", className)}
+			className={cn("group flex min-h-11 shrink-0 items-center gap-2.5 sm:min-h-0", className)}
 		>
 			<span className="sr-only">{t.common.name}</span>
 			<span

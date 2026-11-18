@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { gsap } from "@/lib/gsap";
 import { scrollState } from "@/lib/scrollState";
-import { astrolabeState } from "@/lib/astrolabeState";
+import useAppStore from "@/store/useAppStore";
 import { cn } from "@/utils/cn";
 
 type Theme = "dark" | "light";
@@ -14,6 +15,12 @@ function usePointer(): PointerState {
 	const pointer = useRef({ x: 0, y: 0 });
 
 	useEffect(() => {
+		// Touch devices get the lightweight CSS sculpture instead, so skip the
+		// global pointer listener entirely there.
+		if (!window.matchMedia("(pointer: fine)").matches) {
+			return undefined;
+		}
+
 		const onMove = (event: PointerEvent) => {
 			pointer.current.x = (event.clientX / window.innerWidth) * 2 - 1;
 			pointer.current.y = (event.clientY / window.innerHeight) * 2 - 1;
@@ -45,7 +52,8 @@ function Constellation({ theme, reduceMotion }: { theme: Theme; reduceMotion: bo
 	const isDark = theme === "dark";
 
 	const positions = useMemo(() => {
-		const count = 110;
+		// 64 points instead of 110: same silhouette, far less vertex work.
+		const count = 64;
 		const random = mulberry32(20261114);
 		const array = new Float32Array(count * 3);
 
@@ -128,7 +136,7 @@ function OrbitalRing({
 	return (
 		<group ref={wobble} rotation={tilt}>
 			<mesh>
-				<torusGeometry args={[radius, 0.011, 8, 256]} />
+				<torusGeometry args={[radius, 0.011, 6, 128]} />
 				<meshStandardMaterial
 					color={ringColor}
 					metalness={0.92}
@@ -144,11 +152,11 @@ function OrbitalRing({
 				{nodeAngles.map((angle, index) => (
 					<group key={`${radius}-${angle}-${index}`} rotation={[0, 0, angle]}>
 						<mesh position={[radius, 0, 0]}>
-							<sphereGeometry args={[0.048, 16, 16]} />
+							<sphereGeometry args={[0.048, 12, 12]} />
 							<meshBasicMaterial color={nodeColor} />
 						</mesh>
 						<mesh position={[radius, 0, 0]} scale={2.7}>
-							<sphereGeometry args={[0.048, 12, 12]} />
+							<sphereGeometry args={[0.048, 10, 10]} />
 							<meshBasicMaterial
 								color={nodeColor}
 								transparent
@@ -227,7 +235,7 @@ function CrystallineCore({ theme, reduceMotion }: { theme: Theme; reduceMotion: 
 			</mesh>
 
 			<mesh scale={2.1}>
-				<sphereGeometry args={[1, 32, 32]} />
+				<sphereGeometry args={[1, 24, 24]} />
 				<meshBasicMaterial
 					color={isDark ? "#6366F1" : "#4338CA"}
 					transparent
@@ -302,21 +310,22 @@ function Sculpture({
 	theme,
 	pointer,
 	reduceMotion,
+	spin,
 }: {
 	theme: Theme;
 	pointer: PointerState;
 	reduceMotion: boolean;
+	spin: { current: number };
 }) {
 	const root = useRef<THREE.Group>(null);
 	const lights = useRef<THREE.Group>(null);
 	const assembly = useRef<THREE.Group>(null);
 	const smooth = useRef({ x: 0, y: 0 });
 	const viewport = useThree((state) => state.viewport);
-	const isCompact = viewport.width < 6;
+	const width = useThree((state) => state.size.width);
+	const isCompact = width < 1024;
 	const isDark = theme === "dark";
-	// Fit the widest orbit (2.45 world units) inside the compact viewport width
-	// so the sculpture never touches a horizontal edge on phones.
-	const scale = isCompact ? Math.min(0.42, (viewport.width * 0.4) / 2.45) : 0.5;
+	const scale = isCompact ? 0.44 : 0.5;
 
 	useFrame(({ clock }, delta) => {
 		const group = root.current;
@@ -333,20 +342,17 @@ function Sculpture({
 		smooth.current.x += (pointer.current.y * 0.24 - smooth.current.x) * ease;
 		smooth.current.y += (pointer.current.x * 0.4 - smooth.current.y) * ease;
 
-		// Base position is the Hero's trailing flank. ScrollTrigger writes
-		// offsets on top of it as the astrolabe travels between sections.
+		// Hero-scoped framing: desktop crowns the portrait on the trailing
+		// flank; tablets centre it above the stacked portrait.
 		const baseX = isCompact ? 0 : Math.min(2.35, viewport.width * 0.23);
 		const baseY = isCompact ? -0.85 : 1.82;
 
-		group.rotation.x =
-			smooth.current.x + Math.sin(time * 0.18) * 0.025 + astrolabeState.tiltX;
-		group.rotation.y =
-			smooth.current.y + velocity * 0.3 + astrolabeState.spin;
-		group.rotation.z = velocity * 0.06 + astrolabeState.tiltZ;
-		group.position.x = baseX + astrolabeState.offsetX;
-		group.position.y =
-			baseY + astrolabeState.offsetY + velocity * 0.12;
-		group.scale.setScalar(scale * astrolabeState.scale);
+		group.rotation.x = smooth.current.x + Math.sin(time * 0.18) * 0.025;
+		group.rotation.y = smooth.current.y + velocity * 0.3 + spin.current;
+		group.rotation.z = velocity * 0.06;
+		group.position.x = baseX;
+		group.position.y = baseY + velocity * 0.12;
+		group.scale.setScalar(scale);
 
 		if (lights.current) {
 			lights.current.position.copy(group.position);
@@ -378,40 +384,56 @@ function Sculpture({
 
 			<group ref={root}>
 				<group ref={assembly}>
-				<CrystallineCore theme={theme} reduceMotion={reduceMotion} />
+					<CrystallineCore theme={theme} reduceMotion={reduceMotion} />
 
-				<OrbitalRing
-					radius={1.72}
-					tilt={[Math.PI / 2.15, 0.18, 0]}
-					speed={0.17}
-					phase={0.4}
-					nodeAngles={[0.4, 3.5]}
-					theme={theme}
-					reduceMotion={reduceMotion}
-				/>
-				<OrbitalRing
-					radius={2.02}
-					tilt={[Math.PI / 3.1, 0.62, Math.PI / 5]}
-					speed={-0.115}
-					phase={1.7}
-					nodeAngles={[1.2, 3.1, 5.2]}
-					theme={theme}
-					reduceMotion={reduceMotion}
-				/>
-				<OrbitalRing
-					radius={2.32}
-					tilt={[0.38, Math.PI / 2.35, -0.42]}
-					speed={0.078}
-					phase={3.2}
-					nodeAngles={[0.2, 3.9]}
-					theme={theme}
-					reduceMotion={reduceMotion}
-				/>
+					<OrbitalRing
+						radius={1.72}
+						tilt={[Math.PI / 2.15, 0.18, 0]}
+						speed={0.17}
+						phase={0.4}
+						nodeAngles={[0.4, 3.5]}
+						theme={theme}
+						reduceMotion={reduceMotion}
+					/>
+					<OrbitalRing
+						radius={2.02}
+						tilt={[Math.PI / 3.1, 0.62, Math.PI / 5]}
+						speed={-0.115}
+						phase={1.7}
+						nodeAngles={[1.2, 3.1, 5.2]}
+						theme={theme}
+						reduceMotion={reduceMotion}
+					/>
+					<OrbitalRing
+						radius={2.32}
+						tilt={[0.38, Math.PI / 2.35, -0.42]}
+						speed={0.078}
+						phase={3.2}
+						nodeAngles={[0.2, 3.9]}
+						theme={theme}
+						reduceMotion={reduceMotion}
+					/>
 
-				<Constellation theme={theme} reduceMotion={reduceMotion} />
+					<Constellation theme={theme} reduceMotion={reduceMotion} />
 				</group>
 			</group>
 		</>
+	);
+}
+
+/**
+ * Phones render this zero-GPU CSS sculpture instead of a WebGL canvas.
+ */
+function OrbitalGlow() {
+	return (
+		<div className="absolute inset-x-0 bottom-0 flex h-[40%] items-center justify-center">
+			<div className="orbital-glow relative size-[min(108vw,400px)]">
+				<span className="orbital-glow-core" />
+				<span className="orbital-glow-ring" />
+				<span className="orbital-glow-ring orbital-glow-ring-b" />
+				<span className="orbital-glow-ring orbital-glow-ring-c" />
+			</div>
+		</div>
 	);
 }
 
@@ -424,13 +446,66 @@ export default function HeroScene3D({
 }) {
 	const host = useRef<HTMLDivElement>(null);
 	const pointer = usePointer();
-	const [inView, setInView] = useState(true);
-	const [reduceMotion] = useState(
+	const introDone = useAppStore((state) => state.introDone);
+	const spin = useRef(0);
+	const introWasPending = useRef(false);
+	const [inView, setInView] = useState(false);
+	const [isMobile, setIsMobile] = useState(
+		() =>
+			typeof window !== "undefined" &&
+			window.matchMedia("(max-width: 767px)").matches,
+	);
+	const [reduceMotion, setReduceMotion] = useState(
 		() =>
 			typeof window !== "undefined" &&
 			window.matchMedia("(prefers-reduced-motion: reduce)").matches,
 	);
 
+	useEffect(() => {
+		const mobileQuery = window.matchMedia("(max-width: 767px)");
+		const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+		introWasPending.current = document.documentElement.dataset.intro === "pending";
+
+		const sync = () => {
+			setIsMobile(mobileQuery.matches);
+			setReduceMotion(motionQuery.matches);
+		};
+
+		sync();
+		mobileQuery.addEventListener("change", sync);
+		motionQuery.addEventListener("change", sync);
+
+		return () => {
+			mobileQuery.removeEventListener("change", sync);
+			motionQuery.removeEventListener("change", sync);
+		};
+	}, []);
+
+	// Spin the sculpture into place as the preloader shutters open.
+	useEffect(() => {
+		if (!introDone || !introWasPending.current) {
+			return undefined;
+		}
+
+		introWasPending.current = false;
+
+		if (reduceMotion) {
+			spin.current = 0;
+			return undefined;
+		}
+
+		const tween = gsap.fromTo(
+			spin,
+			{ current: 1.6 },
+			{ current: 0, duration: 1.8, ease: "power3.out", overwrite: "auto" },
+		);
+
+		return () => {
+			tween.kill();
+		};
+	}, [introDone, reduceMotion]);
+
+	// Hard stop the render loop the moment the hero leaves the viewport.
 	useEffect(() => {
 		const node = host.current;
 
@@ -440,13 +515,13 @@ export default function HeroScene3D({
 
 		const observer = new IntersectionObserver(
 			([entry]) => setInView(entry.isIntersecting),
-			{ threshold: 0.02 },
+			{ threshold: 0.01 },
 		);
 
 		observer.observe(node);
 
 		return () => observer.disconnect();
-	}, []);
+	}, [isMobile]);
 
 	const active = inView && !reduceMotion;
 	const isDark = theme === "dark";
@@ -455,37 +530,49 @@ export default function HeroScene3D({
 		<div
 			ref={host}
 			aria-hidden="true"
-			className={cn("pointer-events-none absolute inset-0 z-0 h-full w-full", className)}
+			className={cn(
+				"pointer-events-none absolute inset-0 z-0 h-full w-full",
+				className,
+			)}
 		>
-			<Canvas
-				dpr={[1, 1.5]}
-				camera={{ position: [0, 0, 8.5], fov: 42 }}
-				frameloop={active ? "always" : "demand"}
-				gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-				style={{ pointerEvents: "none" }}
-				onCreated={({ gl }) => {
-					gl.setClearAlpha(0);
-				}}
-			>
-				<StudioEnvironment theme={theme} />
-				<ambientLight intensity={isDark ? 0.28 : 0.75} />
-				<directionalLight
-					position={[5, 7, 8]}
-					intensity={isDark ? 3.2 : 3.4}
-					color={isDark ? "#E0E7FF" : "#FFFFFF"}
-				/>
-				<directionalLight
-					position={[-6, -3, -4]}
-					intensity={isDark ? 1.8 : 1.2}
-					color={isDark ? "#6366F1" : "#4338CA"}
-				/>
-				<directionalLight
-					position={[3, 5, -7]}
-					intensity={isDark ? 4.5 : 2.4}
-					color={isDark ? "#818CF8" : "#4F46E5"}
-				/>
-				<Sculpture theme={theme} pointer={pointer} reduceMotion={reduceMotion} />
-			</Canvas>
+			{isMobile ? (
+				<OrbitalGlow />
+			) : (
+				<Canvas
+					dpr={[1, 1.25]}
+					camera={{ position: [0, 0, 8.5], fov: 42 }}
+					frameloop={active ? "always" : "never"}
+					gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+					style={{ pointerEvents: "none" }}
+					onCreated={({ gl }) => {
+						gl.setClearAlpha(0);
+					}}
+				>
+					<StudioEnvironment theme={theme} />
+					<ambientLight intensity={isDark ? 0.28 : 0.75} />
+					<directionalLight
+						position={[5, 7, 8]}
+						intensity={isDark ? 3.2 : 3.4}
+						color={isDark ? "#E0E7FF" : "#FFFFFF"}
+					/>
+					<directionalLight
+						position={[-6, -3, -4]}
+						intensity={isDark ? 1.8 : 1.2}
+						color={isDark ? "#6366F1" : "#4338CA"}
+					/>
+					<directionalLight
+						position={[3, 5, -7]}
+						intensity={isDark ? 4.5 : 2.4}
+						color={isDark ? "#818CF8" : "#4F46E5"}
+					/>
+					<Sculpture
+						theme={theme}
+						pointer={pointer}
+						reduceMotion={reduceMotion}
+						spin={spin}
+					/>
+				</Canvas>
+			)}
 		</div>
 	);
 }

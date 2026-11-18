@@ -19,7 +19,8 @@ export default function Projects() {
 	const gridRef = useRef(null);
 	const pendingFlip = useRef(null);
 
-	// Scroll-choreographed card depth: entrance tilt + inner mockup parallax.
+	// One-time, GPU-composited card reveals. No scrubbed transforms: each card
+	// animates once on entry, then ScrollTrigger detaches completely.
 	useEffect(() => {
 		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 			return undefined;
@@ -35,40 +36,16 @@ export default function Projects() {
 			gsap.utils.toArray("[data-card-entrance]", grid).forEach((card) => {
 				gsap.fromTo(
 					card,
+					{ y: 28, opacity: 0 },
 					{
-						rotateX: 7,
-						y: 45,
-						opacity: 0.4,
-						transformPerspective: 1200,
-						transformOrigin: "50% 0%",
-					},
-					{
-						rotateX: 0,
 						y: 0,
 						opacity: 1,
-						ease: "none",
+						duration: 0.65,
+						ease: "power3.out",
 						scrollTrigger: {
 							trigger: card,
 							start: "top 92%",
-							end: "top 62%",
-							scrub: 0.6,
-						},
-					},
-				);
-			});
-
-			gsap.utils.toArray("[data-preview]", grid).forEach((preview) => {
-				gsap.fromTo(
-					preview,
-					{ yPercent: -5 },
-					{
-						yPercent: 5,
-						ease: "none",
-						scrollTrigger: {
-							trigger: preview.closest("[data-flip-item]") ?? preview,
-							start: "top bottom",
-							end: "bottom top",
-							scrub: 0.6,
+							once: true,
 						},
 					},
 				);
@@ -175,7 +152,7 @@ export default function Projects() {
 								onClick={() => changeFilter(id)}
 								aria-pressed={isActive}
 								className={cn(
-									"inline-flex min-h-9 items-center rounded-full border px-4 text-[11px] font-semibold transition-colors duration-300",
+									"inline-flex min-h-11 items-center rounded-full border px-4 text-[11px] font-semibold transition-colors duration-300 sm:min-h-9",
 									isActive
 										? "border-transparent bg-ink text-canvas"
 										: "border-line bg-surface text-muted hover:border-line-strong hover:text-ink",
@@ -214,7 +191,7 @@ export default function Projects() {
 									>
 										<div className="p-2 pb-0">
 											<div className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-line bg-surface-2">
-												<div data-preview className="absolute inset-[-6%]">
+												<div className="absolute inset-0">
 													<div
 														dir="ltr"
 														className="size-full transition-transform duration-500 ease-out group-hover:scale-105"
@@ -259,7 +236,7 @@ export default function Projects() {
 													href={project.url}
 													target="_blank"
 													rel="noreferrer noopener"
-													className="btn btn-primary min-h-9 px-4 text-[11px] active:scale-[0.97]"
+													className="btn btn-primary min-h-11 px-4 text-[11px] active:scale-[0.97] sm:min-h-9"
 												>
 													<span>{t.projects.live}</span>
 													<FiArrowUpRight
@@ -272,7 +249,7 @@ export default function Projects() {
 													target="_blank"
 													rel="noreferrer noopener"
 													aria-label={`${copy.title} — ${t.projects.source}`}
-													className="btn btn-secondary min-h-9 px-4 text-[11px] active:scale-[0.97]"
+													className="btn btn-secondary min-h-11 px-4 text-[11px] active:scale-[0.97] sm:min-h-9"
 												>
 													<FiGithub aria-hidden="true" className="size-3" />
 													<span>{t.projects.source}</span>

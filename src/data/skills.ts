@@ -76,6 +76,7 @@ export const stackCategories: StackCategory[] = [
 			{ name: "Firebase", icon: SiFirebase },
 			{ name: "Strapi", icon: SiStrapi },
 			{ name: "SQL", icon: SiMysql },
+			{ name: "Data Analysis", nameAr: "تحليل البيانات", mark: "DA" },
 		],
 	},
 	{

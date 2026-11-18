@@ -207,7 +207,7 @@ export default function Contact() {
 				<div
 					role="status"
 					aria-live="polite"
-					className="toast-pop fixed bottom-6 left-1/2 z-[85] flex items-center gap-3 rounded-2xl border border-accent/30 bg-surface/95 px-4 py-3 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] backdrop-blur-xl"
+					className="toast-pop fixed bottom-[calc(1.5rem_+_env(safe-area-inset-bottom))] left-1/2 z-[85] flex items-center gap-3 rounded-2xl border border-accent/30 bg-surface px-4 py-3 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] sm:bg-surface/95 sm:backdrop-blur-xl"
 				>
 					<span className="grid size-7 shrink-0 place-items-center rounded-full bg-accent text-white">
 						<FiCheck aria-hidden="true" className="size-3.5" />

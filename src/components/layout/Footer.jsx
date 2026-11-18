@@ -15,7 +15,7 @@ export default function Footer() {
 	const displayName = language === "ar" ? profile.nameAr : profile.name;
 
 	return (
-		<footer className="relative z-10 border-t border-line">
+		<footer className="relative z-10 border-t border-line pb-[env(safe-area-inset-bottom)]">
 			<div className="container-shell py-12 sm:py-14">
 				<div className="grid gap-10 md:grid-cols-[1.4fr_0.7fr_0.9fr] md:gap-14">
 					<div className="max-w-sm">
@@ -92,7 +92,7 @@ export default function Footer() {
 							href="#home"
 							aria-label={t.common.backToTop}
 							title={t.common.backToTop}
-							className="icon-btn group size-9 shrink-0"
+							className="icon-btn group size-11 shrink-0 sm:size-9"
 						>
 							<FiArrowUp
 								aria-hidden="true"

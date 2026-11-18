@@ -172,7 +172,7 @@ const en = {
 			},
 			data: {
 				title: "Data & content",
-				note: "Databases, real-time services and headless content infrastructure.",
+				note: "Databases, real-time services, headless content infrastructure and hands-on data analysis.",
 			},
 			exploring: {
 				title: "Also familiar with",

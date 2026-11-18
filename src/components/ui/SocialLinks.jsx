@@ -33,7 +33,7 @@ export default function SocialLinks({ className, iconClassName }) {
 						rel={external ? "noreferrer noopener" : undefined}
 						aria-label={social.name}
 						title={social.name}
-						className={cn("icon-btn size-9", iconClassName)}
+						className={cn("icon-btn size-11 sm:size-9", iconClassName)}
 					>
 						<Icon aria-hidden="true" className="size-[15px]" />
 					</a>

@@ -188,7 +188,7 @@ export default function CertificateLightbox() {
 					ref={panelRef}
 					className="relative w-full max-w-6xl overflow-hidden rounded-[1.6rem] border border-line bg-surface shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] sm:rounded-[2rem]"
 				>
-					<div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-line bg-surface/90 px-4 py-3.5 backdrop-blur-xl sm:px-6">
+					<div className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-line bg-surface px-4 py-3.5 sm:bg-surface/90 sm:px-6 sm:backdrop-blur-xl">
 						<div className="flex min-w-0 items-center gap-3">
 							<span className="grid size-9 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-accent-text">
 								<Icon aria-hidden="true" className="size-4" />
@@ -206,7 +206,7 @@ export default function CertificateLightbox() {
 							type="button"
 							onClick={closeCertificate}
 							aria-label={t.common.closeDialog}
-							className="icon-btn size-9 shrink-0"
+							className="icon-btn size-11 shrink-0 sm:size-9"
 						>
 							<FiX aria-hidden="true" className="size-4" />
 						</button>
@@ -304,7 +304,7 @@ export default function CertificateLightbox() {
 										onClick={() => goTo(-1)}
 										aria-label={t.certifications.previousCertificate}
 										title={t.certifications.previousCertificate}
-										className="icon-btn size-9"
+										className="icon-btn size-11 sm:size-9"
 									>
 										<FiChevronLeft
 											aria-hidden="true"
@@ -316,7 +316,7 @@ export default function CertificateLightbox() {
 										onClick={() => goTo(1)}
 										aria-label={t.certifications.nextCertificate}
 										title={t.certifications.nextCertificate}
-										className="icon-btn size-9"
+										className="icon-btn size-11 sm:size-9"
 									>
 										<FiChevronRight
 											aria-hidden="true"
@@ -329,7 +329,7 @@ export default function CertificateLightbox() {
 									href={cert.image}
 									target="_blank"
 									rel="noreferrer noopener"
-									className="btn btn-primary min-h-9 px-4 text-[10px]"
+									className="btn btn-primary min-h-11 px-4 text-[10px] sm:min-h-9"
 								>
 									<FiExternalLink aria-hidden="true" className="size-3.5" />
 									<span>{t.certifications.openOriginal}</span>

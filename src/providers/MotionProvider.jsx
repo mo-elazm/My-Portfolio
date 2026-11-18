@@ -22,12 +22,40 @@ export default function MotionProvider({ children }) {
 			return undefined;
 		}
 
+		// Lenis is desktop-only. Touch devices keep the browser's native
+		// momentum scrolling so iOS Safari and Android Chrome never stutter.
+		const smooth = window.matchMedia(
+			"(pointer: fine) and (min-width: 1024px)",
+		).matches;
+
+		if (!smooth) {
+			const tracker = ScrollTrigger.create({
+				trigger: document.documentElement,
+				start: "top top",
+				end: "bottom bottom",
+				onUpdate: (self) => {
+					scrollState.velocity = self.getVelocity();
+					scrollState.progress = self.progress;
+				},
+			});
+
+			const reset = () => {
+				scrollState.velocity = 0;
+			};
+
+			window.addEventListener("scrollend", reset, { passive: true });
+
+			return () => {
+				tracker.kill();
+				window.removeEventListener("scrollend", reset);
+				resetScrollState();
+			};
+		}
+
 		const lenis = new Lenis({
 			lerp: 0.085,
 			smoothWheel: true,
 			wheelMultiplier: 1,
-			touchMultiplier: 1.35,
-			syncTouch: false,
 			autoRaf: false,
 		});
 

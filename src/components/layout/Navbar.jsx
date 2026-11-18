@@ -61,7 +61,7 @@ export default function Navbar() {
 	}, [updatePill, language]);
 
 	return (
-		<header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+		<header className="fixed inset-x-0 top-0 z-50 px-3 pt-[calc(0.75rem_+_env(safe-area-inset-top))] sm:px-5 sm:pt-[calc(1rem_+_env(safe-area-inset-top))]">
 			<div className="nav-shell mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 rounded-2xl px-2.5 sm:px-3">
 				<Logo />
 
@@ -124,7 +124,7 @@ export default function Navbar() {
 						aria-label={mobileMenuOpen ? t.common.close : t.common.openMenu}
 						aria-expanded={mobileMenuOpen}
 						aria-controls="mobile-menu"
-						className="icon-btn size-10 lg:hidden"
+						className="icon-btn size-11 lg:hidden"
 					>
 						{mobileMenuOpen ? (
 							<FiX aria-hidden="true" className="size-[18px]" />
